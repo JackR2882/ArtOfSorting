@@ -6,6 +6,7 @@ from init import generate_spectrum
 import LED_controller
 from algorithms import bubble_sort
 from algorithms import insertion_sort
+from algorithms import merge_sort
 
 class Main:
     def __init__(self):
@@ -26,7 +27,7 @@ class Main:
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
 
-        self.currAlg = 0
+        self.currAlg = 1
         #loop indefinitely
         while True:
 
@@ -49,7 +50,7 @@ class Main:
                 #print("insertion sort")
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
-                print("mergeSort")
+                merge_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
