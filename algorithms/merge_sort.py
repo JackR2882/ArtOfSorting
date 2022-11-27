@@ -42,21 +42,25 @@ def sort(obj):
                 if lcount >= mid:
                     arr[i] = r[rcount]            
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
+                    obj.update()                        # update twice to emulate other algrithms?
                     obj.update()
                     rcount += 1
                 elif rcount >= len(arr)-mid:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     obj.update()
+                    obj.update()
                     lcount += 1
                 elif l[lcount] < r[rcount]:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     obj.update()
+                    obj.update()
                     lcount += 1
                 else:
                     arr[i] = r[rcount]
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
+                    obj.update()
                     obj.update()
                     rcount += 1
 
