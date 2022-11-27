@@ -27,7 +27,7 @@ class Main:
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
 
-        self.currAlg = 1
+        self.currAlg = 0
         #loop indefinitely
         while True:
 
