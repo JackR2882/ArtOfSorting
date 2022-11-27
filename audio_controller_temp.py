@@ -7,7 +7,7 @@ import pyaudio
 class AudioOut:
     def __init__(self):
         self.sampleRate = 44000
-        self.duration = 0.1
+        self.duration = 0.01
         self.sineFreq = 440.0
         self.volume = 1.0
 
@@ -22,18 +22,14 @@ class AudioOut:
         self.stream.close()
         self.p.terminate()
 
-    def ordered(self):
-        ordered = (np.sin(2*np.pi * np.arange(self.sampleRate * self.duration) * self.sineFreq / self.sampleRate)).astype(np.float32)
+    def out(self, val):
+        val = val/72+0.5
+        ordered = (np.sin(val*np.pi * np.arange(self.sampleRate * self.duration) * self.sineFreq / self.sampleRate)).astype(np.float32)
         output = (self.volume * ordered).tobytes()
         self.stream.write(output)
 
-    def unordered(self):
-        unordered = (np.sin(1*np.pi * np.arange(self.sampleRate * self.duration) * self.sineFreq / self.sampleRate)).astype(np.float32)
-        output = (self.volume * unordered).tobytes()
-        self.stream.write(output)
 
+#out = AudioOut()
 
-out = AudioOut()
-
-while True:
-    out.ordered()
+#while True:
+#    out.ordered()
