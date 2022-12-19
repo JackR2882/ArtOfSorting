@@ -7,7 +7,7 @@ import pyaudio
 class AudioOut:
     def __init__(self):
         self.sampleRate = 44000
-        self.duration = 0.01
+        self.duration = 0.00001
         self.sineFreq = 440.0
         self.volume = 1.0
 
