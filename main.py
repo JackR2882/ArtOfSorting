@@ -7,6 +7,7 @@ import LED_controller
 from algorithms import bubble_sort
 from algorithms import insertion_sort
 from algorithms import merge_sort
+from algorithms import selection_sort
 
 class Main:
     def __init__(self):
@@ -15,13 +16,13 @@ class Main:
 
         #list to store all algorithms, will loop through this list to execute algorithms
         #allows changing of order of execution
-        self.priorityQueue = ["bubble", "insertion", "merge"]
+        self.priorityQueue = ["bubble", "insertion", "merge", "selection"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 3
 
     def run(self):
         #generate spectrup of RGB colours
@@ -51,6 +52,9 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
                 merge_sort.sort(self.LED)
+            elif self.priorityQueue[self.currAlg] == "selection":
+                #execute selection sort
+                selection_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
