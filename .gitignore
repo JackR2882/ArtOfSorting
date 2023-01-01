@@ -132,3 +132,6 @@ dmypy.json
 #test files
 test1.py
 development/
+
+#env variables
+.env
