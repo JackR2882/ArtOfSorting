@@ -91,7 +91,7 @@ print(heapify(arr, len(arr)-1))
 
 
 # seems to work, but as above not sure about optimality
-def heap_sort(arr_in):
+def heap_sort_test(arr_in):
 	heaped_arr = heapify(arr_in, len(arr_in)-1)
 	sorted_arr = [0]*len(heaped_arr)
 
@@ -108,7 +108,7 @@ def heap_sort(arr_in):
 
 	return sorted_arr
 
-print(heap_sort(arr))
+print(heap_sort_test(arr))
 
 def heap_sort(obj):
 	obj.stripState = heapify(obj.stripState,len(obj.stripState)-1)
