@@ -8,6 +8,7 @@ from algorithms import bubble_sort
 from algorithms import insertion_sort
 from algorithms import merge_sort
 from algorithms import selection_sort
+from algorithms import heap_sort
 
 class Main:
     def __init__(self):
@@ -16,7 +17,7 @@ class Main:
 
         #list to store all algorithms, will loop through this list to execute algorithms
         #allows changing of order of execution
-        self.priorityQueue = ["bubble", "insertion", "merge", "selection"]
+        self.priorityQueue = ["bubble", "insertion", "merge", "selection", "heap"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
@@ -48,13 +49,15 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
                 insertion_sort.sort(self.LED)
-                #print("insertion sort")
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
                 merge_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "selection":
                 #execute selection sort
                 selection_sort.sort(self.LED)
+            elif self.priorityQueue[self.currAlg] == "merge":
+                #execute merge sort
+                heap_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
