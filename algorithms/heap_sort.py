@@ -1,5 +1,6 @@
 import math
-
+# need to convert to use min heap rather than max heap,
+# in order to sort min-max rather than max-min
 
 # sourced inspiration from:
 # https://iq.opengenus.org/create-heap-from-array/
@@ -103,12 +104,34 @@ def heap_sort(arr_in):
 		heaped_arr[0], heaped_arr[len(heaped_arr)-(1+i)] = heaped_arr[len(heaped_arr)-(1+i)], 0
 		heaped_arr = heapify(heaped_arr, len(heaped_arr)-1)
 
-		i += 1	
-		#print(heaped_arr)
+		i += 1
 
 	return sorted_arr
 
 print(heap_sort(arr))
+
+def heap_sort(obj):
+	obj.stripState = heapify(obj.stripState,len(obj.stripState)-1)
+	obj.update()
+
+	heaped_arr = obj.stripState
+	sorted_arr = [0]*len(heaped_arr)
+
+	i = 0
+
+	while i <= len(heaped_arr)-1:
+
+		sorted_arr = heaped_arr[0]
+		heaped_arr[0], heaped_arr[len(heaped_arr)-(1+i)] = heaped_arr[len(heaped_arr)-(1+i)], 0
+		heaped_arr = heapify(heaped_arr, len(heaped_arr)-1)
+
+		obj.stripState = sorted_arr
+		obj.update()
+
+		i += 1
+
+	return sorted_arr
+
 
 
 
