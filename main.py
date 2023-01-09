@@ -23,13 +23,13 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 3
+        self.currAlg = 4
 
     def run(self):
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
 
-        #sself.currAlg = 2
+        #self.currAlg = 2
         #loop indefinitely
         while True:
 
@@ -45,18 +45,23 @@ class Main:
 
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort
+                print("bubble sort")
                 bubble_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
+                print("insertion sort")
                 insertion_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
+                print("merge sort")
                 merge_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "selection":
                 #execute selection sort
+                print("selection sort")
                 selection_sort.sort(self.LED)
-            elif self.priorityQueue[self.currAlg] == "merge":
+            elif self.priorityQueue[self.currAlg] == "heap":
                 #execute merge sort
+                print("heap sort")
                 heap_sort.sort(self.LED)
 
             #algorithm done so clear strip
