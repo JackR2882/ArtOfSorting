@@ -3,16 +3,20 @@
  
 import main
 import threading
+import speech_recognition
 #import time
 
 #setup main object, runs the sorting algorithms
 main = main.Main()
 
 def thread_listen():
-    print("listening")
-    while True:
-        x = input()
-        main.interrupt(x)
+    while True: # need to listen in a loop
+        interrupt_val = speech_recognition.listen()
+        main.interrupt(interrupt_val)
+    #print("listening")
+    #while True:
+        #x = input()
+        #main.interrupt(x)
 
 def thread_main():
     main.run()

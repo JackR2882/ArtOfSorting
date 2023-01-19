@@ -9,6 +9,7 @@ from algorithms import insertion_sort
 from algorithms import merge_sort
 from algorithms import selection_sort
 from algorithms import heap_sort
+from algorithms import quick_sort
 
 class Main:
     def __init__(self):
@@ -17,13 +18,14 @@ class Main:
 
         #list to store all algorithms, will loop through this list to execute algorithms
         #allows changing of order of execution
-        self.priorityQueue = ["bubble", "insertion", "merge", "selection", "heap"]
+        self.priorityQueue = ["bubble", "insertion", "merge", "selection",
+                              "heap", "quick"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 4
+        self.currAlg = 0
 
     def run(self):
         #generate spectrup of RGB colours
@@ -63,18 +65,28 @@ class Main:
                 #execute merge sort
                 print("heap sort")
                 heap_sort.sort(self.LED)
+            elif self.priorityQueue[self.currAlg] == "quick":
+                #execute quick sort
+                print("quick sort")
+                quick_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
 
-            self.currAlg += 1
+            #self.currAlg += 1
         
         self.LED.clear()
 
-    def interrupt(self, name):
+    def interrupt(self, interrupt_val):
+        name = interrupt_val[0] # interrupt val contains, both the name of interupt alg, and the volume it was spoken at
+        vol = interrupt_val[1]
+
+        # need to do something with volume (use it to change the size of the array)
+
         try:
-            #queue this algorithm next
+            #queue the spoken algorithm next
             self.currAlg = self.priorityQueue.index(name) - 1
+            print("queuing: " + name + " sort")
         except:
-            print("Error, not valid input!")
+            print("Error, cannot find: " + name + " sort algorithm")
 
