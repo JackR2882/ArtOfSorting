@@ -25,7 +25,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 5
 
     def run(self):
         #generate spectrup of RGB colours
@@ -73,7 +73,7 @@ class Main:
             #algorithm done so clear strip
             self.LED.clear()
 
-            #self.currAlg += 1
+            self.currAlg += 1
         
         self.LED.clear()
 
