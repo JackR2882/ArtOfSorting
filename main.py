@@ -4,12 +4,15 @@
 import time
 from init import generate_spectrum
 import LED_controller
+
+# import algorithms:
 from algorithms import bubble_sort
 from algorithms import insertion_sort
 from algorithms import merge_sort
 from algorithms import selection_sort
 from algorithms import heap_sort
 from algorithms import quick_sort
+from algorithms import counting_sort
 
 class Main:
     def __init__(self):
@@ -19,13 +22,13 @@ class Main:
         #list to store all algorithms, will loop through this list to execute algorithms
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
-                              "heap", "quick"]
+                              "heap", "quick", "counting"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 5
+        self.currAlg = 6
 
     def run(self):
         #generate spectrup of RGB colours
@@ -69,11 +72,17 @@ class Main:
                 #execute quick sort
                 print("quick sort")
                 quick_sort.sort(self.LED)
+            elif self.priorityQueue[self.currAlg] == "counting":
+                #execute counting sort
+                print("counting sort")
+                generate_spectrum.initializeHalfSpectrum(self.LED,self.stripSize,self.defaultBrightness) # convert strip to random rg dist
+                counting_sort.sort(self.LED)
+                generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness) # return strip to standard rgb dist
 
             #algorithm done so clear strip
             self.LED.clear()
 
-            self.currAlg += 1
+            #self.currAlg += 1
         
         self.LED.clear()
 
