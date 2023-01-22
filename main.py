@@ -13,6 +13,7 @@ from algorithms import selection_sort
 from algorithms import heap_sort
 from algorithms import quick_sort
 from algorithms import counting_sort
+from algorithms import bucket_sort
 
 class Main:
     def __init__(self):
@@ -22,13 +23,13 @@ class Main:
         #list to store all algorithms, will loop through this list to execute algorithms
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
-                              "heap", "quick", "counting"]
+                              "heap", "quick", "counting", "bucket"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 6
+        self.currAlg = 7
 
     def run(self):
         #generate spectrup of RGB colours
@@ -78,11 +79,15 @@ class Main:
                 generate_spectrum.initializeHalfSpectrum(self.LED,self.stripSize,self.defaultBrightness) # convert strip to random rg dist
                 counting_sort.sort(self.LED)
                 generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness) # return strip to standard rgb dist
+            elif self.priorityQueue[self.currAlg] == "bucket":
+                #execute bucket sort
+                print("bucket sort")
+                bucket_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
 
-            #self.currAlg += 1
+            self.currAlg += 1
         
         self.LED.clear()
 
