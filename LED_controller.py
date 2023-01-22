@@ -30,7 +30,7 @@ class LED:
         self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
 
         #send strip state as data frames:
-        for i in range(0,self.stripSize-1):        
+        for i in range(0,len(self.stripState)-1):        
             self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4]])
         
         #send end frame:
