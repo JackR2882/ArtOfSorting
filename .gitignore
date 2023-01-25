@@ -129,9 +129,10 @@ dmypy.json
 .pyre/
 
 
-#test files
+#misc files
 test1.py
 development/
+notes.txt
 
 #env variables
 .env
