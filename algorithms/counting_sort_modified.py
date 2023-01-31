@@ -1,52 +1,42 @@
-# semi working
-# see below for exmplanation (can't handle arrays with repeated elements)
-
+# modified implmentation of counting sort - for use as a subroutine in radix sort, so includes the ability to specify a 
+# 'granularity' with which to sort by
 # the following resource was used in the writing of this function: https://www.javatpoint.com/counting-sort
-
-
-# has been modified to include an offset (for use in radix sort -> sort by hundreds, tens, ones, etc...)
-
-
-import time
-
 
 def sort(obj, off):
 
-    obj.update()
-
-    #print(obj.stripState[0:4])
-    #obj.stripState = obj.stripState[0:4]
 
     arr = obj.stripState
 
-    #print(obj.stripState)
 
-
-
-
+    # count the number of occurences of a given item within an input array
     def count(arr, item):
         counter = 0
         for i in range(0, len(arr)):
-            if arr[i][0] == item:
+            if int(arr[i][0]/off) == item:
                 counter += 1
         return counter
 
-    # find max item in array:
+
+    # find the maximum value item in array:
     max_i = 0
     for i in range(1, len(arr)):
         if arr[max_i] < arr[i]:
             max_i = i
+            
 
-    # init arr of length max + 1
-    new_arr = [0]*(int(arr[max_i][0])+1)
+    # initialize arr of length max + 1
+    new_arr = [0]*(int(arr[max_i][0]/off)+1)
 
-    #print(int(arr[max_i][0]))
+    print("count length: " + str(len(new_arr)))
 
 
+    # clear array, before frequency count is to be displayed
     obj.clear()
     obj.stripState = [[0,0,0,0,0]]*144
 
 
+    # work out and display frequencies (count items)
+    # raw count:
     for i in range(0, len(new_arr)):
         new_arr[i] = count(arr, i)
 
@@ -58,12 +48,10 @@ def sort(obj, off):
             obj.stripState[i] = [i,0,255,255,255]
         obj.update()
 
-    #time.sleep(1) # sleep 5s to display pixel frequencies before starting sorting
-
-    #print("raw-count: ")
-    #print(new_arr)
+    #time.sleep(1) # sleep 1s to display pixel frequencies before starting sorting
 
 
+    # work out and display cumulative frequencies
     # cumulative-count:
     acc = 0
     for i in range(0, len(new_arr)):
@@ -78,57 +66,51 @@ def sort(obj, off):
             obj.stripState[i] = [i,0,255,255,255]
         obj.update()
 
-    #time.sleep(1) # sleep 5s to display cumulative pixel frequencies before starting sorting
+    #time.sleep(1) # sleep 1s to display cumulative pixel frequencies before starting sorting
 
-    #print("cumulative-count: ")
-    #print(new_arr)
     
-    
-    #sorted_arr = obj.stripState
-    obj.stripState = arr
     sorted_arr = obj.stripState
+    obj.stripState = arr.copy()
     obj.update()
 
 
     # sort items:
     for i in range(0, len(arr)):
-        index = new_arr[int(arr[i][0])]-1
-        #index = new_arr
+        index = new_arr[int(arr[i][0]/off)]-1 # get index of item as corresponding item from cumulative freq array
 
+        sorted_arr[index] = arr[i]
 
         # need to deal with multiple items overlapping:
         try:
-            n = new_arr[int(arr[i][0])]-new_arr[int(arr[i][0])-1]
+            n = (new_arr[int(arr[i][0]/off)]) - (new_arr[int(arr[i][0]/off)-1])
             #print("1: " + str(new_arr[int(arr[i][0])])+ ", 2: " + str(new_arr[int(arr[i][0])-1]))
             #n = (144 - index)-1        
         except:
-            n = 0
+            n = index
 
-        while n >= 0:
+        while n > 0:
             sorted_arr[index-n] = arr[i]
             obj.stripState[index-n] = arr[i]
             n -= 1
             obj.update()
 
 
-        #print(n)        
-        #while new_arr[int(arr)]
-
-    #print(sorted_arr[0:4])
-    print(sorted_arr)
-
-
     
-    time.sleep(2.5)
-    obj.clear()
-    time.sleep(2.5)
+    #time.sleep(2.5)
+    #obj.clear()
+    #time.sleep(2.5)
 
 
     #print(sorted_arr)
-    #for i in range(0, len(sorted_arr)):
-    #    print(int(sorted_arr[i][0]))
 
-#print(len(arr))
-#print(len(new_arr))
+    #print(new_arr)
+
+    #print("---------------------------------------------------------------")
+    #for i in range(1, len(sorted_arr)):
+        #print("val: " + str(int(sorted_arr[i][0])) + ", diff: " + str((new_arr[(arr[i][0])]) - (new_arr[(arr[i][0])-1])))
+    #    print(sorted_arr[i][0])
+    #print("---------------------------------------------------------------")
+
+    #print(len(sorted_arr))
 
 
