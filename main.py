@@ -92,7 +92,7 @@ class Main:
             #algorithm done so clear strip
             self.LED.clear()
 
-            #self.currAlg += 1
+            self.currAlg += 1
         
         self.LED.clear()
 
