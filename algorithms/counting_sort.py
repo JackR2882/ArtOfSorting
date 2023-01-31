@@ -8,14 +8,7 @@ import time
 
 def sort(obj):
 
-    obj.update()
-
-    #print(obj.stripState[0:4])
     arr = obj.stripState
-    #print(arr)
-
-
-
 
     def count(arr, item):
         counter = 0
@@ -24,22 +17,25 @@ def sort(obj):
                 counter += 1
         return counter
 
+
     # find max item in array:
     max_i = 0
     for i in range(1, len(arr)):
         if arr[max_i] < arr[i]:
             max_i = i
-            
+
 
     # init arr of length max + 1
     new_arr = [0]*(int(arr[max_i][0])+1)
 
 
-
+    # clear array, before frequency count is to be displayed
     obj.clear()
     obj.stripState = [[0,0,0,0,0]]*144
 
 
+    # work out and display frequencies (count items)
+    # raw count:
     for i in range(0, len(new_arr)):
         new_arr[i] = count(arr, i)
 
@@ -51,12 +47,8 @@ def sort(obj):
             obj.stripState[i] = [i,0,255,255,255]
         obj.update()
 
-    #time.sleep(1) # sleep 1s to display pixel frequencies before starting sorting
 
-    #print("raw-count: ")
-    #print(new_arr)
-
-
+    # work out and display cumulative frequencies
     # cumulative-count:
     acc = 0
     for i in range(0, len(new_arr)):
@@ -71,12 +63,8 @@ def sort(obj):
             obj.stripState[i] = [i,0,255,255,255]
         obj.update()
 
-    #time.sleep(1) # sleep 1s to display cumulative pixel frequencies before starting sorting
-
-    #print("cumulative-count: ")
-    #print(new_arr)
     
-    #obj.stripState = arr
+    # revert strip state back to initial state
     sorted_arr = obj.stripState
     obj.stripState = arr.copy()
     obj.update()

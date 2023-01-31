@@ -69,6 +69,7 @@ def sort(obj, off):
     #time.sleep(1) # sleep 1s to display cumulative pixel frequencies before starting sorting
 
     
+    # revert strip state back to initial state
     sorted_arr = obj.stripState
     obj.stripState = arr.copy()
     obj.update()
@@ -83,8 +84,6 @@ def sort(obj, off):
         # need to deal with multiple items overlapping:
         try:
             n = (new_arr[int(arr[i][0]/off)]) - (new_arr[int(arr[i][0]/off)-1])
-            #print("1: " + str(new_arr[int(arr[i][0])])+ ", 2: " + str(new_arr[int(arr[i][0])-1]))
-            #n = (144 - index)-1        
         except:
             n = index
 
@@ -93,24 +92,5 @@ def sort(obj, off):
             obj.stripState[index-n] = arr[i]
             n -= 1
             obj.update()
-
-
-    
-    #time.sleep(2.5)
-    #obj.clear()
-    #time.sleep(2.5)
-
-
-    #print(sorted_arr)
-
-    #print(new_arr)
-
-    #print("---------------------------------------------------------------")
-    #for i in range(1, len(sorted_arr)):
-        #print("val: " + str(int(sorted_arr[i][0])) + ", diff: " + str((new_arr[(arr[i][0])]) - (new_arr[(arr[i][0])-1])))
-    #    print(sorted_arr[i][0])
-    #print("---------------------------------------------------------------")
-
-    #print(len(sorted_arr))
 
 
