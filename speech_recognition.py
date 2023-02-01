@@ -19,7 +19,9 @@ listener = pyaudio.PyAudio()
 # init porcupine and import hotword samples
 porcupine = pvporcupine.create(access_key = access_key, keyword_paths=["/home/pi/ArtOfSorting/hotword_detection/bubble_sort/bubble-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/insertion_sort/insertion-sort_en_raspberry-pi_v2_1_0.ppn",
-                                                                       "/home/pi/ArtOfSorting/hotword_detection/merge_sort/merge-sort_en_raspberry-pi_v2_1_0.ppn"
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/merge_sort/merge-sort_en_raspberry-pi_v2_1_0.ppn",
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/selection_sort/selection-sort_en_raspberry-pi_v2_1_0.ppn",
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/heap_sort/heap-sort_en_raspberry-pi_v2_1_0.ppn"
                                                                        ])
 
 
@@ -65,7 +67,7 @@ def listen():
             vol = max(prev_amp) # approximate volume as maximum value from the amplitude buffer
 
             # if hotword detected, then which hotword is detected?
-            hotwords = ["bubble", "insertion", "merge"]
+            hotwords = ["bubble", "insertion", "merge", "selection", "heap"]
             
             output = [hotwords[hotword], vol]
             
