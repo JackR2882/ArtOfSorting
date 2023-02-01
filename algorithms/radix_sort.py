@@ -10,7 +10,6 @@
 
 
 import math
-import time
 from algorithms import selection_sort_modified as selection_sort
 from algorithms import counting_sort_modified as counting_sort
 
@@ -29,15 +28,6 @@ def sort(obj):
 
     size = int(math.log10(max_val))+1
     off = int(math.pow(10,size-1))
-
-    def counting(arr_in, off):
-        for i in range(0,len(arr_in)):
-            x = i
-            while x >= 1 and int(arr_in[x][0]/off) > int(arr_in[x-1][0]/off):
-                arr_in[x], arr_in[x-1] = arr_in[x-1], arr_in[x]
-                x -= 1
-        obj.update()
-        time.sleep(2)
 
     while off >= 1:
         selection_sort.sort(obj, off)
