@@ -30,7 +30,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 8
+        self.currAlg = 0
 
     def run(self):
         #generate spectrup of RGB colours
