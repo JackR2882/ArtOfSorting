@@ -133,6 +133,7 @@ dmypy.json
 test1.py
 development/
 notes.txt
+clear_strip.py
 
 #env variables
 .env
