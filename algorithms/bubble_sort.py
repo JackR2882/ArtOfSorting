@@ -3,7 +3,6 @@
 import audio_controller_temp
 
 unsorted = True
-#unsorted = False
 
 def sort(obj):
     
@@ -19,14 +18,13 @@ def sort(obj):
             currVal = obj.stripState[i]
             prevVal = obj.stripState[i-1]
             obj.stripState[i] = [0,255,255,255,255]
+            obj.stripState[i-1] = [0,255,255,255,255]
             obj.update()
 
             if currVal < prevVal:
                 #swap values
-                obj.stripState[i] = prevVal
-                obj.stripState[i-1] = currVal
+                obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
                 unsorted = True
             else:
-                obj.stripState[i] = currVal            
-            obj.update()
-    print("Sorted!")
+                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal         
+            #obj.update()
