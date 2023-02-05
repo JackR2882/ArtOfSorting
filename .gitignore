@@ -134,6 +134,7 @@ test1.py
 development/
 notes.txt
 clear_strip.py
+algorithms/selection_sort_backup.py
 
 #env variables
 .env
