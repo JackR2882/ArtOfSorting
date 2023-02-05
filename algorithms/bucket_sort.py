@@ -28,7 +28,10 @@ def sort(obj):
 
         # need to do this to work around issue with updating list nested in array
         temp_arr = buckets[bucket_index].copy()
-        temp_arr.append(arr[i])
+        if bucket_index%2 == 0:
+            temp_arr.append([arr[i][0],arr[i][1]+10,arr[i][2],arr[i][3],arr[i][4]])
+        else:
+            temp_arr.append(arr[i])
         buckets[bucket_index] = temp_arr
 
 
