@@ -3,13 +3,33 @@
 
 import random
 
+import time
+
+def highlight(obj, start, end, default_b):
+    for i in range(0, len(obj.stripState)):
+        if i in range(start, end):
+            # increase brightness here
+            obj.stripState[i][1] += 5
+        else:
+            # check brightness is default
+            obj.stripState[i][1] = default_b
+    
+    obj.update()
+    return(obj.stripState)
+
+
+
 # start of code stup to integrate with system
 def sort(obj):
+
+    default_b = obj.stripState[0][1]
 
     arr = obj.stripState
     obj.update()
 
     def quicksort(arr_in, start_index, end_index):
+
+        obj.stripState = highlight(obj, start_index, end_index, default_b)
 
         if len(arr_in) > 1:
 
@@ -48,3 +68,4 @@ def sort(obj):
             return arr_in
 
     quicksort(arr, 0, len(arr)-1)
+    time.sleep(500)
