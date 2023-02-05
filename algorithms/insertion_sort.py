@@ -21,5 +21,6 @@ def sort(obj):
                 #obj.update()
             else:
                 break
+            #obj.update()
         sorted += 1
         #obj.update()
