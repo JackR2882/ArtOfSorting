@@ -57,19 +57,14 @@ class LED:
         random.shuffle(self.stripState)
 
 
-    def test(self):
-        print("something")
-        #self.spi.open(0,0)
-        #self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
-
-        #state = np.array([[224,0,0,0]]*(144))
-        #state = np.array([243]*(144*4))
-        #print(state)
-        #print(state.flatten())
-        #print(state.flatten()[4])
-        #self.spi.xfer(state.flatten())
-        #self.spi.xfer(state)
-
-        #self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
-        #self.spi.close()
-        
+    def highlight(self, start, end, default_b):        
+        for i in range(0, len(self.stripState)):
+            if i in range(start, end):
+                # increase brightness here
+                self.stripState[i][1] += 5
+            else:
+                # check brightness is default
+                self.stripState[i][1] = default_b
+    
+        self.update()
+        return(self.stripState)
