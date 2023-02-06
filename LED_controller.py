@@ -61,7 +61,7 @@ class LED:
         for i in range(0, len(self.stripState)):
             if i in range(start, end):
                 # increase brightness here
-                self.stripState[i][1] += 5
+                self.stripState[i][1] = default_b + 5
             else:
                 # check brightness is default
                 self.stripState[i][1] = default_b
