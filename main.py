@@ -32,7 +32,12 @@ class Main:
         #counter for current algorithm being executed
         self.currAlg = 0
 
-    def run(self):
+        #audio-output object
+        self.AUDIO = None
+
+
+    def run(self, audioBuff):
+
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
 
@@ -53,7 +58,7 @@ class Main:
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort
                 print("bubble sort")
-                bubble_sort.sort(self.LED)
+                bubble_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
                 print("insertion sort")
