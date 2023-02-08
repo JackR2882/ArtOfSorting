@@ -1,7 +1,5 @@
 # basic implementation of bubble sort:
 
-unsorted = True
-
 def sort(obj, audioBuff):
 
     unsorted = True
