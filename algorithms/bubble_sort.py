@@ -3,9 +3,12 @@
 def sort(obj, audioBuff):
 
     unsorted = True
+    sorted = 0 # optimisation as algoithm will always put largest item on the right (don't need to re-check this area each time)
+
     while unsorted:
         unsorted = False
-        for i in range(1, len(obj.stripState)):
+
+        for i in range(1, (len(obj.stripState)-sorted)):
 
             audioBuff.append(obj.stripState[i][0])
 
@@ -20,5 +23,6 @@ def sort(obj, audioBuff):
                 obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
                 unsorted = True
             else:
-                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal         
-            #obj.update()
+                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal 
+        
+        sorted += 1
