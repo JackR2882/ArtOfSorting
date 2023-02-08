@@ -1,19 +1,15 @@
 # basic implementation of bubble sort:
 
-import audio_controller_temp
-
 unsorted = True
 
-def sort(obj):
-    
-    audio = audio_controller_temp.AudioOut()
+def sort(obj, audioBuff):
 
     unsorted = True
     while unsorted:
         unsorted = False
         for i in range(1, len(obj.stripState)):
 
-            audio.out(obj.stripState[i][0])
+            audioBuff.append(obj.stripState[i][0])
 
             currVal = obj.stripState[i]
             prevVal = obj.stripState[i-1]
