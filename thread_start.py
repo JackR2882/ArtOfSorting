@@ -5,6 +5,7 @@ import main
 import threading
 import speech_recognition
 from init import buffer
+import audio_controller_temp as audio_controller
 import time
 
 #setup main object, runs the sorting algorithms
@@ -25,11 +26,12 @@ def thread_audio_out():
 
     global audioBuff
     audioBuff = buffer.Buff()
+    audioOut = audio_controller.AudioOut()
 
-    import time
     while True:
         if len(audioBuff.buffer) > 0:
-            print(str(audioBuff.buffer[0]) + " in buffer")
+            #print(str(audioBuff.buffer[0]) + " in buffer")
+            audioOut.out(audioBuff.buffer[0])
             audioBuff.remove()
 
 
