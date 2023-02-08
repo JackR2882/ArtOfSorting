@@ -62,7 +62,7 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
                 print("insertion sort")
-                insertion_sort.sort(self.LED)
+                insertion_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
                 print("merge sort")
