@@ -7,7 +7,7 @@ def sort(obj, audioBuff):
         audioBuff.append(obj.stripState[i][0])
         for n in reversed(range(0,sorted)):
             if obj.stripState[n] > obj.stripState[n+1]:
-                #audio.out(obj.stripState[n][0])
+                audioBuff.append(obj.stripState[i][0])
 
                 mem = obj.stripState[n+1]
                 obj.stripState[n+1] = [mem[0],255,mem[2],mem[3],mem[4]]                
