@@ -16,6 +16,7 @@ from algorithms import counting_sort
 from algorithms import bucket_sort
 from algorithms import radix_sort
 from algorithms import cocktail_sort
+from algorithms import tim_sort
 
 class Main:
     def __init__(self):
@@ -26,13 +27,13 @@ class Main:
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
                               "heap", "quick", "counting", "bucket", "radix",
-                              "cocktail"]
+                              "cocktail", "tim"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 9
+        self.currAlg = 0
 
         #audio-output object
         self.AUDIO = None
@@ -101,6 +102,10 @@ class Main:
                 #execute cocktail shaker sort
                 print("cocktail shaker sort")
                 cocktail_sort.sort(self.LED, audioBuff)
+            elif self.priorityQueue[self.currAlg] == "tim":
+                # execute tim sort
+                print("tim sort")
+                tim_sort.sort(self.LED)
 
             #algorithm done so clear strip
             self.LED.clear()
