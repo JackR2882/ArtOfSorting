@@ -10,31 +10,42 @@ import math
 
 
 def merge(obj, start_l, end_l, start_r, end_r):
-    #print(obj)
-    #print("------------------------------------")
-    arr = obj.stripState
+    
+    #print("start_l: " + str(start_l) + ", end_l: " + str(end_l))
+    #print("start_r: " + str(start_r) + ", end_r: " + str(end_r))
 
-    l = end_l - start_l
-    r = end_r - start_r
+    offset = start_l
 
-    lo = 0
-    ro = 0
+    l_arr = obj.stripState[start_l:end_l+1]
+    r_arr = obj.stripState[start_r:end_r]
+    
+    while(len(l_arr) and len(r_arr)) > 0:
+        if l_arr[0] > r_arr[0]:
+            obj.stripState[offset] = r_arr[0]
 
-    print("l: " + str(l) + ", r: " + str(r))
-
-    while lo < l and ro < r:
-        if arr[start_l+lo] > arr[start_r+ro]:
-            arr[start_l+lo+ro], arr[start_r] = arr[start_r+ro], arr[start_l+lo+ro]
-            ro += 1
+            r_arr.pop(0)
         else:
-            arr[start_l+lo+ro], arr[start_l] = arr[start_l+lo], arr[start_r+lo+ro]
-            lo += 1
+            obj.stripState[offset] = l_arr[0]
+
+            l_arr.pop(0)
+        offset += 1
+        obj.update()
+
+    while len(r_arr) > 0:
+        obj.stripState[offset] = r_arr[0]
+        r_arr.pop(0)
+        offset += 1
+        obj.update()
+
+    while len(l_arr) > 0:
+        obj.stripState[offset] = l_arr[0]
+        l_arr.pop(0)
+        offset += 1
         obj.update()
 
 
 
 def sort(obj, audioBuff):
-    #obj.update()
 
     default_b = obj.stripState[0][1]
     arr = obj.stripState
@@ -64,11 +75,8 @@ def sort(obj, audioBuff):
     obj.highlight(((i-1)*run_size)-1, len(arr)-1, default_b)
     #print("end: " + str(len(arr)-1) + " start: " + str(((i-1)*run_size)-1))
     
-    print(type(obj))
-    merge(obj, ((i-1)*run_size)-1, ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
+    merge(obj, ((i-1)*run_size), ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
     
-    import time
-    time.sleep(5)
 
 
     
@@ -139,62 +147,3 @@ def split(arr):
         runs[int(i%run_count)].append(arr[i])
 
     return runs
-
-
-#def insertion_sort(arr):
-
-#    sorted = 0
-
-#    for i in range(1, len(arr)):
-#        n = sorted
-
-#        while (arr[i] < arr[n]) and n >= 0:
-#            arr[n], arr[i] = arr[i], arr[n]
-#            i = n
-#            n -= 1
-#        sorted += 1
-
-#    return(arr)
-
-
-#def merge(l_arr, r_arr):
-#    merged = []
-
-#    while (len(l_arr) and len(r_arr)) > 0:
-#        if l_arr[0] > r_arr[0]:
-#            merged.append(r_arr[0])
-#            r_arr.pop(0)
-#        else:
-#            merged.append(l_arr[0]) 
-#            l_arr.pop(0)
-    
-#    while len(r_arr) > 0:
-#        merged.append(r_arr[0])
-#        r_arr.pop(0)
-#    while len(l_arr) > 0:
-#        merged.append(l_arr[0])
-#        l_arr.pop(0)
-
-#    return(merged)
-
-
-
-
-
-
-# split into runs
-#runs = split(arr)
-
-# insertion sort runs
-#for i in range(0, len(runs)):
-#    runs[i] = insertion_sort(runs[i])
-#    print(runs[i])
-
-# merge runs
-# merge last two runs, then merge merged run with third to last run, ... , then merge merged run with first run
-#num_runs = len(runs) - 1
-#merged = runs[num_runs]
-#for i in range(num_runs-1, -1, -1):
-#    merged = merge(runs[i], merged)
-#print(merged)
-
