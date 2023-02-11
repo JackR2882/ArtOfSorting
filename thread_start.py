@@ -29,10 +29,18 @@ def thread_audio_out():
     audioOut = audio_controller.AudioOut()
 
     while True:
+        #t1 = time.perf_counter()
         if len(audioBuff.buffer) > 0:
             #print(str(audioBuff.buffer[0]) + " in buffer")
+
+            # to stop items building up in buffer, could send more than one at once if available
+            # or could dynamically change duration in audio controller based on how much is in buffer
+
+            #print(len(audioBuff.buffer))
             audioOut.out(audioBuff.buffer[0])
             audioBuff.remove()
+        #t2 = time.perf_counter()
+        #print("time: " + str(t2-t1))
 
 
 #start threads
