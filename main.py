@@ -31,6 +31,7 @@ class Main:
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
+        #self.LED = None
 
         #counter for current algorithm being executed
         self.currAlg = 0
@@ -39,7 +40,9 @@ class Main:
         self.AUDIO = None
 
 
+    #def run(self, LED, audioBuff):
     def run(self, audioBuff):
+        #self.LED = LED
 
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
@@ -105,7 +108,7 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "tim":
                 # execute tim sort
                 print("tim sort")
-                tim_sort.sort(self.LED)
+                tim_sort.sort(self.LED, audioBuff)
 
             #algorithm done so clear strip
             self.LED.clear()
