@@ -5,7 +5,7 @@
 
 import spidev
 import random
-import numpy as np
+import time
 
 class LED:
     def __init__(self, ss):
@@ -18,12 +18,19 @@ class LED:
         self.stripSize = ss #set strip size
         self.stripState = [[0,224,0,0,0]]*(ss) #create empty array to store pixel values in form ID,brighness,blue,green,red
 
+        #flag for enabling a slow-down
+        self.slowMode = False
+
     #set pixel value by updating strip state
     def setPixel(self,ID,address,brightness,blue,green,red):
         self.stripState[int(address)] = [ID,int(brightness)+224,int(red),int(green),int(blue)]
         #224 is added to brightness as formatting (first 3 bits of 8 mean new pixel then 5 bits of brightness)
 
     def update(self):
+
+        if(self.slowMode):
+            time.sleep(0.1)
+
         #open spi line
         self.spi.open(0,0)   
         #send start frame:
