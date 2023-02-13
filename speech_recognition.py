@@ -21,7 +21,9 @@ porcupine = pvporcupine.create(access_key = access_key, keyword_paths=["/home/pi
                                                                        "/home/pi/ArtOfSorting/hotword_detection/insertion_sort/insertion-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/merge_sort/merge-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/selection_sort/selection-sort_en_raspberry-pi_v2_1_0.ppn",
-                                                                       "/home/pi/ArtOfSorting/hotword_detection/heap_sort/heap-sort_en_raspberry-pi_v2_1_0.ppn"
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/heap_sort/heap-sort_en_raspberry-pi_v2_1_0.ppn",
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/slow_mode/slow-mode_en_raspberry-pi_v2_1_0.ppn",
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/fast_mode/fast-mode_en_raspberry-pi_v2_1_0.ppn"
                                                                        ])
 
 
@@ -67,7 +69,7 @@ def listen():
             vol = max(prev_amp) # approximate volume as maximum value from the amplitude buffer
 
             # if hotword detected, then which hotword is detected?
-            hotwords = ["bubble", "insertion", "merge", "selection", "heap"]
+            hotwords = ["bubble", "insertion", "merge", "selection", "heap", "slow", "fast"]
             
             output = [hotwords[hotword], vol]
             
