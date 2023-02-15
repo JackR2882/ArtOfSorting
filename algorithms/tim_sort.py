@@ -8,6 +8,18 @@ from algorithms import insertion_sort_modified as insertion_sort
 import math
 
 
+# try and find run size between max run size and 0 that will allow the arr to be equally divided into runs
+def calculate_run_size(max_run_size, length):
+    run_size = max_run_size
+    while max_run_size > 0:
+        if length%(max_run_size) == 0:
+            run_size = max_run_size
+            break
+        max_run_size -= 1
+    
+    return(run_size)
+
+
 
 def merge(obj, start_l, end_l, start_r, end_r):
     
@@ -53,7 +65,9 @@ def sort(obj, audioBuff):
     # don't need to split arr into runs, can instead just use slices of arr
     # (runs still exist, just aren't represented)
     
-    run_size = 32
+    max_run_size = 32
+    run_size = calculate_run_size(max_run_size, len(obj.stripState))
+
     run_count = math.ceil(len(arr)/run_size)
 
     i = 0
@@ -72,11 +86,12 @@ def sort(obj, audioBuff):
 
 
     # now need to merge runs
-    # | | | | |     no merges
-    # | | | ||      1st merge
-    # | | |||       2nd merge
-    # | ||||        3th merge
-    # |||||         4th merge
+    # | | | | | |     no merges
+    # || | | | |      1st merge
+    # || || | |       2nd merge
+    # |||| | |        3rd merge
+    # |||| ||         4th merge
+    # ||||||          5th merge
     while i > 0:
         obj.highlight(((i-1)*run_size), len(arr)-1, default_b)
         merge(obj, ((i-1)*run_size), ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
