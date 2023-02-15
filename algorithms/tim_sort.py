@@ -92,7 +92,41 @@ def sort(obj, audioBuff):
     # |||| | |        3rd merge
     # |||| ||         4th merge
     # ||||||          5th merge
-    while i > 0:
-        obj.highlight(((i-1)*run_size), len(arr)-1, default_b)
-        merge(obj, ((i-1)*run_size), ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
-        i -= 1
+    
+    
+    import time
+
+    i = 0
+    left_sorted = 0
+    right_sorted = 0
+
+    while left_sorted < run_count:
+        if (left_sorted != right_sorted) or left_sorted == 0:
+            #left already merged, so start merging right
+            obj.highlight((i)*run_size, (i+2)*run_size-1, default_b)  
+            merge(obj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((i+2)*run_size)-1)      
+            i += 2
+            if left_sorted == 0:
+                left_sorted = i
+            else:
+                right_sorted = i-left_sorted
+
+        else:
+            #merge left and right sorted
+            obj.highlight(0, (run_size*(left_sorted+right_sorted))-1, default_b)
+            merge(obj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(left_sorted+right_sorted)-1))
+            left_sorted = left_sorted+right_sorted
+            right_sorted = 0
+            i = left_sorted
+
+
+        #time.sleep(5)
+
+    obj.highlight(0,0, default_b)
+
+    
+    
+    #while i > 0:
+    #    obj.highlight(((i-1)*run_size), len(arr)-1, default_b)
+    #    merge(obj, ((i-1)*run_size), ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
+    #    i -= 1
