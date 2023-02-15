@@ -17,6 +17,7 @@ from algorithms import bucket_sort
 from algorithms import radix_sort
 from algorithms import cocktail_sort
 from algorithms import tim_sort
+from algorithms import binary_sort
 
 class Main:
     def __init__(self):
@@ -27,7 +28,7 @@ class Main:
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
                               "heap", "quick", "counting", "bucket", "radix",
-                              "cocktail", "tim"]
+                              "cocktail", "tim", "binary"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
@@ -109,6 +110,10 @@ class Main:
                 # execute tim sort
                 print("tim sort")
                 tim_sort.sort(self.LED, audioBuff)
+            elif self.priorityQueue[self.currAlg] == "binary":
+                # execute binary sort
+                print("binary sort")
+                binary_sort.sort(self.LED, audioBuff)
 
             #algorithm done so clear strip
             self.LED.clear()
