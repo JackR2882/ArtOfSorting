@@ -36,7 +36,7 @@ def listen():
         format=pyaudio.paInt16,
         input=True,
         frames_per_buffer=porcupine.frame_length)
-
+    
     prev_amp = [0]*20   # buffer of size 20 to hold previous amplitude val's
                         # could experiment with increasing this to get more of
                         # the sound wave
@@ -46,10 +46,12 @@ def listen():
     output = ""
 
     while True:
-        wave = stream.read(porcupine.frame_length)
+        wave = stream.read(porcupine.frame_length, exception_on_overflow=False)
+        #wave = stream.read(2048)
 
         # convert to more managable form (byte to decimal)
         wave = struct.unpack_from("h" * porcupine.frame_length, wave)
+        #wave = struct.unpack_from("h" * 512, wave)
 
         # generate value corresponding to what noise is detected (hotword or not, and if hotword then which hotword)
         hotword = porcupine.process(wave)
@@ -81,12 +83,13 @@ def listen():
         prev_amp.append(amp)
 
 
-# TESTING  
-#out = listen()
-#print(out)
-#listen()
-
 
 # NEED TO GET AMPLITUDE OF WAVE AS VOLUME LEVEL, CAN USE THIS TO THRESHOLD WHEN HOTWORD DETECTION IS ACTIVE
 # (REDUCING COMPUTATIONAL COST), AND ALSO AS ANOTHER MEANS OF INTERACTING WITH THE SYSTEM
 # can't be used to reduce computational cost - since it's costly in and of itself
+
+
+
+
+# FIXED BY CHANGING FILE: nano ~/.asoundrc
+# using this guide: https://matthewdaws.github.io/blog/2019-12-07-pi-audio.html
