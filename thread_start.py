@@ -28,7 +28,6 @@ def thread_main():
     main.run(audioBuff)
 
 def thread_out():
-
     global audioBuff
     audioBuff = buffer.Buff()
     audioOut = audio_controller.AudioOut()
