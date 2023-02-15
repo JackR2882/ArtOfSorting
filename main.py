@@ -128,5 +128,13 @@ class Main:
             self.currAlg = self.priorityQueue.index(name) - 1
             print("queuing: " + name + " sort")
         except:
-            print("Error, cannot find: " + name + " sort algorithm")
+            # could be slow or fast mode
+            if name == "fast":
+                print("entering fast mode!")
+                self.LED.slowMode = False
+            elif name == "slow":
+                print("entering slow mode!")
+                self.LED.slowMode = True
+            else:
+                print("Error, cannot find: " + name + " sort algorithm")
 
