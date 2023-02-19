@@ -1,0 +1,96 @@
+0000000000000000000000000000000000000000 231afcf3ef6d9fcf29d16bfe8525a3a8a4949d1d pi <pi@raspberrypi.(none)> 1672572926 +0000	clone: from https://github.com/JackR223/ArtOfSorting.git
+231afcf3ef6d9fcf29d16bfe8525a3a8a4949d1d a14e78f1eb0f7548b63445aaad1b0037fd4f6466 JackR223 <sgjrive@liverpool.ac.uk> 1672579287 +0000	commit: prevent keys from being uploaded to github
+a14e78f1eb0f7548b63445aaad1b0037fd4f6466 c6a15935f11ab77e9a3c17be5b401431ebc394cb JackR223 <sgjrive@liverpool.ac.uk> 1672833327 +0000	commit: very basic test implementation of heapsort
+c6a15935f11ab77e9a3c17be5b401431ebc394cb fe603bda66a0793da8f4f66221b8e23232b1ba5a JackR223 <sgjrive@liverpool.ac.uk> 1672833395 +0000	commit: reference files for testing hotword detection
+fe603bda66a0793da8f4f66221b8e23232b1ba5a 655ea61d54d3711b0191b7ce0e116e57ed5def55 JackR223 <sgjrive@liverpool.ac.uk> 1672855985 +0000	commit: setup for led integration of heap sort
+655ea61d54d3711b0191b7ce0e116e57ed5def55 ec0c3584b54c4e5cba90b57cac0215f0088122bd JackR223 <sgjrive@liverpool.ac.uk> 1672856178 +0000	commit: changed test method
+ec0c3584b54c4e5cba90b57cac0215f0088122bd 705777d20139aeacafb7cb14ea8dd553fa49f009 JackR223 <sgjrive@liverpool.ac.uk> 1672856480 +0000	commit: heap sort included in main
+705777d20139aeacafb7cb14ea8dd553fa49f009 4e4ec4c4e8df3d928711c1662b6e31482949486b JackR223 <sgjrive@liverpool.ac.uk> 1673090520 +0000	commit: basix quicksort test
+4e4ec4c4e8df3d928711c1662b6e31482949486b 16ffd059a92fb368a68bdf2d67fceb51098e3d96 JackR223 <sgjrive@liverpool.ac.uk> 1673268398 +0000	commit: heap sort integrated with led strip
+16ffd059a92fb368a68bdf2d67fceb51098e3d96 7b3e06500ebc859c279ef6958ded6fa113c11718 JackR223 <sgjrive@liverpool.ac.uk> 1673268429 +0000	commit: properly integrated heap sort
+7b3e06500ebc859c279ef6958ded6fa113c11718 f1d001e43a2e915cf5bdbfef1020f9fd9db731d6 JackR223 <sgjrive@liverpool.ac.uk> 1673271240 +0000	commit: basic counting sort implementation
+f1d001e43a2e915cf5bdbfef1020f9fd9db731d6 56382a984a5f897d6db32d0eb8e662739ecf1905 JackR223 <sgjrive@liverpool.ac.uk> 1674156660 +0000	commit: initial voice recognition implementation
+56382a984a5f897d6db32d0eb8e662739ecf1905 01ffe32dce00508e50268c28395a8d3281fae02c JackR223 <sgjrive@liverpool.ac.uk> 1674201464 +0000	commit: in place quicksort - working / NOT IMPLEMENTED
+01ffe32dce00508e50268c28395a8d3281fae02c cbaa9b4794bdc27f6b194415ab5bfc62130c0258 JackR223 <sgjrive@liverpool.ac.uk> 1674203098 +0000	commit: implemented quicksort
+cbaa9b4794bdc27f6b194415ab5bfc62130c0258 7d82d6b5bf0e043c66c8af847cdf440c8516dc4c JackR223 <sgjrive@liverpool.ac.uk> 1674203222 +0000	commit: fixed algorithm chageover on main
+7d82d6b5bf0e043c66c8af847cdf440c8516dc4c 002018ec689b5e1e1e41ffd2fa680a222ccf16f8 JackR223 <sgjrive@liverpool.ac.uk> 1674291491 +0000	commit: included option 2 generate spectrum from rand dist
+002018ec689b5e1e1e41ffd2fa680a222ccf16f8 5280401c03228cd574d407c23ccce990a5c7b73a JackR223 <sgjrive@liverpool.ac.uk> 1674291543 +0000	commit: semi-working counting sort (cannot handle repeats)
+5280401c03228cd574d407c23ccce990a5c7b73a 691c3a47ab87e6041df87efd6bb8ca8d7e43a13c JackR223 <sgjrive@liverpool.ac.uk> 1674291578 +0000	commit: implemented coutning sort + modified spectrum init
+691c3a47ab87e6041df87efd6bb8ca8d7e43a13c d5a40189ef85c35d25f6b1a5b4662c6bd9a98fd2 JackR223 <sgjrive@liverpool.ac.uk> 1674301812 +0000	commit: mostly working, still not sorting properly
+d5a40189ef85c35d25f6b1a5b4662c6bd9a98fd2 51d3c2d41951d9b97e612eaffa278634ac061130 JackR223 <sgjrive@liverpool.ac.uk> 1674403867 +0000	commit: implmented bucket splitting
+51d3c2d41951d9b97e612eaffa278634ac061130 3fa7a5d165044d0986c5dfa308fc053165670043 JackR223 <sgjrive@liverpool.ac.uk> 1674404490 +0000	commit: bucket sort implemented
+3fa7a5d165044d0986c5dfa308fc053165670043 ce91bda0287daffaaaa83e2f51b3c61363a9d88f JackR223 <sgjrive@liverpool.ac.uk> 1674404554 +0000	commit: bucket sort cleanup
+ce91bda0287daffaaaa83e2f51b3c61363a9d88f af161d2484b996405134325b16fea3787ea0e266 JackR223 <sgjrive@liverpool.ac.uk> 1674404605 +0000	commit: fixed update function overflowing arr size
+af161d2484b996405134325b16fea3787ea0e266 09160f12cfe8d1cda76a0e4571fa6a9c85cb1047 JackR223 <sgjrive@liverpool.ac.uk> 1674404770 +0000	commit: refactoring
+09160f12cfe8d1cda76a0e4571fa6a9c85cb1047 f3f056838642563f0f7c32500870c298fecc030e JackR223 <sgjrive@liverpool.ac.uk> 1674404814 +0000	commit: integrated bucket sort
+f3f056838642563f0f7c32500870c298fecc030e cb9dd7861c2c75a342d176c47cc0e148e895aad1 JackR223 <sgjrive@liverpool.ac.uk> 1674404854 +0000	commit: remove unecessary file
+cb9dd7861c2c75a342d176c47cc0e148e895aad1 ab6e7abf8dcd4a52d82b96e1e5154902515bc491 JackR223 <sgjrive@liverpool.ac.uk> 1674657911 +0000	commit: file strup radix sort
+ab6e7abf8dcd4a52d82b96e1e5154902515bc491 67ac14881d43fdf4b0f2c8472fff3a9e8014e765 JackR223 <sgjrive@liverpool.ac.uk> 1674657989 +0000	commit: updated gitignore
+67ac14881d43fdf4b0f2c8472fff3a9e8014e765 b427904b93d0f2659d7a70ea259e34f44e7661b5 JackR223 <sgjrive@liverpool.ac.uk> 1674659323 +0000	commit: integrated radix sort to main
+b427904b93d0f2659d7a70ea259e34f44e7661b5 24130dd01374e289df0ba28ad9b7f41ba89f90ff JackR223 <sgjrive@liverpool.ac.uk> 1675158170 +0000	commit: modified counting sort for use in radix sort
+24130dd01374e289df0ba28ad9b7f41ba89f90ff 1adb06edf66e5c0cf6e483b53bcb3cabf20e64e8 JackR223 <sgjrive@liverpool.ac.uk> 1675158216 +0000	commit: implementation/integration of redix sort
+1adb06edf66e5c0cf6e483b53bcb3cabf20e64e8 7fa8b4776679f06ac00dcdb62ab51ac2971d67c6 JackR223 <sgjrive@liverpool.ac.uk> 1675174112 +0000	commit: fixed counting sort
+7fa8b4776679f06ac00dcdb62ab51ac2971d67c6 c161a34653c0dfceabc43039701dfbe50847c08c JackR223 <sgjrive@liverpool.ac.uk> 1675176166 +0000	commit: Implemented radix sort with selection sort
+c161a34653c0dfceabc43039701dfbe50847c08c a3843ecd6aab0a3cb3cf0703ace29cabe4e60902 JackR223 <sgjrive@liverpool.ac.uk> 1675176236 +0000	commit: fix main
+a3843ecd6aab0a3cb3cf0703ace29cabe4e60902 e5599bcb5584274b3e5d7c9673957b362a9bb33e JackR223 <sgjrive@liverpool.ac.uk> 1675176884 +0000	commit: refactoring
+e5599bcb5584274b3e5d7c9673957b362a9bb33e d0aced2cb89f89030469a784fedc1bb2c3f66c28 JackR223 <sgjrive@liverpool.ac.uk> 1675238218 +0000	commit: remove unecessary files
+d0aced2cb89f89030469a784fedc1bb2c3f66c28 21402a19c94ec456235cce78d652261302a61665 JackR223 <sgjrive@liverpool.ac.uk> 1675241639 +0000	commit: reset starting algorithm
+21402a19c94ec456235cce78d652261302a61665 0dffa3ffb867dd73f8c695b7c17d09b8e78bcf7d JackR223 <sgjrive@liverpool.ac.uk> 1675255876 +0000	commit: merge sort hotword detection
+0dffa3ffb867dd73f8c695b7c17d09b8e78bcf7d e086baffeecb3f3cfd6c4879d904e57239d0bd3b JackR223 <sgjrive@liverpool.ac.uk> 1675256073 +0000	commit: heap sort wakeword files
+e086baffeecb3f3cfd6c4879d904e57239d0bd3b e09eef3622185dcf5105bf6e2fe408feeed87179 JackR223 <sgjrive@liverpool.ac.uk> 1675256090 +0000	commit: selection sort wake word files
+e09eef3622185dcf5105bf6e2fe408feeed87179 3a263598fc0753f2774b7267a0ee7d69e8992e1b JackR223 <sgjrive@liverpool.ac.uk> 1675256309 +0000	commit: implemented insertion and bubble sort how words
+3a263598fc0753f2774b7267a0ee7d69e8992e1b 20f1f05adcc89cf77cd7ce06d28abe46355c857a JackR223 <sgjrive@liverpool.ac.uk> 1675258418 +0000	commit: TO DO: HIHLIGHT PIVOT
+20f1f05adcc89cf77cd7ce06d28abe46355c857a 4eaefcb592dcbcb24f3441878a589037330b2100 JackR223 <sgjrive@liverpool.ac.uk> 1675258449 +0000	commit: refactoring
+4eaefcb592dcbcb24f3441878a589037330b2100 864e73cf0202ce08acaafadefe3aa52ee815366e JackR223 <sgjrive@liverpool.ac.uk> 1675328483 +0000	commit: update gitignore
+864e73cf0202ce08acaafadefe3aa52ee815366e 5d00998c15e5c2d78aeda9b545da94d9ab6cdf57 JackR223 <sgjrive@liverpool.ac.uk> 1675330535 +0000	commit: fixed pointers + sped up
+5d00998c15e5c2d78aeda9b545da94d9ab6cdf57 e2884ab708a28aec777877b87b74cccdae99c522 JackR223 <sgjrive@liverpool.ac.uk> 1675331099 +0000	commit: ^brightness instead of white for pointer + speedup
+e2884ab708a28aec777877b87b74cccdae99c522 6b40257bfc3e7bd5f00cabe2b6c8bc0995530285 JackR223 <sgjrive@liverpool.ac.uk> 1675609735 +0000	commit: updated gitignore
+6b40257bfc3e7bd5f00cabe2b6c8bc0995530285 611207959860180e8df47c22cf6438a83bd30827 JackR223 <sgjrive@liverpool.ac.uk> 1675609819 +0000	commit: changed led representation + balanced speed
+611207959860180e8df47c22cf6438a83bd30827 b746f17fd162c8df62d2a202499acb9c06ef9ea4 JackR223 <sgjrive@liverpool.ac.uk> 1675610043 +0000	commit: -
+b746f17fd162c8df62d2a202499acb9c06ef9ea4 0a0b3e538645a7f7f1d4c417dae31dc4ad52a5ea JackR223 <sgjrive@liverpool.ac.uk> 1675613705 +0000	commit: highlighting region of array being processed
+0a0b3e538645a7f7f1d4c417dae31dc4ad52a5ea 584c53888f9a8420b0589b5b8631a2cf35435d6f JackR223 <sgjrive@liverpool.ac.uk> 1675614402 +0000	commit: reps buckets with brightness, need to reset @ end
+584c53888f9a8420b0589b5b8631a2cf35435d6f a0a569ec69370e4a3b4b7176deecc90aaa97eeae JackR223 <sgjrive@liverpool.ac.uk> 1675672403 +0000	commit: updated to match regular insertion sort
+a0a569ec69370e4a3b4b7176deecc90aaa97eeae d83e747727c417aff2e46bdffac475ad22fc9a9e JackR223 <sgjrive@liverpool.ac.uk> 1675673740 +0000	commit: added highlight method
+d83e747727c417aff2e46bdffac475ad22fc9a9e d07c57f1a28a733fba75eaa357bacfe606b1f381 JackR223 <sgjrive@liverpool.ac.uk> 1675673798 +0000	commit: remove old files
+d07c57f1a28a733fba75eaa357bacfe606b1f381 6c87c0d70bc4ed4e3dfd860e1a08a87bab28e1bc JackR223 <sgjrive@liverpool.ac.uk> 1675673956 +0000	commit: integrated with LED highlight method (DRY)
+6c87c0d70bc4ed4e3dfd860e1a08a87bab28e1bc f63ea7b47162dd174a10afbfc94e698e1f7b5897 JackR223 <sgjrive@liverpool.ac.uk> 1675674105 +0000	commit: fixed brightness changes stacking
+f63ea7b47162dd174a10afbfc94e698e1f7b5897 a4a985a6a78c6959e3918a6e5ebc236b498099ec JackR223 <sgjrive@liverpool.ac.uk> 1675767375 +0000	commit: refactoring
+a4a985a6a78c6959e3918a6e5ebc236b498099ec 6ff107152fb44b6eec1edfb6b207adb7aa5a8e1e JackR223 <sgjrive@liverpool.ac.uk> 1675767526 +0000	commit: reduced popping on audio controller
+6ff107152fb44b6eec1edfb6b207adb7aa5a8e1e a5913c1e381937c1290956a8efa17c5192b1ecb8 JackR223 <sgjrive@liverpool.ac.uk> 1675847686 +0000	commit: buffer class to keep buffer for audio out
+a5913c1e381937c1290956a8efa17c5192b1ecb8 131800a974d4c7721b3b9e565ef7d055eed3d95c JackR223 <sgjrive@liverpool.ac.uk> 1675847741 +0000	commit: init thread to watch audio buffer
+131800a974d4c7721b3b9e565ef7d055eed3d95c b16dc035021cb375da52a4e430875d4e76e6b92b JackR223 <sgjrive@liverpool.ac.uk> 1675847772 +0000	commit: integrate audio buff in merge sort
+b16dc035021cb375da52a4e430875d4e76e6b92b 1e493571a6784e0a68fef2e656bcce619c34dbe4 JackR223 <sgjrive@liverpool.ac.uk> 1675847996 +0000	commit: integrating audio buff
+1e493571a6784e0a68fef2e656bcce619c34dbe4 b77785d4185aba21268ab3032806f1ca4847b7e1 JackR223 <sgjrive@liverpool.ac.uk> 1675848253 +0000	commit: integrated with audio controller
+b77785d4185aba21268ab3032806f1ca4847b7e1 2cfb86205d6b48be758809d6394343dd7068258b JackR223 <sgjrive@liverpool.ac.uk> 1675855990 +0000	commit: added control to synchronize buffer / algorithm
+2cfb86205d6b48be758809d6394343dd7068258b c661a0df25a090c5ca6746bfba22882ca3b43370 JackR223 <sgjrive@liverpool.ac.uk> 1675856310 +0000	commit: integrated new technique for audio out
+c661a0df25a090c5ca6746bfba22882ca3b43370 ebe2d492426398cb323f6038594f300e0158ccee JackR223 <sgjrive@liverpool.ac.uk> 1675856619 +0000	commit: audio buff included as arg for insetion sort
+ebe2d492426398cb323f6038594f300e0158ccee 8d0b1e60efb359533d2ac8c58306e76c66ff2939 JackR223 <sgjrive@liverpool.ac.uk> 1675859170 +0000	commit: integrated cocktail shaker sort
+8d0b1e60efb359533d2ac8c58306e76c66ff2939 a44c141320ff00bd8c080c8a1ed2c9fa519e18c0 JackR223 <sgjrive@liverpool.ac.uk> 1675859402 +0000	commit: refactoring
+a44c141320ff00bd8c080c8a1ed2c9fa519e18c0 1e08c6aa9d3260a8f648ad7147e8604c554d7521 JackR223 <sgjrive@liverpool.ac.uk> 1675859432 +0000	commit: fixed audio integration
+1e08c6aa9d3260a8f648ad7147e8604c554d7521 c702d57a9f5a127810ace712bb2dc7ce5bd04ee1 JackR223 <sgjrive@liverpool.ac.uk> 1675860013 +0000	commit: applied minor optimisation to bubble sort
+c702d57a9f5a127810ace712bb2dc7ce5bd04ee1 eb22f19d7b0d34660bc5d53f3c8e92432065690c JackR223 <sgjrive@liverpool.ac.uk> 1675861518 +0000	commit: implmented cocktail sort
+eb22f19d7b0d34660bc5d53f3c8e92432065690c 154893b083abbe5790c63a9254b6589fbbbdefe5 JackR223 <sgjrive@liverpool.ac.uk> 1675933346 +0000	commit: setup for timsort
+154893b083abbe5790c63a9254b6589fbbbdefe5 3d261d1002ec39c6d83038fc03a2effc4b24623a JackR223 <sgjrive@liverpool.ac.uk> 1675933554 +0000	commit: integrated tim sort with main
+3d261d1002ec39c6d83038fc03a2effc4b24623a 8aae2631a78893d52ada791b0fab7e873f740e6d JackR223 <sgjrive@liverpool.ac.uk> 1675944107 +0000	commit: modified insertion sort for use in tim sort
+8aae2631a78893d52ada791b0fab7e873f740e6d f642168d59fe7e7e74cbf6b89c2a4b9a205456ce JackR223 <sgjrive@liverpool.ac.uk> 1675944126 +0000	commit: started integratiing tim sort with led strip
+f642168d59fe7e7e74cbf6b89c2a4b9a205456ce b1e2b79fc4182cf9fa4f473a043881aa75714997 JackR223 <sgjrive@liverpool.ac.uk> 1676019779 +0000	commit: implmented single merge
+b1e2b79fc4182cf9fa4f473a043881aa75714997 3812d75ef7cf6c30217da7cef10fe33288f29e97 JackR223 <sgjrive@liverpool.ac.uk> 1676020361 +0000	commit: implmented merges for all runs
+3812d75ef7cf6c30217da7cef10fe33288f29e97 625bea6b995868b67e5f1c51c84343fddc0c3e53 JackR223 <sgjrive@liverpool.ac.uk> 1676124159 +0000	commit: refactoring
+625bea6b995868b67e5f1c51c84343fddc0c3e53 b047fca61c90ebace4921d5466a7a9316f40423e JackR223 <sgjrive@liverpool.ac.uk> 1676126563 +0000	commit: commented code to unchain update from algs
+b047fca61c90ebace4921d5466a7a9316f40423e f8f54b1eb8ec4cd315a7cac0b1911a4e2e91a918 JackR223 <sgjrive@liverpool.ac.uk> 1676127474 +0000	commit: optimisiation, pre calculated waveform*=transform
+f8f54b1eb8ec4cd315a7cac0b1911a4e2e91a918 5ea6d9511a1ab3401b20ac852d0bb2d946897b73 JackR223 <sgjrive@liverpool.ac.uk> 1676277980 +0000	commit: setup for slowmode
+5ea6d9511a1ab3401b20ac852d0bb2d946897b73 9388e02d0f984b6986810640b5fa87a21a5062b1 JackR223 <sgjrive@liverpool.ac.uk> 1676279040 +0000	commit: hotword detection for slow and fast mode
+9388e02d0f984b6986810640b5fa87a21a5062b1 514b77af43d3aa051f0e418c1b30cce1eeabbd3d JackR223 <sgjrive@liverpool.ac.uk> 1676279058 +0000	commit: integrated new hotword files
+514b77af43d3aa051f0e418c1b30cce1eeabbd3d 7515991d366bc31235261a5ec4106a745fc52862 JackR223 <sgjrive@liverpool.ac.uk> 1676451856 +0000	commit: -
+7515991d366bc31235261a5ec4106a745fc52862 7fae12d4d7d8aa241e47aed875c8b77f543a2e21 JackR223 <sgjrive@liverpool.ac.uk> 1676451930 +0000	commit: fixed issue with system not finding audio devices
+7fae12d4d7d8aa241e47aed875c8b77f543a2e21 1f431c5d8e7aa43fafcdd471cded942b01d830f2 JackR223 <sgjrive@liverpool.ac.uk> 1676451958 +0000	commit: refactoring
+1f431c5d8e7aa43fafcdd471cded942b01d830f2 443b5ec4a1fe45592fed2e6424071b1efa32e59a JackR223 <sgjrive@liverpool.ac.uk> 1676452322 +0000	commit: integrated slow and fast mode to interrupt
+443b5ec4a1fe45592fed2e6424071b1efa32e59a 18c32bc03e594fade86fb94cec7feed154173122 JackR223 <sgjrive@liverpool.ac.uk> 1676452697 +0000	commit: quicksort hotword detection files
+18c32bc03e594fade86fb94cec7feed154173122 ab57979e9406c091bb8056df3429c0426e19dfc7 JackR223 <sgjrive@liverpool.ac.uk> 1676452902 +0000	commit: integrated quicksort with hotword detection
+ab57979e9406c091bb8056df3429c0426e19dfc7 00cedaaf4acc4dc7c75200abddf368611f9f8ab2 JackR223 <sgjrive@liverpool.ac.uk> 1676470131 +0000	commit: split array into equal sized runs < max run size
+00cedaaf4acc4dc7c75200abddf368611f9f8ab2 d6ac1e233e789970459d4d82d65df8832d10e3c1 JackR223 <sgjrive@liverpool.ac.uk> 1676472918 +0000	commit: changed merge process to left-right
+d6ac1e233e789970459d4d82d65df8832d10e3c1 2e4be12404eb30099a67bbbbb5c5bc1865744806 JackR223 <sgjrive@liverpool.ac.uk> 1676473199 +0000	commit: integrated binary sort
+2e4be12404eb30099a67bbbbb5c5bc1865744806 a6fda861840dce5e3616a7007a5f186fdc43ab67 JackR223 <sgjrive@liverpool.ac.uk> 1676473208 +0000	commit: setup for binary sort
+a6fda861840dce5e3616a7007a5f186fdc43ab67 3144d3430243518d19c989064c14079890368e93 JackR223 <sgjrive@liverpool.ac.uk> 1676538629 +0000	commit: 1st working implementation
+3144d3430243518d19c989064c14079890368e93 d58216b2599593ec2fc318148bdf90c387c939c4 JackR223 <sgjrive@liverpool.ac.uk> 1676538865 +0000	commit: refactoring
+                                                                                                                                                                                               
