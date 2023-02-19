@@ -1,12 +1,13 @@
-# TO DO: slow down somehow?
-
 # modified version of merge sort -> works on a copy of array, and keeps track of current
 # section (run) of array being worked on; meaning that as runs are merged, the values in
-# array object can also be updated, thus LED strip mirrors sorting algorithm 
+# array object can also be updated, thus LED strip mirrors sorting algorithm
 
-#import time
+import copy
 
 def sort(obj):
+
+    # get starting brightness to act as anchor - so brightness can always be reset to orignial value
+    default_b = obj.stripState[0][1]
 
     # get copy of array object to run merge sort on
     arr = obj.stripState.copy()
@@ -20,7 +21,10 @@ def sort(obj):
     #   -> start = pointer for start of current slice of array
     #   -> end = pointer for end of current slice of array
     def mergeSort(arr, start, end):
-        
+    
+        obj.highlight(start, end, default_b)
+        obj.highlight(0,0,default_b)
+
         # split array into two 
         mid = (int) (len(arr)/2)
         left = arr[:mid]
@@ -42,25 +46,21 @@ def sort(obj):
                 if lcount >= mid:
                     arr[i] = r[rcount]            
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
-                    obj.update()                        # update twice to emulate other algrithms?
                     obj.update()
                     rcount += 1
                 elif rcount >= len(arr)-mid:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     obj.update()
-                    obj.update()
                     lcount += 1
                 elif l[lcount] < r[rcount]:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     obj.update()
-                    obj.update()
                     lcount += 1
                 else:
                     arr[i] = r[rcount]
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
-                    obj.update()
                     obj.update()
                     rcount += 1
 
