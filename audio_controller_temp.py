@@ -15,7 +15,16 @@ class AudioOut:
                                   rate = self.sampleRate,
                                   output = True)
         
+        # calculate default waveform:
         self.waveform = (np.sin(2 * np.arange((self.sampleRate/2) * (self.duration/2)) * self.sineFreq / self.sampleRate)).astype(np.float32) # 1 is amplitude value
+        self.waveform =  np.concatenate((self.waveform, np.flip(self.waveform)), axis=None) # full length waveform - flip second half so that they match up
+
+        # calculate ramp up/down to apply to waveform
+        self.ramp = np.arange(0,1,1/(len(self.waveform)/2))
+        self.ramp = np.concatenate((self.ramp, np.flip(self.ramp)), axis=None)
+
+        # need to apply ramp to waveform:
+        self.waveform *= self.ramp
 
     def cleanup(self):
         self.stream.stop_stream()
@@ -23,40 +32,20 @@ class AudioOut:
         self.p.terminate()
 
     def out(self, val):
-        #amp = (val/144+0.5)
-        #amp = (val/72+0.5)*np.pi
-        transform = (val/144)
         
-        # cut back waveform to the most recent peak - causes waves to mesh better preventing pops
-        
+        # fetch pre-caclualted waveform:
         waveform = self.waveform.copy()
-        
-        n = len(waveform)-1
-        if waveform[len(waveform)-1] > 0: # need to do this when positive (above line)
-            while waveform[n] < waveform[n-1]:
-                waveform = np.delete(waveform, n)
-                n-=1
-        if waveform[len(waveform)-1] < 0: # and negative (below line)
-            while waveform[n] > waveform[n-1]:
-                waveform = np.delete(waveform, n)
-                n-=1
 
-        
-        ramp = np.arange(0,1,1/len(waveform))
-        while len(waveform) < len(ramp):
-            ramp = np.delete(ramp, len(ramp)-1)
-        waveform *= ramp
+        # workout transfrom for precaclualted waveform
+        transform = (val/144)
 
-
-        # need to now apply the transform to waveform:
+        # need to apply the transform to waveform:
         waveform *= transform
 
-
-        waveform = np.concatenate((waveform, np.flip(waveform)), axis=None)
-
-
+        # work out output
         output = (self.volume * waveform).tobytes()
 
+        # write output
         self.stream.write(output)
 
         # https://stackoverflow.com/questions/42192239/remove-control-clicking-sound-using-pyaudio-as-an-oscillator
