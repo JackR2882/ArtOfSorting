@@ -13,6 +13,7 @@ class LED:
         self.spi = spidev.SpiDev()
         self.spi.open(0,0)
         self.spi.max_speed_hz = 10000000 #lower if errors occur (want as high as possible for response time)
+        #10,000,000 (10MHz)
 
         #defualt values
         self.stripSize = ss #set strip size
@@ -37,9 +38,22 @@ class LED:
         self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
 
         #send strip state as data frames:
-        for i in range(0,len(self.stripState)-1):        
-            self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4]])
-        
+        for i in range(0,len(self.stripState),4): 
+            #self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
+            #              self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4],
+            #              self.stripState[i+2][1],self.stripState[i+2][2],self.stripState[i+2][3],self.stripState[i+2][4],
+            #              self.stripState[i+3][1],self.stripState[i+3][2],self.stripState[i+3][3],self.stripState[i+3][4],
+            #              self.stripState[i+4][1],self.stripState[i+4][2],self.stripState[i+4][3],self.stripState[i+4][4],
+            #              self.stripState[i+5][1],self.stripState[i+5][2],self.stripState[i+5][3],self.stripState[i+5][4],
+            #              self.stripState[i+6][1],self.stripState[i+6][2],self.stripState[i+6][3],self.stripState[i+6][4],
+            #              self.stripState[i+7][1],self.stripState[i+7][2],self.stripState[i+7][3],self.stripState[i+7][4]])
+            self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
+                          self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4],
+                          self.stripState[i+2][1],self.stripState[i+2][2],self.stripState[i+2][3],self.stripState[i+2][4],
+                          self.stripState[i+3][1],self.stripState[i+3][2],self.stripState[i+3][3],self.stripState[i+3][4]])
+            #self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
+            #              self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4]])
+
         #send end frame:
         self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])    
         #close spi line
