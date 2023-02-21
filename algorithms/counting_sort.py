@@ -31,7 +31,7 @@ def sort(obj):
 
     # clear array, before frequency count is to be displayed
     obj.clear()
-    obj.stripState = [[0,0,0,0,0]]*144
+    obj.stripState = [[0,0,0,0,0]]*146
 
 
     # work out and display frequencies (count items)
@@ -83,7 +83,7 @@ def sort(obj):
         try:
             n = (new_arr[(arr[i][0])]) - (new_arr[(arr[i][0])-1])
             #print("1: " + str(new_arr[int(arr[i][0])])+ ", 2: " + str(new_arr[int(arr[i][0])-1]))
-            #n = (144 - index)-1        
+            #n = (146 - index)-1        
         except:
             n = index
 

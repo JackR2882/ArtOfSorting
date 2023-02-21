@@ -4,8 +4,8 @@
 # CURRENTLY WORKING WITH INSERTION SORT WHICH IS ALLOWED AS IT IS A STABLE SORTING METHOD, HOWEVER SHOULD PROBABLY SWITCH
 # TO COUNTING SORT IF POSSIBLE
 
-# need to work out maximum item in array to inform radix sort, then if item is for example 144: sort
-# items first by their hundreth digit value, e.g. 144 == 1 and 95 == 0
+# need to work out maximum item in array to inform radix sort, then if item is for example 146: sort
+# items first by their hundreth digit value, e.g. 146 == 1 and 95 == 0
 # then do the same for the 10th digit value, etc... all the way down to zero
 
 

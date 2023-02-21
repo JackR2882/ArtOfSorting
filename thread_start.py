@@ -33,8 +33,8 @@ def thread_out():
     audioOut = audio_controller.AudioOut()
 
     #global LED
-    #LED = LED_controller.LED(144)
-    #generate_spectrum.initialize(LED, 144, 1)
+    #LED = LED_controller.LED(146)
+    #generate_spectrum.initialize(LED, 146, 1)
 
     while True:
 

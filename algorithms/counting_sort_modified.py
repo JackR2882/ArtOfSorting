@@ -32,7 +32,7 @@ def sort(obj, off):
 
     # clear array, before frequency count is to be displayed
     obj.clear()
-    obj.stripState = [[0,0,0,0,0]]*144
+    obj.stripState = [[0,0,0,0,0]]*146
 
 
     # work out and display frequencies (count items)

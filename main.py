@@ -21,7 +21,7 @@ from algorithms import binary_sort
 
 class Main:
     def __init__(self):
-        self.stripSize = 144
+        self.stripSize = 146
         self.defaultBrightness = 1
 
         #list to store all algorithms, will loop through this list to execute algorithms
@@ -35,7 +35,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 7
 
         #audio-output object
         self.AUDIO = None

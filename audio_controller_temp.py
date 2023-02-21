@@ -37,7 +37,7 @@ class AudioOut:
         waveform = self.waveform.copy()
 
         # workout transfrom for precaclualted waveform
-        transform = (val/144)
+        transform = (val/146)
 
         # need to apply the transform to waveform:
         waveform *= transform

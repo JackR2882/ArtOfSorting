@@ -70,9 +70,11 @@ class LED:
         #send start frame:
         self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
 
-        #not sure why this is 145? need to look into this
-        for i in range(0,145):
-            self.spi.xfer([224,0,0,0])
+
+        # LED strip is actually 146 diodes long
+        for i in range(0,146):
+            self.spi.xfer([0b11100000,0b00000000,0b00000000,0b00000000])
+
         
         #send end frame:
         self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
@@ -85,6 +87,7 @@ class LED:
 
     def highlight(self, start, end, default_b):        
         for i in range(0, len(self.stripState)):
+            #print(i)
             if i in range(start, end):
                 # increase brightness here
                 self.stripState[i][1] = default_b + 5
@@ -93,4 +96,7 @@ class LED:
                 self.stripState[i][1] = default_b
     
         self.update()
+
+        #print(self.stripState)
+
         return(self.stripState)
