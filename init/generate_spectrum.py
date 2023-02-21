@@ -1,8 +1,8 @@
-#initialize() -> generates and sets pixel values to form an rgb spectrum
+# initialize() -> generates and sets pixel values to form an rgb spectrum
 
-#initializeHalfSpectrum() -> generates a random distribution of pixels between red and red+green - with random repeats
-#                            used in counting sort
-#                            (not sorted by default)
+# initializeHalfSpectrum() -> generates a random distribution of pixels between red and red+green - with random repeats
+#                             used in counting sort
+#                             (not sorted by default)
  
 import math
 import random
