@@ -29,5 +29,3 @@ def sort(obj):
     while off >= 1:
         counting_sort.sort(obj, off)
         off = off/10
-
-    print(obj.stripState)
