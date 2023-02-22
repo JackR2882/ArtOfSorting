@@ -25,9 +25,9 @@ def heapify2(arr, n, obj, default_b):
 	child_left = 2*parent+1
 	child_right = 2*parent+2
 
-	#obj.highlight(parent, parent+1, default_b, stack=True, val=10)
-	#obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
-	#obj.highlight(child_right, child_right+1, default_b, stack=True, val=10)
+	obj.highlight(parent, parent+1, default_b, stack=True, val=10)
+	obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
+	obj.highlight(child_right, child_right+1, default_b, stack=True, val=10)
     
 	# compare with children
 	if (child_left < len(arr)) and (arr[child_left] > arr[parent]):
@@ -69,6 +69,7 @@ def sort(obj):
 
 	import time
 	print("heaped: " + str(obj.stripState[0][0]))
+	#print("heaped: " + str(obj.stripState))
 	#time.sleep(500)
 	# could be issues with direction of sorting -> min/max heap ?
 
@@ -81,8 +82,9 @@ def sort(obj):
 	while i <= len(heaped_arr)-1:
 
 		sorted_arr[i] = heaped_arr[0]
-		heaped_arr[0], heaped_arr[len(heaped_arr)-(1+i)] = heaped_arr[len(heaped_arr)-(1+i)], [0,0,0,0,0]
+		heaped_arr[0], heaped_arr[len(heaped_arr)-(1+i)] = heaped_arr[len(heaped_arr)-(1+i)], [0,0,0,0,0] #what is this doing?
 		
+
 		heap(heaped_arr, obj, default_b)
 		heaped_arr = obj.stripState
 		#heaped_arr = heapify2(heaped_arr, len(heaped_arr)-1, obj, default_b)
@@ -94,7 +96,8 @@ def sort(obj):
 
 		i += 1
 
-	return sorted_arr
+	obj.stripState = sorted_arr
+	print(sorted_arr)
 
 
 
