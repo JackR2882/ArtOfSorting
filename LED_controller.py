@@ -85,7 +85,7 @@ class LED:
         random.shuffle(self.stripState)
 
 
-    def highlight(self, start, end, default_b, stack=False):        
+    def highlight(self, start, end, default_b, stack=False, val=1):        
         for i in range(0, len(self.stripState)):
             #print(i)
             if not stack:
@@ -97,6 +97,6 @@ class LED:
                     self.stripState[i][1] = default_b
             else:
                 if i in range(start, end): 
-                    self.stripState[i][1] = min(self.stripState[i][1] + 1, 255)  
+                    self.stripState[i][1] = min(self.stripState[i][1] + val, 255)  
         self.update()
         return(self.stripState)
