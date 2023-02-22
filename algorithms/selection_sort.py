@@ -2,8 +2,6 @@
 
 def sort(obj):
 
-    print(obj.stripState)
-
     default_brightness = obj.stripState[0][1]
 
     for i in range(0, len(obj.stripState)-1):
