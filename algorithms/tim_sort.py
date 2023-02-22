@@ -16,7 +16,6 @@ def calculate_run_size(max_run_size, length):
             run_size = max_run_size
             break
         max_run_size -= 1
-    
     return(run_size)
 
 
@@ -32,6 +31,7 @@ def merge(obj, start_l, end_l, start_r, end_r):
     r_arr = obj.stripState[start_r:end_r]
     
     while(len(l_arr) and len(r_arr)) > 0:
+
         if l_arr[0] > r_arr[0]:
             obj.stripState[offset] = r_arr[0]
 
@@ -66,7 +66,8 @@ def sort(obj, audioBuff):
     # (runs still exist, just aren't represented)
     
     max_run_size = 32
-    run_size = calculate_run_size(max_run_size, len(obj.stripState))
+    #run_size = calculate_run_size(max_run_size, len(obj.stripState))
+    run_size = 32
 
     run_count = math.ceil(len(arr)/run_size)
 
@@ -78,9 +79,6 @@ def sort(obj, audioBuff):
         insertion_sort.sort(obj, audioBuff, (i*run_size), ((i+1)*run_size)-1)
         i += 1
 
-    # acount for last run which may be smaller
-    #if i%2 == 0:
-    #    obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
     obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
     insertion_sort.sort(obj, audioBuff, (i*run_size), len(arr)-1)
 
@@ -92,41 +90,34 @@ def sort(obj, audioBuff):
     # |||| | |        3rd merge
     # |||| ||         4th merge
     # ||||||          5th merge
-    
-    
-    import time
 
     i = 0
     left_sorted = 0
     right_sorted = 0
 
     while left_sorted < run_count:
-        if (left_sorted != right_sorted) or left_sorted == 0:
-            #left already merged, so start merging right
-            obj.highlight((i)*run_size, (i+2)*run_size-1, default_b)  
-            merge(obj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((i+2)*run_size)-1)      
-            i += 2
+        # if left_sorted and right_sorted are the same size (left_sorted == (right_sorted-left_sorted)):
+        #      merge left and right sorted partitions
+        # 
+        # otherwise if right_sorted <= run_count:
+        #      merge right sorted with whatever's to its right 
+        if (right_sorted < run_count) and ((left_sorted != (right_sorted-left_sorted)) or left_sorted == 0):
+            #print("HERE1;       left_s: " + str(left_sorted) + ", right_s: " + str(right_sorted))
+            inc = min(i+2, run_count)
+            
+            obj.highlight((i)*run_size, (inc*run_size)-1, default_b)
+            merge(obj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((inc*run_size))-1)
+            
+            i = inc
+
             if left_sorted == 0:
                 left_sorted = i
             else:
-                right_sorted = i-left_sorted
-
+                right_sorted = i
         else:
-            #merge left and right sorted
-            obj.highlight(0, (run_size*(left_sorted+right_sorted))-1, default_b)
-            merge(obj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(left_sorted+right_sorted)-1))
-            left_sorted = left_sorted+right_sorted
-            right_sorted = 0
-            i = left_sorted
-
-
-        #time.sleep(5)
+            #print("HERE2;       left_s: " + str(left_sorted) + ", right_s: " + str(right_sorted))
+            obj.highlight(0, (right_sorted*run_size)-1, default_b)
+            merge(obj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(right_sorted))-1)
+            left_sorted = right_sorted
 
     obj.highlight(0,0, default_b)
-
-    
-    
-    #while i > 0:
-    #    obj.highlight(((i-1)*run_size), len(arr)-1, default_b)
-    #    merge(obj, ((i-1)*run_size), ((i)*run_size)-1, ((i)*run_size), len(arr)-1)
-    #    i -= 1
