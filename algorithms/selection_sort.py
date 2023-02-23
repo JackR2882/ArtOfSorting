@@ -12,7 +12,7 @@ def sort(obj):
         # keep track of current anchor
         mem = obj.stripState[i]
         # set pointer for current element
-        obj.stripState[i] = [0,255,255,255,255]
+        obj.stripState[i][1] += 15
         # update strip state
         obj.update()
 
@@ -22,35 +22,33 @@ def sort(obj):
             # if current item is less than the current min value 
             if min > obj.stripState[n]:
                 # remove old pointer
-                obj.stripState[min_index] = [min[0], default_brightness, min[2], min[3], min[4]]
+                min[1] = default_brightness
+                obj.stripState[min_index] = min
                 # update min
                 min = obj.stripState[n]
                 min_index = n
                 # add new pointer
-                obj.stripState[n] = [0,255,255,255,255]
+                obj.stripState[n][1] += 15
 
             else:
                 # brighten current pixel value:
-                curr = obj.stripState[n]
-                obj.stripState[n] = [curr[0], 250, curr[2], curr[3], curr[4]]
-            
-                # dim previous pixel value (only if min-pointer isn't on prev val)
-
-
+                obj.stripState[n][1]  += 15
                 obj.update()
 
             # dim previous pixel value (only if min-pointer isn't on prev val)
             try:
                 if n-1 != min_index:
-                    prev = obj.stripState[n-1]
-                    obj.stripState[n-1] = [prev[0], default_brightness, prev[2], prev[3], prev[4]]
+                    obj.stripState[n-1][1] = default_brightness
             except:
-                obj.stripState[n-1] = [min[0], default_brightness, min[2], min[3], min[4]]
+                min[1] = default_brightness
+                obj.stripState[n-1] = min
 
 
         # swap values
-        obj.stripState[i] = [min[0], default_brightness, min[2], min[3], min[4]]
-        obj.stripState[min_index] = [mem[0], default_brightness, mem[2], mem[3], mem[4]]
+        min[1] = default_brightness
+        mem[1] = default_brightness
+        obj.stripState[i] = min
+        obj.stripState[min_index] = mem
         
         # update strip state
         obj.update()
