@@ -28,11 +28,11 @@ def heapify(arr, n, obj, default_b):
 	obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
     
 	# compare with children
-	if (child_left < len(arr)) and (arr[child_left] > arr[parent]):
+	if (child_left < len(arr)) and (arr[child_left] < arr[parent]):
 		# swap left child and parent
 		arr[child_left], arr[parent] = arr[parent], arr[child_left]
 		arr = heapify(arr, n, obj, default_b)
-	if (child_right < len(arr)) and (arr[child_right] > arr[parent]):
+	if (child_right < len(arr)) and (arr[child_right] < arr[parent]):
 	    # swap right child and parent
 		arr[child_right], arr[parent] = arr[parent], arr[child_right]
 		arr = heapify(arr, n, obj, default_b)
