@@ -32,7 +32,7 @@ def sort(obj, audioBuff):
 
     while i > 0:
         
-        print(i)
+        #print(i)
 
         for n in range(0, len(arr)-i):
 
