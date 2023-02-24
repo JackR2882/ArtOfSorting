@@ -12,10 +12,12 @@ def sort(obj, audioBuff):
 
             audioBuff.append(obj.stripState[i][0])
 
-            currVal = obj.stripState[i]
-            prevVal = obj.stripState[i-1]
-            obj.stripState[i] = [0,255,255,255,255]
-            obj.stripState[i-1] = [0,255,255,255,255]
+            currVal = obj.stripState[i].copy()
+            prevVal = obj.stripState[i-1].copy()
+            #obj.stripState[i] = [0,255,255,255,255]
+            #obj.stripState[i-1] = [0,255,255,255,255]
+            obj.stripState[i][1] += 10
+            obj.stripState[i-1][1] += 10
             obj.update()
 
             if currVal < prevVal:
