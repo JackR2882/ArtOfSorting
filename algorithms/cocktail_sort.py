@@ -34,7 +34,7 @@ def sort(obj, audioBuff):
             forward = not forward
 
         else:
-            for i in range((len(obj.stripState)-sorted_r)-1, sorted_l, -1):
+            for i in range((len(obj.stripState)-sorted_r)-1, sorted_l-1, -1):
                 audioBuff.append(obj.stripState[i][0])
 
                 currVal = obj.stripState[i]
