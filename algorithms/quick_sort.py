@@ -1,5 +1,6 @@
 # basic implmentation of quick sort
 # could do with highlighting the pivot
+# randomized pivot
 
 import random
 
