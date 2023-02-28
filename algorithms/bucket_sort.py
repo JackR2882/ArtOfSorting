@@ -1,23 +1,11 @@
+#  https://www.cs.usfca.edu/~galles/visualization/BucketSort.html <- should it be looking more like this?
+
 # basic implementation of bucket sort
-
-
-
-
-
-# NEED TO REMOVE SLEEPING
-# NEED TO RESET BRIGHTNESS AT END
-
-
-
-
-
 
 import math
 import time
 
 def sort(obj):
-
-    #time.sleep(1)
 
     default_b = obj.stripState[0][1]
 
@@ -25,8 +13,6 @@ def sort(obj):
     
     arr = obj.stripState.copy()
     obj.update()
-
-    #time.sleep(1)
 
 
     # get max item from arr to decide what bucket size to use
@@ -49,15 +35,13 @@ def sort(obj):
         if bucket_index%2 == 0:
             temp_arr.append([arr[i][0],arr[i][1]+10,arr[i][2],arr[i][3],arr[i][4]])
         else:
-            temp_arr.append(arr[i])
+            temp_arr.append([arr[i][0],arr[i][1]+2,arr[i][2],arr[i][3],arr[i][4]])
         buckets[bucket_index] = temp_arr
 
     obj.stripState = [] 
     for n in range (0, num_buckets):
         obj.stripState = obj.stripState + buckets[n]
     obj.update()
-
-    #time.sleep(1)
 
 
     # now just need to sort buckets - can just do any basic sort e.g. insertion sort
@@ -72,8 +56,9 @@ def sort(obj):
                 if arr_unsorted[n] > arr_unsorted[n+1]:
                     #audioBuff.append(obj.stripState[i][0])
 
-                    mem = arr_unsorted[n+1]
-                    arr_unsorted[n+1] = [mem[0],255,mem[2],mem[3],mem[4]] 
+                    mem = arr_unsorted[n+1].copy()
+                    #arr_unsorted[n+1] = [mem[0],255,mem[2],mem[3],mem[4]] 
+                    arr_unsorted[n+1][1] += 10
 
                     obj.stripState[i*bucket_range:(i+1)*bucket_range] = arr_unsorted
                     obj.update()
@@ -85,6 +70,11 @@ def sort(obj):
                     obj.update()
                 else:
                     break
+
+            # revert to default brightness:
+            for n in range(0, (i)*bucket_range):
+                obj.stripState[n][1] = default_b
+            obj.update() 
                 #obj.update()
             sorted += 1
 
