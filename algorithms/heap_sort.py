@@ -26,16 +26,16 @@ def heapify(arr, n, obj, default_b):
 
 	obj.highlight(parent, parent+1, default_b, stack=True, val=10)
 	obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
-    
+
 	# compare with children
 	if (child_left < len(arr)) and (arr[child_left] < arr[parent]):
 		# swap left child and parent
 		arr[child_left], arr[parent] = arr[parent], arr[child_left]
-		arr = heapify(arr, n, obj, default_b)
+		arr = heapify(arr, child_left, obj, default_b)
 	if (child_right < len(arr)) and (arr[child_right] < arr[parent]):
 	    # swap right child and parent
 		arr[child_right], arr[parent] = arr[parent], arr[child_right]
-		arr = heapify(arr, n, obj, default_b)
+		arr = heapify(arr, child_right, obj, default_b)
 
 	return(arr)
 
@@ -62,6 +62,8 @@ def sort(obj):
 	heaped_arr = obj.stripState
 	sorted_arr = []
 	i = 0
+
+	#while False:
 	while i <= len(obj.stripState)-1:
 
 		sorted_arr.append(heaped_arr[0])
@@ -73,8 +75,6 @@ def sort(obj):
 		# left side of strip is for heaped arr, and right side to build up sorted arr
 		obj.stripState = heaped_arr + sorted_arr
 		obj.update()
-
-		#print("heaped: " + str(obj.stripState[0][0]))
 
 		i += 1
 
