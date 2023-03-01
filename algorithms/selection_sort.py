@@ -14,9 +14,9 @@ def sort(obj):
         # set pointer for current element
         obj.stripState[i][1] += 15
         # update strip state
-        obj.update()
+        #obj.update()
 
-        # for each item in arr:
+        # for each item in remaining arr:
         for n in range(i+1, len(obj.stripState)):
             
             # if current item is less than the current min value 
@@ -29,11 +29,9 @@ def sort(obj):
                 min_index = n
                 # add new pointer
                 obj.stripState[n][1] += 15
-
             else:
                 # brighten current pixel value:
                 obj.stripState[n][1]  += 15
-                obj.update()
 
             # dim previous pixel value (only if min-pointer isn't on prev val)
             try:
@@ -42,6 +40,8 @@ def sort(obj):
             except:
                 min[1] = default_brightness
                 obj.stripState[n-1] = min
+
+            obj.update()
 
 
         # swap values
