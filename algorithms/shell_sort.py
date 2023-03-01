@@ -20,27 +20,59 @@
 # prevents items from having to be inserted to distant position
 
 
+# inspired by the following implemntation: https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
 
-# just a copy of insertion sort -> need to adapt
+
 def sort(obj, audioBuff):
 
     default_b = obj.stripState[0][1]
 
-    i = int(len(obj.stripState)/2)
+    #i = int(len(obj.stripState)/2)
+    #i = 1
 
     arr  = obj.stripState
-
-    while i > 0:
         
+    #while i < len(arr):
+
         #print(i)
 
-        for n in range(0, len(arr)-i):
+    #    for n in range(0, len(arr)-i):
 
-            obj.highlight(n, n+1, default_b)
-            obj.highlight(n+i, n+i+1, default_b, stack=True, val=5)
+    #        obj.highlight(n, n+1, default_b)
+    #        obj.highlight(n+i, n+i+1, default_b, stack=True, val=5)
 
-            if arr[n] > arr[n+i]:
-                arr[n], arr[n+i] = arr[n+i], arr[n]
-            obj.update()
+    #        if arr[n] > arr[n+i]:
+    #            arr[n], arr[n+i] = arr[n+i], arr[n]
+    #        obj.update()
         
-        i -= 1
+    #    i = int(i/2)
+    #    i = (3*i) + 1
+
+    #def shell(arr):
+    
+    interval = int(len(arr)/2)
+
+    while interval > 0:
+
+        for i in range(interval, len(arr)):
+
+            obj.highlight(i, i+1, default_b) # highlight current item
+
+            temp = arr[i] # store current item
+
+            n = i # value to look back by
+
+            # insertion sort backwards from current item in steps of size = interval
+            while n >= interval and arr[n - interval] > temp:
+                obj.highlight(n, n+1, default_b)
+                obj.highlight(n-interval, n-interval+1, default_b, stack=True, val=5)
+                arr[n] = arr[n - interval]
+                n = n - interval
+                obj.update()
+            
+            arr[n] = temp # insert current item into correct place
+
+        interval = int(interval/2) # update interval
+    
+    # reset brightness:
+    obj.highlight(0,0, default_b)
