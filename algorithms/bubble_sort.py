@@ -20,11 +20,16 @@ def sort(obj, audioBuff):
             obj.stripState[i-1][1] += 10
             obj.update()
 
+ 
+            obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness 
+            
             if currVal < prevVal:
-                #swap values
-                obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
+                # swap values
+                obj.swapPixel(i,i-1)
                 unsorted = True
-            else:
-                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal 
-        
+            #else:
+            #    # just reset brightness 
+            #    obj.stripState[i], obj.stripState[i-1] = currVal, prevVal 
+                
+
         sorted += 1
