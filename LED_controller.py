@@ -24,20 +24,26 @@ class LED:
         self.slowMode = False
 
         #values for different slow down effects: (allows the slowing down of algorithms based on the cost of different actions)
-        self.swapSD = 0
+        #val of 10 gives a slowdown of ~0.015ms
+        #val of 100 gives a slowdown of ~0.095ms
+        #val of 1000 gives a slowdown of ~0.95ms
+        #val of 10000 gives a slowdown of ~11ms
+        self.swapSD = 10000
+        self.compareSD = 0
 
     #set pixel value by updating strip state
-    def setPixel(self,ID,brightness,blue,green,red):
-        self.stripState[int(ID)] = [int(ID),int(brightness)+224,int(red),int(green),int(blue)]
+    def setPixel(self,address,ID,brightness,blue,green,red):
+        self.stripState[int(address)] = [int(ID),int(brightness)+224,int(red),int(green),int(blue)]
         #224 is added to brightness as formatting (first 3 bits of 8 mean new pixel then 5 bits of brightness)
 
     #set pixel value by updating strip state
     def swapPixel(self,ID_1,ID_2):
 
         # bogus loop to consume time
-        i = 0
-        while i < self.swapSD:
-            i += 1
+        #i = 0
+        #while i < self.swapSD:
+        #    i += 1
+        time.sleep(0.001) # simply sleeping seems to give a smoother result?
 
         #print("-------------------")
         #print("id_1 before: " + str(self.stripState[ID_1]))
@@ -47,6 +53,7 @@ class LED:
         #print("id_2 after: " + str(self.stripState[ID_2]))
         #print("-------------------")
         #time.sleep(0.1)
+
 
 
     def update(self):
