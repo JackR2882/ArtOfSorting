@@ -18,14 +18,18 @@ import math
 def heapify(arr, n, obj, default_b):
 	
 	parent = n
-
-	obj.highlight(0,0,225) # clear previous higlighting
     
 	child_left = 2*parent+1
 	child_right = 2*parent+2
 
-	obj.highlight(parent, parent+1, default_b, stack=True, val=10)
-	obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
+	obj.highlight(parent, parent+1, default_b)
+
+	# only highlight children if they exist
+	if (child_right < len(arr)):
+		#obj.highlight(parent, parent+1, default_b, stack=True, val=10)
+		obj.highlight(child_left, child_right+1, default_b, stack=True, val=10)
+	elif (child_left < len(arr)):
+		obj.highlight(child_left, child_left+1, default_b, stack=True, val=10)
 
 	# compare with children
 	if (child_left < len(arr)) and (arr[child_left] < arr[parent]):
@@ -55,8 +59,6 @@ def sort(obj):
 
 	# get arr into initial heap
 	obj.stripState = heap(arr, obj, default_b)
-
-	#print("heaped: " + str(obj.stripState[0][0]))
 
 	# pull first item from heap, and append it to the end of the sorted arr:
 	heaped_arr = obj.stripState
