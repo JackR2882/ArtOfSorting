@@ -23,10 +23,31 @@ class LED:
         #flag for enabling a slow-down
         self.slowMode = False
 
+        #values for different slow down effects: (allows the slowing down of algorithms based on the cost of different actions)
+        self.swapSD = 0
+
     #set pixel value by updating strip state
     def setPixel(self,ID,brightness,blue,green,red):
         self.stripState[int(ID)] = [int(ID),int(brightness)+224,int(red),int(green),int(blue)]
         #224 is added to brightness as formatting (first 3 bits of 8 mean new pixel then 5 bits of brightness)
+
+    #set pixel value by updating strip state
+    def swapPixel(self,ID_1,ID_2):
+
+        # bogus loop to consume time
+        i = 0
+        while i < self.swapSD:
+            i += 1
+
+        #print("-------------------")
+        #print("id_1 before: " + str(self.stripState[ID_1]))
+        #print("id_2 before: " + str(self.stripState[ID_2]))
+        self.stripState[ID_1], self.stripState[ID_2] = self.stripState[ID_2], self.stripState[ID_1]
+        #print("id_1 after: " + str(self.stripState[ID_1]))
+        #print("id_2 after: " + str(self.stripState[ID_2]))
+        #print("-------------------")
+        #time.sleep(0.1)
+
 
     def update(self):
 
