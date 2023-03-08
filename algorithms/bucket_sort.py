@@ -3,7 +3,6 @@
 # basic implementation of bucket sort
 
 import math
-import time
 
 def sort(obj):
 
@@ -49,27 +48,24 @@ def sort(obj):
 
         arr_unsorted = buckets[i]
 
-        sorted = 1
-        for x in range(0, len(arr_unsorted)-1):
+        sorted = i*bucket_range+1
+        for x in range(i*bucket_range, i*bucket_range+len(arr_unsorted)-1):
         #audioBuff.append(obj.stripState[i][0])
-            for n in reversed(range(0,sorted)):
-                if arr_unsorted[n] > arr_unsorted[n+1]:
-                    #audioBuff.append(obj.stripState[i][0])
+            for n in reversed(range(i*bucket_range,sorted)):
+                
+                obj.stripState[n+1][1] += 10
+                obj.stripState[n][1] += 10
 
-                    mem = arr_unsorted[n+1].copy()
-                    #arr_unsorted[n+1] = [mem[0],255,mem[2],mem[3],mem[4]] 
-                    arr_unsorted[n+1][1] += 10
-
-                    obj.stripState[i*bucket_range:(i+1)*bucket_range] = arr_unsorted
-                    obj.update()
-
-                    arr_unsorted[n+1] = arr_unsorted[n]
-                    arr_unsorted[n] = mem
-
-                    obj.stripState[i*bucket_range:(i+1)*bucket_range] = arr_unsorted
-                    obj.update()
-                else:
+                if not obj.compareAndSwapPixel(n+1, n):
+                    obj.stripState[n+1][1] -= 10
+                    obj.stripState[n][1] -= 10
                     break
+
+                obj.update()
+                
+                obj.stripState[n+1][1] -= 10
+                obj.stripState[n][1] -= 10
+                
 
             # revert to default brightness:
             for n in range(0, (i)*bucket_range):
