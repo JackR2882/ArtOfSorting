@@ -27,28 +27,7 @@ def sort(obj, audioBuff):
 
     default_b = obj.stripState[0][1]
 
-    #i = int(len(obj.stripState)/2)
-    #i = 1
-
     arr  = obj.stripState
-        
-    #while i < len(arr):
-
-        #print(i)
-
-    #    for n in range(0, len(arr)-i):
-
-    #        obj.highlight(n, n+1, default_b)
-    #        obj.highlight(n+i, n+i+1, default_b, stack=True, val=5)
-
-    #        if arr[n] > arr[n+i]:
-    #            arr[n], arr[n+i] = arr[n+i], arr[n]
-    #        obj.update()
-        
-    #    i = int(i/2)
-    #    i = (3*i) + 1
-
-    #def shell(arr):
     
     interval = int(len(arr)/2)
 
@@ -63,14 +42,12 @@ def sort(obj, audioBuff):
             n = i # value to look back by
 
             # insertion sort backwards from current item in steps of size = interval
-            while n >= interval and arr[n - interval] > temp:
+            while n >= interval and obj.compareAndSwapPixel(n, n-interval):
                 obj.highlight(n, n+1, default_b)
                 obj.highlight(n-interval, n-interval+1, default_b, stack=True, val=5)
-                arr[n] = arr[n - interval]
+
                 n = n - interval
                 obj.update()
-            
-            arr[n] = temp # insert current item into correct place
 
         interval = int(interval/2) # update interval
     
