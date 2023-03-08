@@ -23,7 +23,8 @@ def sort(obj, audioBuff):
  
             obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
 
-            unsorted = obj.compareAndSwapPixel(i,i-1)
+            if obj.compareAndSwapPixel(i,i-1):
+                unsorted = True
 
             #if currVal < prevVal:
                 # swap values
