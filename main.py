@@ -18,6 +18,7 @@ from algorithms import radix_sort
 from algorithms import cocktail_sort
 from algorithms import tim_sort
 from algorithms import binary_sort
+from algorithms import shell_sort
 
 class Main:
     def __init__(self):
@@ -28,14 +29,14 @@ class Main:
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
                               "heap", "quick", "counting", "bucket", "radix",
-                              "cocktail", "tim", "binary"]
+                              "cocktail", "tim", "binary", "shell"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 7
+        self.currAlg = 6
 
         #audio-output object
         self.AUDIO = None
@@ -114,6 +115,10 @@ class Main:
                 # execute binary sort
                 print("binary sort")
                 binary_sort.sort(self.LED, audioBuff)
+            elif self.priorityQueue[self.currAlg] == "shell":
+                # execute shell sort
+                print("shell sort")
+                shell_sort.sort(self.LED, audioBuff)
 
             #algorithm done so clear strip
             self.LED.clear()
