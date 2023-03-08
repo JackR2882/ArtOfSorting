@@ -2,9 +2,13 @@
 # section (run) of array being worked on; meaning that as runs are merged, the values in
 # array object can also be updated, thus LED strip mirrors sorting algorithm
 
-import copy
+import time
 
 def sort(obj):
+
+    swapSD = obj.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+    compareSD = obj.compareSD = 0.001
+    recursionSD = obj.recursionSD = 0.001
 
     # get starting brightness to act as anchor - so brightness can always be reset to orignial value
     default_b = obj.stripState[0][1]
@@ -21,9 +25,8 @@ def sort(obj):
     #   -> start = pointer for start of current slice of array
     #   -> end = pointer for end of current slice of array
     def mergeSort(arr, start, end):
-    
-        obj.highlight(start, end, default_b)
-        obj.highlight(0,0,default_b)
+
+        time.sleep(recursionSD)
 
         # split array into two 
         mid = (int) (len(arr)/2)
@@ -36,6 +39,9 @@ def sort(obj):
             # recurse
             l = mergeSort(left,start,start+mid-1)
             r = mergeSort(right,start+mid,end)
+
+            #highlight after recurison to show merge
+            obj.highlight(start, end+1, default_b)
 
             # pointers for merging
             lcount = 0
@@ -63,12 +69,17 @@ def sort(obj):
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
                     obj.update()
                     rcount += 1
+                time.sleep(compareSD + swapSD)
+
+            # remove highlight after merge
+            obj.highlight(0,0,default_b)
 
             # pass merged array up a level                    
             return(arr)
 
         # only two elements in array so can simply order them and return
         elif len(arr) == 2:
+            time.sleep(compareSD)
             if left[0] < right[0]:
                 return([left[0], right[0]])
             else:
