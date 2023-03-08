@@ -28,8 +28,8 @@ class LED:
         #val of 100 gives a slowdown of ~0.095ms
         #val of 1000 gives a slowdown of ~0.95ms
         #val of 10000 gives a slowdown of ~11ms
-        self.swapSD = 10000
-        self.compareSD = 0
+        self.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+        self.compareSD = 0.001
 
     #set pixel value by updating strip state
     def setPixel(self,address,ID,brightness,blue,green,red):
@@ -38,13 +38,11 @@ class LED:
 
     #set pixel value by updating strip state
     def swapPixel(self,ID_1,ID_2):
-
         # bogus loop to consume time
         #i = 0
         #while i < self.swapSD:
         #    i += 1
         time.sleep(0.001) # simply sleeping seems to give a smoother result?
-
         #print("-------------------")
         #print("id_1 before: " + str(self.stripState[ID_1]))
         #print("id_2 before: " + str(self.stripState[ID_2]))
@@ -53,6 +51,18 @@ class LED:
         #print("id_2 after: " + str(self.stripState[ID_2]))
         #print("-------------------")
         #time.sleep(0.1)
+
+    def compareAndSwapPixel(self,ID_1,ID_2):
+
+        #time.sleep(0.001)
+        time.sleep(self.compareSD)
+
+        if self.stripState[ID_1] < self.stripState[ID_2]:
+            time.sleep(self.swapSD)
+            self.stripState[ID_1], self.stripState[ID_2] = self.stripState[ID_2], self.stripState[ID_1]
+            return(True) # flag to signify that swap occured
+        else:
+            return(False) # flag to signify that no swap occured
 
 
 
