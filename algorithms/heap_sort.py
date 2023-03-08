@@ -1,21 +1,19 @@
-import math
+# basic implmentation of heap sort
 
-# need to convert to use min heap rather than max heap,
-# in order to sort min-max rather than max-min
-
-# sourced inspiration from:
+# inspired by the following resources:
 # https://iq.opengenus.org/create-heap-from-array/
 # and:
 # https://www.geeksforgeeks.org/heap-sort/
 
-# Python program for implementation of heap Sort
-
-# To heapify subtree rooted at index i.
-# n is size of heap
-
-
+import math
+import time
 
 def heapify(arr, n, obj, default_b):
+
+	# fetch slowdowns: (easier than the alternative)
+	swapSD = obj.swapSD
+	compareSD = obj.compareSD
+	recursionSD = obj.recursionSD
 	
 	parent = n
     
@@ -36,10 +34,12 @@ def heapify(arr, n, obj, default_b):
 		# swap left child and parent
 		arr[child_left], arr[parent] = arr[parent], arr[child_left]
 		arr = heapify(arr, child_left, obj, default_b)
+		time.sleep(compareSD+swapSD+recursionSD)
 	if (child_right < len(arr)) and (arr[child_right] < arr[parent]):
 	    # swap right child and parent
 		arr[child_right], arr[parent] = arr[parent], arr[child_right]
 		arr = heapify(arr, child_right, obj, default_b)
+		time.sleep(compareSD+swapSD+recursionSD)
 
 	return(arr)
 
