@@ -3,6 +3,8 @@
 
 def sort(obj, audioBuff):
 
+    default_b = obj.stripState[0][1]
+
     unsorted = True
     forward = True   # switch between forward and backwards directions:
     
@@ -14,46 +16,54 @@ def sort(obj, audioBuff):
 
         if forward:
             for i in range(sorted_l+1, (len(obj.stripState)-sorted_r), 1):
+                
                 audioBuff.append(obj.stripState[i][0])
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i-1].copy()
                 obj.stripState[i][1] += 10
                 obj.stripState[i-1][1] += 10
-                #obj.stripState[i] = [0,255,255,255,255]
-                #obj.stripState[i-1] = [0,255,255,255,255]
                 obj.update()
 
+                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
 
-                if currVal < prevVal:
-                    #swap values
-                    obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
+                if obj.compareAndSwapPixel(i,i-1):
                     unsorted = True
-                else:
-                    obj.stripState[i], obj.stripState[i-1] = currVal, prevVal
+
+                #if currVal < prevVal:
+                    #swap values
+                #    obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
+                #    unsorted = True
+                #else:
+                #    obj.stripState[i], obj.stripState[i-1] = currVal, prevVal
             
             sorted_r += 1
             forward = not forward
 
         else:
             for i in range((len(obj.stripState)-sorted_r)-1, sorted_l-1, -1):
+                
                 audioBuff.append(obj.stripState[i][0])
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i+1].copy()
                 obj.stripState[i][1] += 10
                 obj.stripState[i+1][1] += 10
-                #obj.stripState[i] = [0,255,255,255,255]
-                #obj.stripState[i+1] = [0,255,255,255,255]
                 obj.update()
 
+                obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
 
-                if currVal > prevVal:
-                    #swap values
-                    obj.stripState[i], obj.stripState[i+1] = prevVal, currVal
+                if obj.compareAndSwapPixel(i+1, i):
                     unsorted = True
-                else:
-                    obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
+
+                #if currVal > prevVal:
+                    #swap values
+                #    obj.stripState[i], obj.stripState[i+1] = prevVal, currVal
+                #    unsorted = True
+                #else:
+                #    obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
             
             sorted_l += 1
             forward = not forward
+
+    obj.highlight(0,0,default_b)
