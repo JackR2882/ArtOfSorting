@@ -27,11 +27,6 @@ def sort(obj):
     bucket_range = math.ceil(max / num_buckets)
 
     # divide the array into 5 buckets:
-    obj.stripState = [[0,224,0,0,0]]*146
-    obj.update()
-    
-    b_1,b_2,b_3,b_4,b_5 = 0,0,0,0,0
-
     bucket_1, bucket_2, bucket_3, bucket_4, bucket_5 = [], [], [], [], []
 
     for i in range(0, len(arr)):
