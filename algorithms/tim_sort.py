@@ -6,6 +6,7 @@
 
 from algorithms import insertion_sort_modified as insertion_sort
 import math
+import time
 
 
 # try and find run size between max run size and 0 that will allow the arr to be equally divided into runs
@@ -21,6 +22,9 @@ def calculate_run_size(max_run_size, length):
 
 
 def merge(obj, start_l, end_l, start_r, end_r):
+
+    swapSD = obj.swapSD
+    compareSD = obj.compareSD
     
     #print("start_l: " + str(start_l) + ", end_l: " + str(end_l))
     #print("start_r: " + str(start_r) + ", end_r: " + str(end_r))
@@ -31,6 +35,8 @@ def merge(obj, start_l, end_l, start_r, end_r):
     r_arr = obj.stripState[start_r:end_r]
     
     while(len(l_arr) and len(r_arr)) > 0:
+
+        time.sleep(compareSD + swapSD)
 
         if l_arr[0] > r_arr[0]:
             obj.stripState[offset] = r_arr[0]
@@ -44,12 +50,18 @@ def merge(obj, start_l, end_l, start_r, end_r):
         obj.update()
 
     while len(r_arr) > 0:
+
+        time.sleep(swapSD)
+
         obj.stripState[offset] = r_arr[0]
         r_arr.pop(0)
         offset += 1
         obj.update()
 
     while len(l_arr) > 0:
+
+        time.sleep(swapSD)
+
         obj.stripState[offset] = l_arr[0]
         l_arr.pop(0)
         offset += 1
