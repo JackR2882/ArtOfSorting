@@ -3,8 +3,11 @@
 # basic implementation of bucket sort
 
 import math
+import time
 
 def sort(obj):
+
+    compareSD = obj.compareSD
 
     default_b = obj.stripState[0][1]
 
@@ -23,24 +26,45 @@ def sort(obj):
 
     bucket_range = math.ceil(max / num_buckets)
 
-    # divide array into 5 buckets:
-    obj.clear()
-    buckets = [[]]*num_buckets
-    for i in range(0, len(arr)):
-        bucket_index = math.floor(arr[i][0]/bucket_range)
-
-        # need to do this to work around issue with updating list nested in array
-        temp_arr = buckets[bucket_index].copy()
-        if bucket_index%2 == 0:
-            temp_arr.append([arr[i][0],arr[i][1]+10,arr[i][2],arr[i][3],arr[i][4]])
-        else:
-            temp_arr.append([arr[i][0],arr[i][1]+2,arr[i][2],arr[i][3],arr[i][4]])
-        buckets[bucket_index] = temp_arr
-
-    obj.stripState = [] 
-    for n in range (0, num_buckets):
-        obj.stripState = obj.stripState + buckets[n]
+    # divide the array into 5 buckets:
+    obj.stripState = [[0,224,0,0,0]]*146
     obj.update()
+    
+    b_1,b_2,b_3,b_4,b_5 = 0,0,0,0,0
+
+    bucket_1, bucket_2, bucket_3, bucket_4, bucket_5 = [], [], [], [], []
+
+    for i in range(0, len(arr)):
+
+        time.sleep(compareSD)
+
+        if arr[i][0] < bucket_range*1:
+            # insert into bucket_1
+            bucket_1.append(arr[i])
+            bucket_1[-1][1] += 10
+        elif arr[i][0] < bucket_range*2:
+            # insert into bucket 2
+            bucket_2.append(arr[i])
+            bucket_2[-1][1] += 2
+        elif arr[i][0] < bucket_range*3:
+            # insert into bucket 3
+            bucket_3.append(arr[i])
+            bucket_3[-1][1] += 10
+        elif arr[i][0] < bucket_range*4:
+            # insert into bucket 2
+            bucket_4.append(arr[i])
+            bucket_4[-1][1] += 2
+        else:
+            # insert into bucket 2
+            bucket_5.append(arr[i])
+            bucket_5[-1][1] += 10
+
+        obj.stripState[0:i+1], obj.stripState[i:]= bucket_1 + bucket_2 + bucket_3 + bucket_4 + bucket_5, arr[i:]
+
+        obj.update()
+
+        buckets = [bucket_1, bucket_2, bucket_3, bucket_4, bucket_5]
+
 
 
     # now just need to sort buckets - can just do any basic sort e.g. insertion sort
