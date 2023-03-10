@@ -36,10 +36,15 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 6
+        self.currAlg = 10
 
         #audio-output object
         self.AUDIO = None
+
+        #temp variables to store
+        self.swapSD = 0.0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+        self.compareSD = 0.0
+        self.recursionSD = 0.0
 
 
     #def run(self, LED, audioBuff):
@@ -53,6 +58,11 @@ class Main:
         #loop indefinitely
         while True:
 
+            #refresh individual slowdowns:
+            self.LED.swapSD = self.swapSD
+            self.LED.compareSD = self.swapSD
+            self.LED.recursionSD = self.recursionSD
+ 
             #randomize strip state
             self.LED.shake()
             #update physical strip
@@ -147,4 +157,18 @@ class Main:
                 self.LED.slowMode = True
             else:
                 print("Error, cannot find: " + name + " sort algorithm")
+
+    #temporary (just for testing) will integrate with main interrupt method at a later date
+    def interrupt2(self, interrupt_val):
+        if interrupt_val == "slower":
+            print("slowing")
+            self.swapSD += 0.002
+            self.compareSD += 0.002
+            self.recursionSD += 0.002
+        elif self.swapSD != 0:
+            print("speeding-up")
+            self.swapSD -= 0.002
+            self.compareSD -= 0.002
+            self.recursionSD -= 0.002
+        
 
