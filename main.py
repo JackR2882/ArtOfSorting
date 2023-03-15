@@ -4,6 +4,7 @@
 import time
 from init import generate_spectrum
 import LED_controller
+import display_controller
 
 # import algorithms:
 from algorithms import bubble_sort
@@ -36,10 +37,15 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 10
+        self.currAlg = 0
 
         #audio-output object
         self.AUDIO = None
+
+        #display-output obj
+        self.DISPLAY = None
+        #self.DISPLAY = display_controller.display()
+        #self.DISPLAY.update()
 
         #temp variables to store
         self.swapSD = 0.0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
@@ -48,8 +54,11 @@ class Main:
 
 
     #def run(self, LED, audioBuff):
-    def run(self, audioBuff):
+    def run(self, audioBuff, displayObj):
+        self.DISPLAY = displayObj
         #self.LED = LED
+        #self.AUDIO = audioObj
+
 
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
@@ -78,6 +87,7 @@ class Main:
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort
                 print("bubble sort")
+                self.DISPLAY.currAlg = "bubble sort"
                 bubble_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
