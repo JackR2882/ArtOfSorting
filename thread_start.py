@@ -5,9 +5,8 @@ import main
 import threading
 import speech_recognition
 from init import buffer
-#from init import generate_spectrum
 import audio_controller_temp as audio_controller
-#import LED_controller
+import display_controller
 import time
 
 #setup main object, runs the sorting algorithms
@@ -15,7 +14,9 @@ main = main.Main()
 
 # buffer for audio out
 audioBuff = None
-audioObj = None
+
+# buffer for display out
+displayObj = None
 
 #LED = None
 
@@ -27,24 +28,25 @@ def thread_listen():
         #main.interrupt2(interrupt_val2)
 
 def thread_main():
-    #main.run(LED, audioBuff)
-    main.run(audioBuff)
+    main.run(audioBuff, displayObj)
 
 def thread_out():
     #global audioObj
     global audioBuff
     audioBuff = buffer.Buff()
-    #audioOut = audio_controller.AudioOut()
     audioObj = audio_controller.AudioOut()
-    #audioObj.out()
 
-    #global LED
-    #LED = LED_controller.LED(146)
-    #generate_spectrum.initialize(LED, 146, 1)
+    global displayObj
+    displayObj = display_controller.display()
+
+    i = 1
 
     while True:
 
         #LED.update()
+        if i > 50: # don't want to update display that often, can wait a bit
+            displayObj.update()        
+        i += 1
 
         #t1 = time.perf_counter()
         if len(audioBuff.buffer) > 0:
@@ -71,7 +73,7 @@ if __name__ == "__main__":
 
     # start these fractionally later, to give time for audio and LED objects to be generated
     print("Initializing...")
-    time.sleep(0.1)
+    time.sleep(2)
     mainThread.start()
     interruptThread.start()
 
