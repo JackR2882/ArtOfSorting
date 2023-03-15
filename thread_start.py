@@ -15,6 +15,7 @@ main = main.Main()
 
 # buffer for audio out
 audioBuff = None
+audioObj = None
 
 #LED = None
 
@@ -22,15 +23,20 @@ def thread_listen():
     while True: # need to listen in a loop
         interrupt_val = speech_recognition.listen()
         main.interrupt(interrupt_val)
+        #interrupt_val2 = input("Control slowdowns here: ")
+        #main.interrupt2(interrupt_val2)
 
 def thread_main():
     #main.run(LED, audioBuff)
     main.run(audioBuff)
 
 def thread_out():
+    #global audioObj
     global audioBuff
     audioBuff = buffer.Buff()
-    audioOut = audio_controller.AudioOut()
+    #audioOut = audio_controller.AudioOut()
+    audioObj = audio_controller.AudioOut()
+    #audioObj.out()
 
     #global LED
     #LED = LED_controller.LED(146)
@@ -48,7 +54,7 @@ def thread_out():
             # or could dynamically change duration in audio controller based on how much is in buffer
 
             #print(len(audioBuff.buffer))
-            audioOut.out(audioBuff.buffer[0])
+            audioObj.out(audioBuff.buffer[0])
             audioBuff.remove()
         #t2 = time.perf_counter()
         #print("time: " + str(t2-t1))
@@ -57,6 +63,7 @@ def thread_out():
 
 #start threads
 if __name__ == "__main__":
+
     mainThread = threading.Thread(target=thread_main)    
     interruptThread = threading.Thread(target=thread_listen)
     outThread = threading.Thread(target=thread_out)
