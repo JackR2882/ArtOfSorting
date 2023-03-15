@@ -6,7 +6,7 @@ import os
 
 # set correct display
 if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using :0.0')
+    #print('no display found. Using :0.0')
     os.environ.__setitem__('DISPLAY', ':0.0')
 
 
@@ -42,16 +42,16 @@ class display:
         self.root.update()
 
 
-import time
-DISPLAY = display()
-DISPLAY.update()
+#import time
+#DISPLAY = display()
+#DISPLAY.update()
 
-time.sleep(1)
-DISPLAY.currAlg = "bubble_sort"
-DISPLAY.update()
-time.sleep(1)
-DISPLAY.currAlg = "merge_sort"
-DISPLAY.update()
+#time.sleep(1)
+#DISPLAY.currAlg = "bubble_sort"
+#DISPLAY.update()
+#time.sleep(1)
+#DISPLAY.currAlg = "merge_sort"
+#DISPLAY.update()
 
 
 # just to stop program exiting -> REMOVE LATER
