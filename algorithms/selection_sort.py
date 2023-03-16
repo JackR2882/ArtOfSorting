@@ -1,19 +1,20 @@
 # basic implementation of insertion sort:
 
-def sort(obj):
+def sort(obj, audioBuff):
 
     default_b = obj.stripState[0][1]
 
     for i in range(0, len(obj.stripState)-1):
 
+        audioBuff.append(obj.stripState[i][0])
+
         # track curr min
         min_index = i
-        min = obj.stripState[min_index]
 
         for n in range(i+1, len(obj.stripState)):
 
+            audioBuff.append(obj.stripState[n][0])
             
-            #obj.highlight(n,n+1,default_b,stack=True,val=10)
             obj.stripState[n][1] += 10
             obj.update()
 
