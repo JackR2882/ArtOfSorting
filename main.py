@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 2
+        self.currAlg = 4
 
         #audio-output object
         self.AUDIO = None
@@ -102,12 +102,12 @@ class Main:
                 #execute selection sort
                 self.DISPLAY.change(currAlg="selection sort", nextAlg="heap sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("selection sort")
-                selection_sort.sort(self.LED)
+                selection_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "heap":
                 #execute merge sort
                 self.DISPLAY.change(currAlg="heap sort", nextAlg="quick sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("heap sort")
-                heap_sort.sort(self.LED)
+                heap_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "quick":
                 #execute quick sort
                 self.DISPLAY.change(currAlg="quick sort", nextAlg="counting sort", swapSD=self.swapSD, compareSD=self.swapSD)
