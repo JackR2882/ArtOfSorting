@@ -4,30 +4,22 @@
 
 def sort(obj, audioBuff, start, end):
 
-    default_b = obj.stripState[0][1]
-
+    #default_b = obj.stripState[0][1]
     sorted = start+1
+
     for i in range(start, end):
+
         audioBuff.append(obj.stripState[i][0])
+
         for n in reversed(range(start,sorted)):
+
+            audioBuff.append(obj.stripState[n][0])
+
             #obj.highlight(n, n+2, default_b)
             
             if not obj.compareAndSwapPixel(n+1, n):
                 break
 
             obj.update()
-            #if obj.stripState[n] > obj.stripState[n+1]:
-            #    audioBuff.append(obj.stripState[i][0])
 
-            #    mem = obj.stripState[n+1]
-            #    obj.stripState[n+1] = [mem[0],255,mem[2],mem[3],mem[4]]                
-                #obj.stripState[n+1] = [0,255,255,255,255]
-            #    obj.update()
-            #    obj.stripState[n+1] = obj.stripState[n]
-            #    obj.stripState[n] = mem
-                #obj.update()
-            #else:
-            #    break
-            #obj.update()
         sorted += 1
-        #obj.update()
