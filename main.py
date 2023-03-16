@@ -87,7 +87,7 @@ class Main:
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort
                 print("bubble sort")
-                self.DISPLAY.currAlg = "bubble sort"
+                self.DISPLAY.change(currAlg = "bubble sort")
                 bubble_sort.sort(self.LED, audioBuff)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort

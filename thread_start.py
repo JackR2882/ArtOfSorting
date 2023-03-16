@@ -39,14 +39,11 @@ def thread_out():
     global displayObj
     displayObj = display_controller.display()
 
-    i = 1
-
     while True:
 
-        #LED.update()
-        if i > 50: # don't want to update display that often, can wait a bit
-            displayObj.update()        
-        i += 1
+        
+        if displayObj.changed:
+            displayObj.update()
 
         #t1 = time.perf_counter()
         if len(audioBuff.buffer) > 0:
