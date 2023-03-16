@@ -4,7 +4,7 @@
 
 import time
 
-def sort(obj):
+def sort(obj, audioBuff):
 
     swapSD = obj.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
     compareSD = obj.compareSD = 0.001
@@ -69,6 +69,10 @@ def sort(obj):
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
                     obj.update()
                     rcount += 1
+                
+                audioBuff.append(obj.stripState[start+i][0])
+
+                
                 time.sleep(compareSD + swapSD)
 
             # remove highlight after merge
@@ -81,8 +85,12 @@ def sort(obj):
         elif len(arr) == 2:
             time.sleep(compareSD)
             if left[0] < right[0]:
+                audioBuff.append(left[0][0])
+                audioBuff.append(right[0][0])
                 return([left[0], right[0]])
             else:
+                audioBuff.append(right[0][0])
+                audioBuff.append(left[0][0])
                 return([right[0], left[0]])
         # only one element in array so just return (reached base layer of recursion)
         else:
