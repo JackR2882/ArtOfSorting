@@ -5,9 +5,11 @@ import pyaudio
 class AudioOut:
     def __init__(self):
         self.sampleRate = 60000
-        self.duration = 0.1
+        self.duration = 0.01
         self.sineFreq = 800
-        self.volume = 200
+        #self.volume = 200
+        #self.volume = 6
+        self.volume = 0
 
         self.p = pyaudio.PyAudio()
         self.stream = self.p.open(format=pyaudio.paFloat32,
@@ -41,7 +43,7 @@ class AudioOut:
         freq = (2000*(val/146)) + 400
 
         # calculate waveform:
-        waveform = (np.sin(4 * np.arange((self.sampleRate) * (self.duration)) * freq / self.sampleRate)).astype(np.float32) # 1 is amplitude value
+        waveform = (np.sin(self.volume * np.arange((self.sampleRate) * (self.duration)) * freq / self.sampleRate)).astype(np.float32) # 1 is amplitude value
         
         self.stream.write(waveform)
 
