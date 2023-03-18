@@ -28,25 +28,36 @@ class display:
         # initalize relevant variables + outputs
         self.currAlg = ""
         self.currAlgLbl = ttk.Label(self.frm, text=self.currAlg).grid(column=0, row=0)
+        
         self.swapSD = 0.0
         self.compareSD = 0.0
-        self.swapSDLbl = ttk.Label(self.frm, text=self.currAlg, anchor="e").grid(column=0, row=1)
+        self.swapSDLbl = ttk.Label(self.frm, text="Current algorithm: " + self.currAlg, anchor="e").grid(column=0, row=1)
         self.compareSDLbl = ttk.Label(self.frm, text=self.currAlg, anchor="e").grid(column=0, row=2)
         self.sExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item swap in array, that is, whenever an item changes position.", wraplength=300, justify="left").grid(column=1, row=1)
         self.sExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item comparison, that is, whenever two items are compared.", wraplength=300, justify="left").grid(column=1, row=2)
+        
+        self.nextAlg = ""
+        self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + self.nextAlg).grid(column=0, row=4)
 
         #ttk.Label(frm, text=self.currAlg).grid(column=0, row=0)
 
-    def change(self, currAlg="", swapSD=0.0, compareSD=0.0):
-        self.currAlg = currAlg
-        self.swapSD = swapSD
-        self.compareSD = compareSD
+    def change(self, currAlg=None, nextAlg=None, swapSD=None, compareSD=None):
+        if currAlg:
+            self.currAlg = currAlg
+        if swapSD:
+            self.swapSD = swapSD
+        if compareSD:
+            self.compareSD = compareSD
+        if nextAlg:
+            self.nextAlg = nextAlg
         self.changed = True
 
     def update(self):
-        self.currAlgLbl = ttk.Label(self.frm, text=self.currAlg).grid(column=0, row=0)
+        self.currAlgLbl = ttk.Label(self.frm, text="Current algorithm: "+ self.currAlg).grid(column=0, row=0)
         self.swapSDLbl = ttk.Label(self.frm, text=("Swap slowdown: " + str(self.swapSD)), anchor="e").grid(column=0, row=1)
         self.compareSDLbl = ttk.Label(self.frm, text=("Comparison slowdown: " + str(self.swapSD)), anchor="e").grid(column=0, row=2)
+        self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + self.nextAlg).grid(column=0, row=4)
+
         self.root.update()
         self.changed = False
 
