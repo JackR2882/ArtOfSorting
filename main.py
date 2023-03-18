@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 11
 
         #audio-output object
         self.AUDIO = None
@@ -67,6 +67,9 @@ class Main:
         #loop indefinitely
         while True:
 
+            # stop audio out
+            self.AUDIO.amplitude = 0
+
             #refresh individual slowdowns:
             self.LED.swapSD = self.swapSD
             self.LED.compareSD = self.swapSD
@@ -84,7 +87,7 @@ class Main:
                 self.currAlg = 0
 
             # set volume of audio out
-            self.AUDIO.amplitude = 1
+            self.AUDIO.amplitude = 0.5
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
@@ -96,22 +99,22 @@ class Main:
                 #execute insertion sort
                 self.DISPLAY.change(currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("insertion sort")
-                insertion_sort.sort(self.LED, audioBuff)
+                insertion_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
                 self.DISPLAY.change(currAlg="merge sort", nextAlg="selection sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("merge sort")
-                merge_sort.sort(self.LED, audioBuff)
+                merge_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "selection":
                 #execute selection sort
                 self.DISPLAY.change(currAlg="selection sort", nextAlg="heap sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("selection sort")
-                selection_sort.sort(self.LED, audioBuff)
+                selection_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "heap":
                 #execute merge sort
                 self.DISPLAY.change(currAlg="heap sort", nextAlg="quick sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("heap sort")
-                heap_sort.sort(self.LED, audioBuff)
+                heap_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "quick":
                 #execute quick sort
                 self.DISPLAY.change(currAlg="quick sort", nextAlg="counting sort", swapSD=self.swapSD, compareSD=self.swapSD)
@@ -138,22 +141,22 @@ class Main:
                 #execute cocktail shaker sort
                 self.DISPLAY.change(currAlg="cocktail shaker sort", nextAlg="tim sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("cocktail shaker sort")
-                cocktail_sort.sort(self.LED, audioBuff)
+                cocktail_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "tim":
                 # execute tim sort
                 self.DISPLAY.change(currAlg="tim sort", nextAlg="binary sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("tim sort")
-                tim_sort.sort(self.LED, audioBuff)
+                tim_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "binary":
                 # execute binary sort
                 self.DISPLAY.change(currAlg="binary sort", nextAlg="shell sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("binary sort")
-                binary_sort.sort(self.LED, audioBuff)
+                binary_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "shell":
                 # execute shell sort
                 self.DISPLAY.change(currAlg="shell sort", nextAlg="bubble sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("shell sort")
-                shell_sort.sort(self.LED, audioBuff)
+                shell_sort.sort(self.LED, audioObj)
 
             #algorithm done so clear strip
             self.LED.clear()

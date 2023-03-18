@@ -1,7 +1,7 @@
 # basic implementation of cocktail shaker sort:
 # probably cleaner ways to do this, but can fix later
 
-def sort(obj, audioBuff):
+def sort(obj, audioObj):
 
     default_b = obj.stripState[0][1]
 
@@ -17,7 +17,7 @@ def sort(obj, audioBuff):
         if forward:
             for i in range(sorted_l+1, (len(obj.stripState)-sorted_r), 1):
                 
-                audioBuff.append(obj.stripState[i][0])
+                audioObj.update(obj.stripState[i][0])
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i-1].copy()
@@ -43,7 +43,7 @@ def sort(obj, audioBuff):
         else:
             for i in range((len(obj.stripState)-sorted_r)-1, sorted_l-1, -1):
                 
-                audioBuff.append(obj.stripState[i][0])
+                audioObj.update(obj.stripState[i][0])
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i+1].copy()

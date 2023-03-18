@@ -21,7 +21,7 @@ def calculate_run_size(max_run_size, length):
 
 
 
-def merge(obj, audioBuff, start_l, end_l, start_r, end_r):
+def merge(obj, audioObj, start_l, end_l, start_r, end_r):
 
     swapSD = obj.swapSD
     compareSD = obj.compareSD
@@ -47,7 +47,7 @@ def merge(obj, audioBuff, start_l, end_l, start_r, end_r):
 
             l_arr.pop(0)
             
-        audioBuff.append(obj.stripState[offset][0])
+        audioObj.update(obj.stripState[offset][0])
 
         offset += 1
         obj.update()
@@ -59,7 +59,7 @@ def merge(obj, audioBuff, start_l, end_l, start_r, end_r):
         obj.stripState[offset] = r_arr[0]
         r_arr.pop(0)
 
-        audioBuff.append(obj.stripState[offset][0])
+        audioObj.update(obj.stripState[offset][0])
 
         offset += 1
         obj.update()
@@ -71,14 +71,14 @@ def merge(obj, audioBuff, start_l, end_l, start_r, end_r):
         obj.stripState[offset] = l_arr[0]
         l_arr.pop(0)
         
-        audioBuff.append(obj.stripState[offset][0])
+        audioObj.update(obj.stripState[offset][0])
         
         offset += 1
         obj.update()
 
 
 
-def sort(obj, audioBuff):
+def sort(obj, audioObj):
 
     default_b = obj.stripState[0][1]
     arr = obj.stripState
@@ -97,11 +97,11 @@ def sort(obj, audioBuff):
         #if i%2 == 0:
             #obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
         obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
-        insertion_sort.sort(obj, audioBuff, (i*run_size), ((i+1)*run_size)-1)
+        insertion_sort.sort(obj, audioObj, (i*run_size), ((i+1)*run_size)-1)
         i += 1
 
     obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
-    insertion_sort.sort(obj, audioBuff, (i*run_size), len(arr)-1)
+    insertion_sort.sort(obj, audioObj, (i*run_size), len(arr)-1)
 
 
     # now need to merge runs
@@ -127,7 +127,7 @@ def sort(obj, audioBuff):
             inc = min(i+2, run_count)
             
             obj.highlight((i)*run_size, (inc*run_size)-1, default_b)
-            merge(obj, audioBuff, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((inc*run_size))-1)
+            merge(obj, audioObj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((inc*run_size))-1)
             
             i = inc
 
@@ -138,7 +138,7 @@ def sort(obj, audioBuff):
         else:
             #print("HERE2;       left_s: " + str(left_sorted) + ", right_s: " + str(right_sorted))
             obj.highlight(0, (right_sorted*run_size)-1, default_b)
-            merge(obj, audioBuff, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(right_sorted))-1)
+            merge(obj, audioObj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(right_sorted))-1)
             left_sorted = right_sorted
 
     obj.highlight(0,0, default_b)

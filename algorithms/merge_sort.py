@@ -4,7 +4,7 @@
 
 import time
 
-def sort(obj, audioBuff):
+def sort(obj, audioObj):
 
     swapSD = obj.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
     compareSD = obj.compareSD = 0.001
@@ -70,7 +70,7 @@ def sort(obj, audioBuff):
                     obj.update()
                     rcount += 1
                 
-                audioBuff.append(obj.stripState[start+i][0])
+                audioObj.update(obj.stripState[start+i][0])
 
                 
                 time.sleep(compareSD + swapSD)
@@ -85,12 +85,12 @@ def sort(obj, audioBuff):
         elif len(arr) == 2:
             time.sleep(compareSD)
             if left[0] < right[0]:
-                audioBuff.append(left[0][0])
-                audioBuff.append(right[0][0])
+                audioObj.update(left[0][0])
+                audioObj.update(right[0][0])
                 return([left[0], right[0]])
             else:
-                audioBuff.append(right[0][0])
-                audioBuff.append(left[0][0])
+                audioObj.update(right[0][0])
+                audioObj.update(left[0][0])
                 return([right[0], left[0]])
         # only one element in array so just return (reached base layer of recursion)
         else:
