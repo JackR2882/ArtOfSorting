@@ -83,6 +83,9 @@ class Main:
                 #reset curr
                 self.currAlg = 0
 
+            # set volume of audio out
+            self.AUDIO.amplitude = 1
+
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort

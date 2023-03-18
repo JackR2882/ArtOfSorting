@@ -4,14 +4,14 @@ import sounddevice as sd
 
 class AudioOut:
     def __init__(self):
-        self.sampleRate = 60000
+        self.sampleRate = 30000
         self.duration = 0.01
-        self.sineFreq = 440
-        self.amplitude = 1
+        self.sineFreq = 500 # controls pitch
+        self.amplitude = 0 # acts as vol
         self.start_idx = 0
 
     def update(self, val):
-        self.sineFreq = 440 + (2000*(val/144))
+        self.sineFreq = 500 + (2000*(val/144))
 
     def audio_out(self):
 
