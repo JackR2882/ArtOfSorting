@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 4
+        self.currAlg = 0
 
         #audio-output object
         self.AUDIO = None
@@ -53,10 +53,11 @@ class Main:
 
 
     #def run(self, LED, audioBuff):
-    def run(self, audioBuff, displayObj):
+    def run(self, audioObj, displayObj):
         self.DISPLAY = displayObj
         #self.LED = LED
-        #self.AUDIO = audioObj
+        self.AUDIO = audioObj
+        audioBuff = None # need to remove this later 
 
 
         #generate spectrup of RGB colours
@@ -87,7 +88,7 @@ class Main:
                 #execute bubble sort
                 print("bubble sort")
                 self.DISPLAY.change(currAlg="bubble sort", nextAlg="insertion sort", swapSD=self.swapSD, compareSD=self.swapSD) # update display with relvant values
-                bubble_sort.sort(self.LED, audioBuff)
+                bubble_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
                 self.DISPLAY.change(currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.swapSD)
