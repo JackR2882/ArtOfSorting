@@ -4,8 +4,7 @@
 import main
 import threading
 import speech_recognition
-from init import buffer
-import audio_controller_temp as audio_controller
+import audio_controller
 import display_controller
 import time
 
@@ -28,35 +27,18 @@ def thread_listen():
         #main.interrupt2(interrupt_val2)
 
 def thread_main():
-    main.run(audioBuff, displayObj)
+    main.run(audioObj, displayObj)
 
 def thread_out():
-    #global audioObj
-    global audioBuff
-    audioBuff = buffer.Buff()
+    # mights as well define both output objects together
+    global audioObj
     audioObj = audio_controller.AudioOut()
-
     global displayObj
     displayObj = display_controller.display()
 
-    while True:
-
-        
-        if displayObj.changed:
-            displayObj.update()
-
-        #t1 = time.perf_counter()
-        if len(audioBuff.buffer) > 0:
-            #print(str(audioBuff.buffer[0]) + " in buffer")
-
-            # to stop items building up in buffer, could send more than one at once if available
-            # or could dynamically change duration in audio controller based on how much is in buffer
-
-            #print(len(audioBuff.buffer))
-            audioObj.out(audioBuff.buffer[0])
-            audioBuff.remove()
-        #t2 = time.perf_counter()
-        #print("time: " + str(t2-t1))
+    #while True:
+    #    if displayObj.changed:
+    #        displayObj.update()
 
 
 
@@ -71,6 +53,10 @@ if __name__ == "__main__":
     # start these fractionally later, to give time for audio and LED objects to be generated
     print("Initializing...")
     time.sleep(2)
+
+    audioOutThread = threading.Thread(target=audioObj.audio_out)
+    audioOutThread.start()
+
     mainThread.start()
     interruptThread.start()
 
