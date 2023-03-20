@@ -23,7 +23,7 @@
 # inspired by the following implemntation: https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
 
 
-def sort(obj, audioBuff):
+def sort(obj, audioObj):
 
     default_b = obj.stripState[0][1]
 
@@ -36,6 +36,7 @@ def sort(obj, audioBuff):
         for i in range(interval, len(arr)):
 
             obj.highlight(i, i+1, default_b) # highlight current item
+            audioObj.update(arr[i][0])
 
             temp = arr[i] # store current item
 
@@ -45,6 +46,8 @@ def sort(obj, audioBuff):
             while n >= interval and obj.compareAndSwapPixel(n, n-interval):
                 obj.highlight(n, n+1, default_b)
                 obj.highlight(n-interval, n-interval+1, default_b, stack=True, val=5)
+
+                audioObj.update(arr[n-interval][0])
 
                 n = n - interval
                 obj.update()
