@@ -3,7 +3,7 @@ import time
 #basic implmentation of binary sort:
 #essentially the same as insertion sort, however a binary search is used to find the correct index for insertion
 
-def binary_search(val, obj, start_i, end_i, default_b):
+def binary_search(val, obj, audioObj, start_i, end_i, default_b):
 
     compareSD = obj.compareSD
 
@@ -32,20 +32,24 @@ def binary_search(val, obj, start_i, end_i, default_b):
             i += 1
     elif val > arr[i]:
     #elif obj.evaluate(val, arr[i])[2]:
+        audioObj.update(val[0])
+        audioObj.update(arr[i][0])
         time.sleep(compareSD)
         # recurse to right of val
-        i = binary_search(val, obj, i+1, end_i, default_b)
+        i = binary_search(val, obj, audioObj, i+1, end_i, default_b)
     elif val < arr[i]:
     #elif obj.evaluate(val, arr[i])[0]:
+        audioObj.update(val[0])
+        audioObj.update(arr[i][0])
         time.sleep(compareSD)
         # recurse to left of val
-        i = binary_search(val, obj, start_i, i-1, default_b)
+        i = binary_search(val, obj, audioObj, start_i, i-1, default_b)
 
     return(i)
 
 
 
-def sort(obj, audioBuff):
+def sort(obj, audioObj):
 
     swapSD = obj.swapSD
 
@@ -56,13 +60,13 @@ def sort(obj, audioBuff):
     for i in range(1, len(obj.stripState)-1):
 
         val = obj.stripState[i].copy()
-        audioBuff.append(val[0])
+        audioObj.update(val[0])
 
         # highlight pixel to be inserted
         obj.stripState[i][1] += 5
         obj.update()
 
-        index = binary_search(val, obj, 0, sorted, default_b) # perform binary search to find where to insert item
+        index = binary_search(val, obj, audioObj, 0, sorted, default_b) # perform binary search to find where to insert item
         #sorted_arr = insert(sorted_arr, index, val) # insert item into sorted arr at given index (need to shift anything to the right of including the index, right by one)
 
         obj.highlight(0,0,default_b)
