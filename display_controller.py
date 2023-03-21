@@ -10,7 +10,7 @@ if os.environ.get('DISPLAY','') == '':
     os.environ.__setitem__('DISPLAY', ':0.0')
 
 
-class display:
+class Display:
     def __init__(self):
 
         #changed flag (tells the update loop when to update)
