@@ -34,7 +34,7 @@ def thread_out():
     global audioObj
     audioObj = audio_controller.AudioOut()
     global displayObj
-    displayObj = display_controller.display()
+    displayObj = display_controller.Display()
 
     #while True:
     #    if displayObj.changed:
