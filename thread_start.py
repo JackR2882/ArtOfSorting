@@ -22,7 +22,7 @@ def thread_listen():
         #main.interrupt2(interrupt_val2)
 
 def thread_main():
-    main.run(audioObj, displayObj)
+    main.run(audioObj)
 
 #start threads
 if __name__ == "__main__":
