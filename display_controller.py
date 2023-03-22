@@ -1,10 +1,14 @@
 # controller to handle viusal output to display
 
+# SCREEN DIMENSIONS: 800x480
+
 import tkinter
 from tkinter import ttk
 import os
 
+
 # set correct display
+
 if os.environ.get('DISPLAY','') == '':
     #print('no display found. Using :0.0')
     os.environ.__setitem__('DISPLAY', ':0.0')
@@ -18,28 +22,36 @@ class Display:
 
         # initalize window
         self.root = tkinter.Tk()
-        self.root.geometry('500x300')
+        #self.root.geometry('800x480')
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
         
-        #self.root.wm_attributes('-fullscreen', 'True') # enable later -> will stretch window to fit fullscreen
+        self.root.wm_attributes('-fullscreen', 'True')  # enable later -> will stretch window to fit fullscreen
                                                         # without header toolbar, irrespective of screen size
 
+        # make sure cursor is disabled
+        self.root.config(cursor="none")
+
         # initalize relevant variables + outputs
-        self.currAlg = ""
-        self.currAlgLbl = ttk.Label(self.frm, text=self.currAlg).grid(column=0, row=0)
-        
+        self.currAlg = "long algorithm name here"
+        self.currAlgLbl = ttk.Label(self.frm, text="Current algorithm: " + self.currAlg, font=("Times", 40), wraplength=790)
+        self.currAlgLbl.grid(column=0, row=0, columnspan=6, rowspan=3)
+
         self.swapSD = 0.0
         self.compareSD = 0.0
-        self.swapSDLbl = ttk.Label(self.frm, text="Current algorithm: " + self.currAlg, anchor="e").grid(column=0, row=1)
-        self.compareSDLbl = ttk.Label(self.frm, text=self.currAlg, anchor="e").grid(column=0, row=2)
-        self.sExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item swap in array, that is, whenever an item changes position.", wraplength=300, justify="left").grid(column=1, row=1)
-        self.sExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item comparison, that is, whenever two items are compared.", wraplength=300, justify="left").grid(column=1, row=2)
+        self.swapSDLbl = ttk.Label(self.frm, text="Swap SD: " + str(self.swapSD), justify='left', font=('Times', 25), width=20)
+        self.swapSDLbl.grid(column=0, row=6, rowspan=3) # need to do this separately as .grid() returns none
+        self.compareSDLbl = ttk.Label(self.frm, text="Comparison SD: " + str(self.compareSD), justify='left', font=("Times", 25), width=20)
+        self.compareSDLbl.grid(column=0, row=9, rowspan=3)
+        self.sExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item swap in array, that is, whenever an item changes position.", wraplength=300, justify="left", font=("Times", 15))
+        self.sExplainLbl.grid(column=3, row=6, rowspan=3)
+        self.cExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item comparison, that is, whenever two items are compared.", wraplength=300, justify="left", font=("Times", 15))
+        self.cExplainLbl.grid(column=3, row=9, rowspan=3)
         
-        self.nextAlg = ""
-        self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + self.nextAlg).grid(column=0, row=4)
+        self.nextAlg = "long algorithm name here"
+        self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 25))
+        self.nextAlgLbl.grid(column=0, row=12, columnspan=4)
 
-        #ttk.Label(frm, text=self.currAlg).grid(column=0, row=0)
 
     def change(self, currAlg=None, nextAlg=None, swapSD=None, compareSD=None):
         if currAlg:
@@ -52,36 +64,18 @@ class Display:
             self.nextAlg = nextAlg
         self.changed = True
 
+        # update label text values
+        self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
+        self.swapSDLbl.config(text="Swap slowdown: " + str(self.swapSD))
+        self.compareSDLbl.config(text="Comparison slowdown: " + str(self.compareSD))
+        self.nextAlgLbl.config(text="Next algorithm: " + self.nextAlg)
+
+        self.root.update()
+
     def update(self):
-        self.currAlgLbl = ttk.Label(self.frm, text="Current algorithm: "+ self.currAlg).grid(column=0, row=0)
-        self.swapSDLbl = ttk.Label(self.frm, text=("Swap slowdown: " + str(self.swapSD)), anchor="e").grid(column=0, row=1)
-        self.compareSDLbl = ttk.Label(self.frm, text=("Comparison slowdown: " + str(self.swapSD)), anchor="e").grid(column=0, row=2)
-        self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + self.nextAlg).grid(column=0, row=4)
 
         self.root.update()
         self.changed = False
 
-
-#import time
-#DISPLAY = display()
-#DISPLAY.update()
-
-#time.sleep(1)
-#DISPLAY.currAlg = "bubble_sort"
-#DISPLAY.update()
-#time.sleep(1)
-#DISPLAY.currAlg = "merge_sort"
-#DISPLAY.update()
-
-
-# just to stop program exiting -> REMOVE LATER
-#time.sleep(5000)
-
-
-
-
-
-
-#ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
 
 
