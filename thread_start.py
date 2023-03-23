@@ -6,26 +6,31 @@ import threading
 import multiprocessing
 import speech_recognition
 import audio_controller
+import display_controller
+import display_updater
 
 #setup main object, runs the sorting algorithms
 main = main.Main()
 
-# buffer for display out
-displayObj = None
+def process_display(reciever):
+    displayObj = display_controller.Display()
+    displayObj.refresh()
+    while True:
+        update = reciever.recv()
+        displayObj.change(update)
 
-#LED = None
 
 def process_listen(sender):
     while True: # need to listen in a loop
         interupt = speech_recognition.listen()
         sender.send(interupt) # send through pipe to thread interupt
 
-def thread_interupt(reciver):
-    interupt = reciver.recv() # recieve from process_listen
+def thread_interupt(reciever):
+    interupt = reciever.recv() # recieve from process_listen
     main.interrupt(interupt)
 
-def thread_main():
-    main.run(audioObj)
+def thread_main(displayUpdateObj):
+    main.run(audioObj, displayUpdateObj)
 
 #start threads
 if __name__ == "__main__":
@@ -34,17 +39,28 @@ if __name__ == "__main__":
     global audioObj
     audioObj = audio_controller.AudioOut()
 
-    # define pipe between listenProcess and interuptThread
+    # define pipe between displayUpdateObj and displayProcess
     sender, reciever = multiprocessing.Pipe()
 
+    # define display update object
+    displayUpdateObj = display_updater.Display_Updater
+    displayUpdateObj.sender = sender
+
+    # define + start displayProcess
+    displayProcess = multiprocessing.Process(target=process_display, args=(reciever,))
+    displayProcess.start()
+
+    # define pipe between listenProcess and interuptThread
+    sender1, reciever1 = multiprocessing.Pipe()
+
     # define + start main and interrupt threads
-    mainThread = threading.Thread(target=thread_main)    
+    mainThread = threading.Thread(target=thread_main, args=(displayUpdateObj,))    
     mainThread.start()
-    interuptThread = threading.Thread(target=thread_interupt, args=(reciever,))
+    interuptThread = threading.Thread(target=thread_interupt, args=(reciever1,))
     interuptThread.start()
 
     # define + start listenerProcess
-    listenerProcess = multiprocessing.Process(target=process_listen, args=(sender,))
+    listenerProcess = multiprocessing.Process(target=process_listen, args=(sender1,))
     listenerProcess.start()
 
     # define + start audio output thread
