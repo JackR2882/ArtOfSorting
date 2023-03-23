@@ -48,32 +48,48 @@ class Display:
         self.cExplainLbl = ttk.Label(self.frm, text="Slow down is performed on an item comparison, that is, whenever two items are compared.", wraplength=300, justify="left", font=("Times", 15))
         self.cExplainLbl.grid(column=3, row=9, rowspan=3)
         
+        self.volume = 0.0
+        self.volumeLbl = ttk.Label(self.frm, text="Volume: " + str(self.volume), justify='left', font=("Times", 25), width=20)
+        self.volumeLbl.grid(column=0, row=12, rowspan=3)
+
+        #self.volSlider = ttk.Scale(self.frm, from_=0, to=100, orient='horizontal', variable=self.volume)
+        #self.volSlider.grid(column = 3, row=12, rowspan=3)
+        
+        # works, but only applies changes on update -> not very responsive
+        def test():
+            print("works")
+        button = ttk.Button(self.frm, text ="Hello", command=test)
+        button.grid(column=3, row=3, rowspan=3)
+
         self.nextAlg = "long algorithm name here"
         self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 25))
-        self.nextAlgLbl.grid(column=0, row=12, columnspan=4)
+        self.nextAlgLbl.grid(column=0, row=15, columnspan=4)
 
 
-    def change(self, currAlg=None, nextAlg=None, swapSD=None, compareSD=None):
-        if currAlg:
-            self.currAlg = currAlg
-        if swapSD:
-            self.swapSD = swapSD
-        if compareSD:
-            self.compareSD = compareSD
-        if nextAlg:
-            self.nextAlg = nextAlg
+    def change(self, update):
+        if update[0]:
+            self.currAlg = update[0]
+        if update[1]:
+            self.nextAlg = update[1]
+        if update[2]:
+            self.swapSD = update[2]
+        if update[3]:
+            self.compareSD = update[3]
+        if update[4]:
+            self.volume = update[4]
         self.changed = True
+
+        #print(self.volSlider.get())
 
         # update label text values
         self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
         self.swapSDLbl.config(text="Swap slowdown: " + str(self.swapSD))
         self.compareSDLbl.config(text="Comparison slowdown: " + str(self.compareSD))
-        self.nextAlgLbl.config(text="Next algorithm: " + self.nextAlg)
+        self.nextAlgLbl.config(text="Next algorithm: " + str(self.nextAlg))
 
-        self.root.update()
+        self.refresh()
 
-    def update(self):
-
+    def refresh(self):
         self.root.update()
         self.changed = False
 
