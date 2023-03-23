@@ -3,6 +3,7 @@
  
 import main
 import threading
+import multiprocessing
 import speech_recognition
 import audio_controller
 
@@ -14,12 +15,14 @@ displayObj = None
 
 #LED = None
 
-def thread_listen():
+def process_listen(sender):
     while True: # need to listen in a loop
-        interrupt_val = speech_recognition.listen()
-        main.interrupt(interrupt_val)
-        #interrupt_val2 = input("Control slowdowns here: ")
-        #main.interrupt2(interrupt_val2)
+        interupt = speech_recognition.listen()
+        sender.send(interupt) # send through pipe to thread interupt
+
+def thread_interupt(reciver):
+    interupt = reciver.recv() # recieve from process_listen
+    main.interrupt(interupt)
 
 def thread_main():
     main.run(audioObj)
@@ -31,11 +34,18 @@ if __name__ == "__main__":
     global audioObj
     audioObj = audio_controller.AudioOut()
 
+    # define pipe between listenProcess and interuptThread
+    sender, reciever = multiprocessing.Pipe()
+
     # define + start main and interrupt threads
     mainThread = threading.Thread(target=thread_main)    
-    interruptThread = threading.Thread(target=thread_listen)
     mainThread.start()
-    interruptThread.start()
+    interuptThread = threading.Thread(target=thread_interupt, args=(reciever,))
+    interuptThread.start()
+
+    # define + start listenerProcess
+    listenerProcess = multiprocessing.Process(target=process_listen, args=(sender,))
+    listenerProcess.start()
 
     # define + start audio output thread
     audioOutThread = threading.Thread(target=audioObj.audio_out)
