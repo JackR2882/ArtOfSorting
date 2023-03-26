@@ -17,9 +17,6 @@ if os.environ.get('DISPLAY','') == '':
 class Display:
     def __init__(self):
 
-        #changed flag (tells the update loop when to update)
-        self.changed = False
-
         # initalize window
         self.root = tkinter.Tk()
         #self.root.geometry('800x480')
@@ -56,15 +53,17 @@ class Display:
         #self.volSlider.grid(column = 3, row=12, rowspan=3)
         
         # works, but only applies changes on update -> not very responsive
-        def test():
-            print("works")
-        button = ttk.Button(self.frm, text ="Hello", command=test)
+        button = ttk.Button(self.frm, text ="Hello", command=self.test)
         button.grid(column=3, row=3, rowspan=3)
 
         self.nextAlg = "long algorithm name here"
         self.nextAlgLbl = ttk.Label(self.frm, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 25))
         self.nextAlgLbl.grid(column=0, row=15, columnspan=4)
 
+        #self.root.mainloop()
+
+    def test(self):
+            print("works")
 
     def change(self, update):
         if update[0]:
@@ -77,21 +76,17 @@ class Display:
             self.compareSD = update[3]
         if update[4]:
             self.volume = update[4]
-        self.changed = True
 
         #print(self.volSlider.get())
 
         # update label text values
         self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
-        self.swapSDLbl.config(text="Swap slowdown: " + str(self.swapSD))
-        self.compareSDLbl.config(text="Comparison slowdown: " + str(self.compareSD))
+        self.swapSDLbl.config(text="Swap SD: " + str(self.swapSD))
+        self.compareSDLbl.config(text="Comparison SD: " + str(self.compareSD))
         self.nextAlgLbl.config(text="Next algorithm: " + str(self.nextAlg))
 
         self.refresh()
 
     def refresh(self):
         self.root.update()
-        self.changed = False
-
-
 
