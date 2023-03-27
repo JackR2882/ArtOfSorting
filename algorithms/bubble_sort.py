@@ -17,8 +17,6 @@ def sort(obj, audioObj):
             currVal = obj.stripState[i].copy()
             prevVal = obj.stripState[i-1].copy()
             obj.highlight(i-1,i+1, default_b)
-            #obj.stripState[i][1] += 10
-            #obj.stripState[i-1][1] += 10
             obj.update()
  
             obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
