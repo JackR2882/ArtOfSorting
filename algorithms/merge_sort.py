@@ -6,10 +6,6 @@ import time
 
 def sort(obj, audioObj):
 
-    swapSD = obj.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
-    compareSD = obj.compareSD = 0.001
-    recursionSD = obj.recursionSD = 0.001
-
     # get starting brightness to act as anchor - so brightness can always be reset to orignial value
     default_b = obj.stripState[0][1]
 
@@ -26,7 +22,7 @@ def sort(obj, audioObj):
     #   -> end = pointer for end of current slice of array
     def mergeSort(arr, start, end):
 
-        time.sleep(recursionSD)
+        time.sleep(obj.recursionSD)
 
         # split array into two 
         mid = (int) (len(arr)/2)
@@ -73,7 +69,7 @@ def sort(obj, audioObj):
                 audioObj.update(obj.stripState[start+i][0])
 
                 
-                time.sleep(compareSD + swapSD)
+                time.sleep(obj.compareSD + obj.swapSD)
 
             # remove highlight after merge
             obj.highlight(0,0,default_b)
@@ -83,7 +79,7 @@ def sort(obj, audioObj):
 
         # only two elements in array so can simply order them and return
         elif len(arr) == 2:
-            time.sleep(compareSD)
+            time.sleep(obj.compareSD)
             if left[0] < right[0]:
                 audioObj.update(left[0][0])
                 audioObj.update(right[0][0])
