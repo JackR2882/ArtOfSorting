@@ -61,8 +61,6 @@ class Display:
             self.currAlg = update[0]
         if update[1]:
             self.nextAlg = update[1]
-        if update[2]:
-            self.volume = update[2]
 
 
 

@@ -3,8 +3,8 @@ class Display_Updater():
         self.pipe = None
 
 
-    def send(self, currAlg=None, nextAlg=None, volume=None):
-        self.pipe.send([currAlg, nextAlg, volume])
+    def send(self, currAlg=None, nextAlg=None):
+        self.pipe.send([currAlg, nextAlg])
 
     # recive updated slowdowns from ui
     def recieve(self):
