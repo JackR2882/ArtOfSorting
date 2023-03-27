@@ -12,7 +12,6 @@ def sort(obj, audioObj):
         for n in reversed(range(0,sorted)):
 
             audioObj.update(obj.stripState[n][0])
-
             obj.highlight(n, n+2, default_b)
 
             if not obj.compareAndSwapPixel(n+1, n):
