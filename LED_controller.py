@@ -28,9 +28,9 @@ class LED:
         #val of 100 gives a slowdown of ~0.095ms
         #val of 1000 gives a slowdown of ~0.95ms
         #val of 10000 gives a slowdown of ~11ms
-        self.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
-        self.compareSD = 0.001
-        self.recursionSD = 0.001
+        self.swapSD = 0.0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+        self.compareSD = 0.0
+        self.recursionSD = 0.0
         #self.swapSD = 0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
         #self.compareSD = 0
         #self.recursionSD = 0
