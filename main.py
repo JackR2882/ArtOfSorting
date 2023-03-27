@@ -47,9 +47,9 @@ class Main:
         #self.DISPLAY.update()
 
         #temp variables to store
-        self.swapSD = 0.0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
-        self.compareSD = 0.0
-        self.recursionSD = 0.0
+        #self.swapSD = 0.005 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+        #self.compareSD = 0.005
+        #self.recursionSD = 0.005
 
 
     #def run(self, LED, audioBuff):
@@ -73,9 +73,9 @@ class Main:
             self.AUDIO.amplitude = 0
 
             #refresh individual slowdowns:
-            self.LED.swapSD = self.swapSD
-            self.LED.compareSD = self.swapSD
-            self.LED.recursionSD = self.recursionSD
+            #self.LED.swapSD = self.swapSD
+            #self.LED.compareSD = self.swapSD
+            #self.LED.recursionSD = self.recursionSD
  
             #randomize strip state
             self.LED.shake()
@@ -98,19 +98,23 @@ class Main:
             if self.priorityQueue[self.currAlg] == "bubble":
                 #execute bubble sort
                 print("bubble sort")
-                displayUpdateObj.send(displayUpdateObj, currAlg="bubble sort", nextAlg="insertion sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
+                #displayUpdateObj.send(displayUpdateObj, currAlg="bubble sort", nextAlg="insertion sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
+                displayUpdateObj.send(displayUpdateObj, currAlg="bubble sort", nextAlg="insertion sort", volume=self.AUDIO.amplitude)
                 #self.DISPLAY.change(currAlg="bubble sort", nextAlg="insertion sort", swapSD=self.swapSD, compareSD=self.compareSD) # update display with relvant values
                 bubble_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "insertion":
                 #execute insertion sort
                 #self.DISPLAY.change(currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("insertion sort")
-                displayUpdateObj.send(displayUpdateObj, currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
+                #displayUpdateObj.send(displayUpdateObj, currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
+                displayUpdateObj.send(displayUpdateObj, currAlg="insertion sort", nextAlg="merge sort", volume=self.AUDIO.amplitude)
                 insertion_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
                 #self.DISPLAY.change(currAlg="merge sort", nextAlg="selection sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("merge sort")
+                #displayUpdateObj.send(displayUpdateObj, currAlg="merge sort", nextAlg="selection sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
+                displayUpdateObj.send(displayUpdateObj, currAlg="merge sort", nextAlg="selection sort", volume=self.AUDIO.amplitude)
                 merge_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "selection":
                 #execute selection sort
@@ -199,16 +203,21 @@ class Main:
                 print("Error, cannot find: " + name + " sort algorithm")
 
     #temporary (just for testing) will integrate with main interrupt method at a later date
-    def interrupt2(self, interrupt_val):
-        if interrupt_val == "slower":
-            print("slowing")
-            self.swapSD += 0.002
-            self.compareSD += 0.002
-            self.recursionSD += 0.002
-        elif self.swapSD != 0:
-            print("speeding-up")
-            self.swapSD -= 0.002
-            self.compareSD -= 0.002
-            self.recursionSD -= 0.002
+    #def interrupt2(self, interrupt_val):
+
+    #    print("swapSD or compareSD changing")
+    #    print(self.LED.swapSD)
+    #    print(self.LED.compareSD)
+
+        #if interrupt_val == "slower":
+        #    print("slowing")
+        #    self.swapSD += 0.002
+        #    self.compareSD += 0.002
+        #    self.recursionSD += 0.002
+        #elif self.swapSD != 0:
+        #    print("speeding-up")
+        #    self.swapSD -= 0.002
+        #    self.compareSD -= 0.002
+        #    self.recursionSD -= 0.002
         
 
