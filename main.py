@@ -63,6 +63,7 @@ class Main:
 
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
+        default_b = self.LED.stripState[0][1]
 
         #self.currAlg = 2
         #loop indefinitely
@@ -80,6 +81,8 @@ class Main:
             self.LED.shake()
             #update physical strip
             self.LED.update()
+            #ensure any highlighting is removed from LED strip
+            self.LED.highlight(0,0, default_b)
             time.sleep(0.5)
 
             # loop around to start when necessary
@@ -89,7 +92,7 @@ class Main:
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
-            self.AUDIO.amplitude = 0.1
+            self.AUDIO.amplitude = 0.0
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
@@ -102,6 +105,7 @@ class Main:
                 #execute insertion sort
                 #self.DISPLAY.change(currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("insertion sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="insertion sort", nextAlg="merge sort", swapSD=self.swapSD, compareSD=self.compareSD, volume=self.AUDIO.amplitude)
                 insertion_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "merge":
                 #execute merge sort
