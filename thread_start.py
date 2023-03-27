@@ -12,12 +12,18 @@ import display_updater
 #setup main object, runs the sorting algorithms
 main = main.Main()
 
-def process_display(reciever):
+def process_display(pipe):
     displayObj = display_controller.Display()
-    displayObj.refresh()
-    while True:
-        update = reciever.recv()
+
+    # recieve from 
+    def rcv():
+        update = pipe.recv()
         displayObj.change(update)
+    
+    t1 = threading.Thread(target=rcv)
+    t1.start()
+
+    displayObj.refresh()
 
 
 def process_listen(sender):
@@ -40,27 +46,27 @@ if __name__ == "__main__":
     audioObj = audio_controller.AudioOut()
 
     # define pipe between displayUpdateObj and displayProcess
-    sender, reciever = multiprocessing.Pipe()
+    pipe1, pipe2 = multiprocessing.Pipe(True)
 
     # define display update object
     displayUpdateObj = display_updater.Display_Updater
-    displayUpdateObj.sender = sender
+    displayUpdateObj.sender = pipe1
 
     # define + start displayProcess
-    displayProcess = multiprocessing.Process(target=process_display, args=(reciever,))
+    displayProcess = multiprocessing.Process(target=process_display, args=(pipe2,))
     displayProcess.start()
 
     # define pipe between listenProcess and interuptThread
-    sender1, reciever1 = multiprocessing.Pipe()
+    sender, reciever = multiprocessing.Pipe()
 
     # define + start main and interrupt threads
     mainThread = threading.Thread(target=thread_main, args=(displayUpdateObj,))    
     mainThread.start()
-    interuptThread = threading.Thread(target=thread_interupt, args=(reciever1,))
+    interuptThread = threading.Thread(target=thread_interupt, args=(reciever,))
     interuptThread.start()
 
     # define + start listenerProcess
-    listenerProcess = multiprocessing.Process(target=process_listen, args=(sender1,))
+    listenerProcess = multiprocessing.Process(target=process_listen, args=(sender,))
     listenerProcess.start()
 
     # define + start audio output thread

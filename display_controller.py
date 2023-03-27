@@ -49,6 +49,11 @@ class Display:
         self.volumeLbl = ttk.Label(self.frm, text="Volume: " + str(self.volume), justify='left', font=("Times", 25), width=20)
         self.volumeLbl.grid(column=0, row=12, rowspan=3)
 
+
+        #self.slide_val = tkinter.DoubleVar()
+        #self.slide_val.set(0.0)
+        #self.slider = ttk.Scale(self.frm, from_=0, to=100, orient='horizontal', variable=self.slide_val)
+        #self.slider.grid(column=3, row=18, columnspan=4)
         #self.volSlider = ttk.Scale(self.frm, from_=0, to=100, orient='horizontal', variable=self.volume)
         #self.volSlider.grid(column = 3, row=12, rowspan=3)
         
@@ -80,13 +85,28 @@ class Display:
         #print(self.volSlider.get())
 
         # update label text values
-        self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
-        self.swapSDLbl.config(text="Swap SD: " + str(self.swapSD))
-        self.compareSDLbl.config(text="Comparison SD: " + str(self.compareSD))
-        self.nextAlgLbl.config(text="Next algorithm: " + str(self.nextAlg))
+        #self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
+        #self.swapSDLbl.config(text="Swap SD: " + str(self.swapSD))
+        #self.compareSDLbl.config(text="Comparison SD: " + str(self.compareSD))
+        #self.nextAlgLbl.config(text="Next algorithm: " + str(self.nextAlg))
 
-        self.refresh()
+        #self.refresh()
 
     def refresh(self):
-        self.root.update()
+        while True:
+            # update label text values
+            self.currAlgLbl.config(text="Current algorithm: " + self.currAlg)
+            self.swapSDLbl.config(text="Swap SD: " + str(self.swapSD))
+            self.compareSDLbl.config(text="Comparison SD: " + str(self.compareSD))
+            self.nextAlgLbl.config(text="Next algorithm: " + str(self.nextAlg))
+            
+            #print(self.slide_val.get())
+
+            # refresh screen with new values
+            self.root.update()
+
+    #def interrupt(self, pipe):
+    #    while True:
+    #        update = pipe.recv()
+    #        self.change(update)
 
