@@ -30,6 +30,10 @@ class LED:
         #val of 10000 gives a slowdown of ~11ms
         self.swapSD = 0.001 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
         self.compareSD = 0.001
+        self.recursionSD = 0.001
+        #self.swapSD = 0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
+        #self.compareSD = 0
+        #self.recursionSD = 0
 
     #set pixel value by updating strip state
     def setPixel(self,address,ID,brightness,blue,green,red):
@@ -42,7 +46,7 @@ class LED:
         #i = 0
         #while i < self.swapSD:
         #    i += 1
-        time.sleep(0.001) # simply sleeping seems to give a smoother result?
+        time.sleep(self.swapSD) # simply sleeping seems to give a smoother result?
         #print("-------------------")
         #print("id_1 before: " + str(self.stripState[ID_1]))
         #print("id_2 before: " + str(self.stripState[ID_2]))
@@ -63,6 +67,49 @@ class LED:
             return(True) # flag to signify that swap occured
         else:
             return(False) # flag to signify that no swap occured
+        
+    def comparePixel(self,ID_1,ID_2):
+
+        time.sleep(self.compareSD)
+
+        if self.stripState[ID_1] < self.stripState[ID_2]:
+            return(ID_1, ID_2)
+        else:
+            return(ID_2,ID_1)
+
+
+
+
+
+
+
+
+    # STARTING TO GET A BIT MESSY NOW, COULD DO WITH A WAY OF CLEANING THIS UP
+
+    def evaluate(self, val_1, val_2):
+
+        time.sleep(self.compareSD)
+
+        if val_1 < val_2:
+            return (True, False, False)
+        elif val_1 == val_2:
+            return (False, True, False) 
+        else:
+            return (False, False, False)
+    
+
+
+
+
+
+
+
+
+
+
+    def recursionSlowDown(self):
+         
+         time.sleep(self.recursionSD)
 
 
 
@@ -83,9 +130,9 @@ class LED:
         temp_arr = (np.asarray(self.stripState)[:len(self.stripState),1:5]).flatten().tolist()
         self.spi.xfer(list(map(int, temp_arr)))
 
-        i = 0
-        while i < 50:
-            i+=1
+        #i = 0
+        #while i < 50:
+        #    i+=1
 
         #time.sleep(0.001)
 
