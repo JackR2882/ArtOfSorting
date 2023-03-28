@@ -1,15 +1,10 @@
 # basic implmentation of quick sort
-# could do with highlighting the pivot
 # randomized pivot
 
 import random
 import time
 
-def sort(obj):
-
-    # fetch slowdowns:
-    compareSD = obj.compareSD
-    recursionSD = obj.recursionSD    
+def sort(obj):  
 
     default_b = obj.stripState[0][1]
 
@@ -18,7 +13,7 @@ def sort(obj):
 
     def quicksort(arr_in, start_index, end_index):
 
-        time.sleep(recursionSD)
+        time.sleep(obj.recursionSD)
 
         obj.stripState = obj.highlight(start_index, end_index, default_b)
 
@@ -32,18 +27,9 @@ def sort(obj):
             # shift indexes into the right position:
             for i in range(start_index, end_index+1):
                 
-                #left, right = obj.comparePixel(i, pivot)
-            
-                #if (left != pivot) and (left != right):
-                #    #insert into left partion
-                #    #arr_in[i], arr_in[l_part] = arr_in[l_part], arr_in[i]
-                #    obj.swapPixel(i, l_part)                    
-                #    l_part += 1
-                
                 if arr_in[i] < pivot_val:
-                    time.sleep(compareSD)
+                    time.sleep(obj.compareSD)
                     # insert into left partition
-                    #arr_in[i], arr_in[l_part] = arr_in[l_part], arr_in[i]
                     obj.swapPixel(i, l_part)
                     l_part += 1
                 
