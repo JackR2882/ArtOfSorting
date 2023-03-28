@@ -9,11 +9,6 @@ import math
 import time
 
 def heapify(arr, n, obj, audioObj, default_b):
-
-	# fetch slowdowns: (easier than the alternative)
-	swapSD = obj.swapSD
-	compareSD = obj.compareSD
-	recursionSD = obj.recursionSD
 	
 	parent = n
 	audioObj.update(obj.stripState[n][0])
@@ -37,12 +32,12 @@ def heapify(arr, n, obj, audioObj, default_b):
 		# swap left child and parent
 		arr[child_left], arr[parent] = arr[parent], arr[child_left]
 		arr = heapify(arr, child_left, obj, audioObj, default_b)
-		time.sleep(compareSD+swapSD+recursionSD)
+		time.sleep(obj.compareSD+obj.swapSD+obj.recursionSD)
 	if (child_right < len(arr)) and (arr[child_right] < arr[parent]):
 	    # swap right child and parent
 		arr[child_right], arr[parent] = arr[parent], arr[child_right]
 		arr = heapify(arr, child_right, obj, audioObj, default_b)
-		time.sleep(compareSD+swapSD+recursionSD)
+		time.sleep(obj.compareSD+obj.swapSD+obj.recursionSD)
 
 	return(arr)
 
