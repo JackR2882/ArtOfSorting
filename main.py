@@ -29,33 +29,27 @@ class Main:
         #allows changing of order of execution
         self.priorityQueue = ["bubble", "insertion", "merge", "selection",
                               "heap", "quick", "counting", "bucket", "radix",
-                              "cocktail", "tim", "binary", "shell"]
+                              "cocktail shaker", "tim", "binary", "shell"]
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 5
 
         #audio-output object
         self.AUDIO = None
 
         #display-output obj
         self.DISPLAY = None
-        #self.DISPLAY = display_controller.display()
-        #self.DISPLAY.update()
-
-        #temp variables to store
-        #self.swapSD = 0.005 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
-        #self.compareSD = 0.005
-        #self.recursionSD = 0.005
 
 
     #def run(self, LED, audioBuff):
     def run(self, audioObj, displayUpdateObj):
         
         self.AUDIO = audioObj
+        self.DISPLAY = displayUpdateObj
 
         #generate spectrup of RGB colours
         generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
@@ -102,62 +96,63 @@ class Main:
                 merge_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "selection":
                 #execute selection sort
-                #self.DISPLAY.change(currAlg="selection sort", nextAlg="heap sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("selection sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="selection sort", nextAlg="heap sort")                
                 selection_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "heap":
                 #execute merge sort
                 #self.DISPLAY.change(currAlg="heap sort", nextAlg="quick sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("heap sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="heap sort", nextAlg="quick sort")
                 heap_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "quick":
                 #execute quick sort
-                #self.DISPLAY.change(currAlg="quick sort", nextAlg="counting sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("quick sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="counting sort")
                 quick_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "counting":
                 #execute counting sort
-                #self.DISPLAY.change(currAlg="counting sort", nextAlg="bucket sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("counting sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="counting sort", nextAlg="bucket sort")
                 generate_spectrum.initializeHalfSpectrum(self.LED,self.stripSize,self.defaultBrightness) # convert strip to random rg dist
                 counting_sort.sort(self.LED)
                 generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness) # return strip to standard rgb dist
             elif self.priorityQueue[self.currAlg] == "bucket":
                 #execute bucket sort
-                #self.DISPLAY.change(currAlg="bucket sort",  nextAlg="radix sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("bucket sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="bucket sort", nextAlg="radix sort")
                 bucket_sort.sort(self.LED)
             elif self.priorityQueue[self.currAlg] == "radix":
                 #execute radix sort
-                #self.DISPLAY.change(currAlg="radix sort", nextAlg="cocktail shaker sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("radix sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="radix sort", nextAlg="cocktail shaker sort")
                 radix_sort.sort(self.LED)
-            elif self.priorityQueue[self.currAlg] == "cocktail":
+            elif self.priorityQueue[self.currAlg] == "cocktail shaker":
                 #execute cocktail shaker sort
-                #self.DISPLAY.change(currAlg="cocktail shaker sort", nextAlg="tim sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("cocktail shaker sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="cocktail shaker sort", nextAlg="tim sort")
                 cocktail_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "tim":
                 # execute tim sort
-                #self.DISPLAY.change(currAlg="tim sort", nextAlg="binary sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("tim sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="tim sort", nextAlg="binary sort")
                 tim_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "binary":
                 # execute binary sort
-                #self.DISPLAY.change(currAlg="binary sort", nextAlg="shell sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("binary sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="binary sort", nextAlg="shell sort")
                 binary_sort.sort(self.LED, audioObj)
             elif self.priorityQueue[self.currAlg] == "shell":
                 # execute shell sort
-                #self.DISPLAY.change(currAlg="shell sort", nextAlg="bubble sort", swapSD=self.swapSD, compareSD=self.swapSD)
                 print("shell sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="shell sort", nextAlg="bubble sort")
                 shell_sort.sort(self.LED, audioObj)
 
             #algorithm done so clear strip
             self.LED.clear()
 
             self.currAlg += 1
-        
+
         self.LED.clear()
 
     def interrupt(self, interrupt_val):
@@ -165,14 +160,14 @@ class Main:
         vol = interrupt_val[1]
 
         # need to do something with volume (use it to change the size of the array)
-        print(name)
 
         try:
             #queue the spoken algorithm next
-            self.currAlg = self.priorityQueue.index(name) - 1
+            self.currAlg = self.priorityQueue.index(name)-1
+            #print(self.priorityQueue.index(name))
             ret_str = name + " sort"    # wont work for cocktail shaker sort - will deal with later
             print("queuing: " + ret_str)
-            #self.DISPLAY.change(nextAlg=ret_str)
+            self.DISPLAY.send(self.DISPLAY, nextAlg=ret_str)
 
         except Exception as e:
             print(e)
