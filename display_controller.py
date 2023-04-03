@@ -4,6 +4,7 @@
 
 import tkinter
 from tkinter import ttk
+import customtkinter
 import os
 
 
@@ -17,7 +18,8 @@ class Display:
     def __init__(self):
 
         # initalize window
-        self.root = tkinter.Tk()
+        self.root = customtkinter.CTk()
+        #self.root = tkinter.Tk()
         #self.root.geometry('800x480')
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
