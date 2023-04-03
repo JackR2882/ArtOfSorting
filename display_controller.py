@@ -4,7 +4,6 @@
 
 import tkinter
 from tkinter import ttk
-import customtkinter
 import os
 
 
@@ -18,8 +17,7 @@ class Display:
     def __init__(self):
 
         # initalize window
-        self.root = customtkinter.CTk()
-        #self.root = tkinter.Tk()
+        self.root = tkinter.Tk()
         #self.root.geometry('800x480')
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
@@ -59,6 +57,9 @@ class Display:
 
 
     def change(self, update):
+        
+        #print("updating: " + update[0] + " & " + update[1])
+
         if update[0]:
             self.currAlg = update[0]
         if update[1]:
@@ -80,4 +81,3 @@ class Display:
 
             # refresh screen with new values
             self.root.update()
-
