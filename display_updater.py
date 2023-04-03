@@ -1,11 +1,13 @@
 class Display_Updater():
     def __init__(self):
-        self.pipe = None
+        self.recievePipe = None
+        self.sendPipe = None
 
 
     def send(self, currAlg=None, nextAlg=None):
-        self.pipe.send([currAlg, nextAlg])
+        #print("sending: " + currAlg + " & " + nextAlg)
+        self.sendPipe.send([currAlg, nextAlg])
 
     # recive updated slowdowns from ui
     def recieve(self):
-        return(self.pipe.recv())
+        return(self.recievePipe.recv())
