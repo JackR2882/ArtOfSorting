@@ -13,183 +13,56 @@ class LED:
         #initialize spi line
         self.spi = spidev.SpiDev()
         self.spi.open(0,0)
-        self.spi.max_speed_hz = 10000000 #lower if errors occur (want as high as possible for response time)
-        #10,000,000 (10MHz)
+        self.spi.max_speed_hz = 10000000 # lower if errors occur (want as high as possible for response time)
 
         #defualt values
         self.stripSize = ss #set strip size
-        self.stripState = [[0,224,0,0,0]]*(ss) #create empty array to store pixel values in form ID,brighness,blue,green,red
+        self.stripState = [[0,224,0,0,0]]*(ss) # create empty array to store pixel values in form ID,brighness,blue,green,red
+                                               # items are sorted by ID value
 
         #flag for enabling a slow-down
         self.slowMode = False
 
-        #values for different slow down effects: (allows the slowing down of algorithms based on the cost of different actions)
-        #val of 10 gives a slowdown of ~0.015ms
-        #val of 100 gives a slowdown of ~0.095ms
-        #val of 1000 gives a slowdown of ~0.95ms
-        #val of 10000 gives a slowdown of ~11ms
         self.swapSD = 0.0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
         self.compareSD = 0.0
         self.recursionSD = 0.0
-        #self.swapSD = 0 # JUST USING RAW TIME AT THE MOMENT, WILL EXPERIMENT WITH LOOPING LATER
-        #self.compareSD = 0
-        #self.recursionSD = 0
+
 
     #set pixel value by updating strip state
     def setPixel(self,address,ID,brightness,blue,green,red):
         self.stripState[int(address)] = [int(ID),int(brightness)+224,int(red),int(green),int(blue)]
         #224 is added to brightness as formatting (first 3 bits of 8 mean new pixel then 5 bits of brightness)
 
-    #set pixel value by updating strip state
+    # swaps pixels at locations ID_1 and ID_2
     def swapPixel(self,ID_1,ID_2):
-        # bogus loop to consume time
-        #i = 0
-        #while i < self.swapSD:
-        #    i += 1
-        time.sleep(self.swapSD) # simply sleeping seems to give a smoother result?
-        #print("-------------------")
-        #print("id_1 before: " + str(self.stripState[ID_1]))
-        #print("id_2 before: " + str(self.stripState[ID_2]))
+        time.sleep(self.swapSD)
+
         self.stripState[ID_1], self.stripState[ID_2] = self.stripState[ID_2], self.stripState[ID_1]
-        #print("id_1 after: " + str(self.stripState[ID_1]))
-        #print("id_2 after: " + str(self.stripState[ID_2]))
-        #print("-------------------")
-        #time.sleep(0.1)
 
+    # compares and swaps pixels at locations ID_1 and ID_2
+    # returns true if swap occured, and false if no swap
     def compareAndSwapPixel(self,ID_1,ID_2):
-
-        #time.sleep(0.001)
-        time.sleep(self.compareSD)
-
+        time.sleep(self.compareSD + self.swapSD)
         if self.stripState[ID_1] < self.stripState[ID_2]:
-            time.sleep(self.swapSD)
             self.stripState[ID_1], self.stripState[ID_2] = self.stripState[ID_2], self.stripState[ID_1]
             return(True) # flag to signify that swap occured
         else:
             return(False) # flag to signify that no swap occured
-        
+
+    # compares pixels at locations ID_1 and ID_2
+    # returns correct ordering of ID_1 and ID_2    
     def comparePixel(self,ID_1,ID_2):
-
         time.sleep(self.compareSD)
-
         if self.stripState[ID_1] < self.stripState[ID_2]:
             return(ID_1, ID_2)
         else:
-            return(ID_2,ID_1)
-
-
-
-
-
-
-
-
-    # STARTING TO GET A BIT MESSY NOW, COULD DO WITH A WAY OF CLEANING THIS UP
-
-    def evaluate(self, val_1, val_2):
-
-        time.sleep(self.compareSD)
-
-        if val_1 < val_2:
-            return (True, False, False)
-        elif val_1 == val_2:
-            return (False, True, False) 
-        else:
-            return (False, False, False)
-    
-
-
-
-
-
-
-
-
-
-
-    def recursionSlowDown(self):
-         
-         time.sleep(self.recursionSD)
-
-
-
-    def update(self):
-
-        if(self.slowMode):
-            time.sleep(0.1)
-        #else:
-        #    time.sleep(0.1)
-        #    time.sleep(0.0001)
-
-        #open spi line
-        self.spi.open(0,0)   
-        #send start frame:
-        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
-
-        # process and send list as one entire chunk
-        temp_arr = (np.asarray(self.stripState)[:len(self.stripState),1:5]).flatten().tolist()
-        self.spi.xfer(list(map(int, temp_arr)))
-
-        #i = 0
-        #while i < 50:
-        #    i+=1
-
-        #time.sleep(0.001)
-
-        #send strip state as data frames:
-        #for i in range(0,len(self.stripState),4): 
-            #self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
-            #              self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4],
-            #              self.stripState[i+2][1],self.stripState[i+2][2],self.stripState[i+2][3],self.stripState[i+2][4],
-            #              self.stripState[i+3][1],self.stripState[i+3][2],self.stripState[i+3][3],self.stripState[i+3][4],
-            #              self.stripState[i+4][1],self.stripState[i+4][2],self.stripState[i+4][3],self.stripState[i+4][4],
-            #              self.stripState[i+5][1],self.stripState[i+5][2],self.stripState[i+5][3],self.stripState[i+5][4],
-            #              self.stripState[i+6][1],self.stripState[i+6][2],self.stripState[i+6][3],self.stripState[i+6][4],
-            #              self.stripState[i+7][1],self.stripState[i+7][2],self.stripState[i+7][3],self.stripState[i+7][4]])
-            #self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
-            #              self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4],
-            #              self.stripState[i+2][1],self.stripState[i+2][2],self.stripState[i+2][3],self.stripState[i+2][4],
-            #              self.stripState[i+3][1],self.stripState[i+3][2],self.stripState[i+3][3],self.stripState[i+3][4]])
-            #if i < 144:
-            #    self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
-            #                   self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4],
-            #                   self.stripState[i+2][1],self.stripState[i+2][2],self.stripState[i+2][3],self.stripState[i+2][4],
-            #                   self.stripState[i+3][1],self.stripState[i+3][2],self.stripState[i+3][3],self.stripState[i+3][4]])
-            #else:
-            #    self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
-            #                   self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4]])            
-            #self.spi.xfer([self.stripState[i][1],self.stripState[i][2],self.stripState[i][3],self.stripState[i][4],
-            #              self.stripState[i+1][1],self.stripState[i+1][2],self.stripState[i+1][3],self.stripState[i+1][4]])
-
-        #send end frame:
-        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])    
-        #close spi line
-        self.spi.close()
-
-    def clear(self):
-        #open spi line
-        self.spi.open(0,0)   
-        #send start frame:
-        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
-
-
-        # LED strip is actually 146 diodes long
-        for i in range(0,146):
-            self.spi.xfer([0b11100000,0b00000000,0b00000000,0b00000000])
-
+            return(ID_2, ID_1)
         
-        #send end frame:
-        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
-        #close spi line
-        self.spi.close()
-
-    def shake(self):
-        random.shuffle(self.stripState)
-
-
+    # highlights pixels in range start (inclusive) to end (exclusive)
+    # used to provide a clearer representation of what algorithms are actually doing
+    # has optional arguments to facilitate multiple highlights stacking on top of each other, otherwise higlights are reset each time
     def highlight(self, start, end, default_b, stack=False, val=1):        
         for i in range(0, len(self.stripState)):
-            #print(i)
             if not stack:
                 if i in range(start, end):
                     # increase brightness here
@@ -202,3 +75,58 @@ class LED:
                     self.stripState[i][1] = min(self.stripState[i][1] + val, 255)  
         self.update()
         return(self.stripState)
+
+    # currently unused, was intended to replace sleeps in some algorithms
+    #def evaluate(self, val_1, val_2):
+    #    time.sleep(self.compareSD)
+    #    if val_1 < val_2:
+    #        return (True, False, False)
+    #    elif val_1 == val_2:
+    #        return (False, True, False) 
+    #    else:
+    #        return (False, False, False)
+ 
+    # currently unused
+    #def recursionSlowDown(self):         
+    #     time.sleep(self.recursionSD)
+
+
+    # updates entire strip based on current value of self.stripState
+    def update(self):
+
+        if(self.slowMode): # apply slowdown
+            time.sleep(0.1)
+
+        #open spi line
+        self.spi.open(0,0)   
+        #send start frame:
+        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
+        
+        # process and send strip state as one entire chunk
+        temp_arr = (np.asarray(self.stripState)[:len(self.stripState),1:5]).flatten().tolist()
+        self.spi.xfer(list(map(int, temp_arr)))
+        
+        #send end frame:
+        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])    
+        #close spi line
+        self.spi.close()
+
+    # clears the strip
+    def clear(self):
+        #open spi line
+        self.spi.open(0,0)   
+        #send start frame:
+        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
+
+        # one empty frame for each pixel
+        for i in range(0,146):
+            self.spi.xfer([0b11100000,0b00000000,0b00000000,0b00000000])
+
+        #send end frame:
+        self.spi.xfer([0b00000000,0b00000000,0b00000000,0b00000000])
+        #close spi line
+        self.spi.close()
+
+    # randomly shuffles (shakes the array)
+    def shake(self):
+        random.shuffle(self.stripState)
