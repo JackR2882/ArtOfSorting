@@ -55,7 +55,6 @@ class Display:
 
 
     def change(self, update):
-
         if update[0]:
             self.currAlg = update[0]
         if update[1]:
@@ -72,8 +71,8 @@ class Display:
             self.nextAlgLbl.configure(text="Next algorithm: " + str(self.nextAlg))
 
             # update values based on current slider position
-            self.swapSD = round(self.swapSlider.get(),2)
-            self.compareSD = round(self.compareSlider.get(),2)
+            self.swapSD = round(self.swapSlider.get(),3)
+            self.compareSD = round(self.compareSlider.get(),3)
 
             # refresh screen with new values
             self.root.update()
