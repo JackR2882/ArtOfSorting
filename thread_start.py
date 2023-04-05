@@ -16,19 +16,21 @@ main = main.Main()
 # process takes pipe as argument, sets up two threads, one to update display values based on values recieved from pipe
 # and one to recieve updated slowdown values to pass back to main thread
 # also refreshes display at steady intervals
-def process_display(pipe):
+def process_display(sendPipe, recievePipe):
     displayObj = display_controller.Display()
 
     # recieve updated labels from display updater
     def rcv():
-        update = pipe.recv()
-        displayObj.change(update)
+        while True:
+            update = recievePipe.recv()
+            #print("receiving: " + update[0] + " & " + update[1])
+            displayObj.change(update)
 
-    # send updated slowdowns to display updater
+    # send updated slowdowns to display updater - doesn't need to be that responsive so can do once every second
     def send():
         while True:
             time.sleep(1)
-            pipe.send((displayObj.swapSD, displayObj.compareSD))
+            sendPipe.send((displayObj.swapSD, displayObj.compareSD))
     
     t1 = threading.Thread(target=rcv)
     t1.start()
@@ -70,15 +72,17 @@ if __name__ == "__main__":
     global audioObj
     audioObj = audio_controller.AudioOut()
 
-    # define pipe between displayUpdateObj and displayProcess (pipe is bi-directional)
+    # define pipe between displayUpdateObj and displayProcess (pipe is bi-directional) <- changed to use separate pipes
     pipe1, pipe2 = multiprocessing.Pipe(True)
+    pipe3, pipe4 = multiprocessing.Pipe()
 
     # define display update object
     displayUpdateObj = display_updater.Display_Updater
-    displayUpdateObj.pipe = pipe1
+    displayUpdateObj.recievePipe = pipe1
+    displayUpdateObj.sendPipe = pipe3
 
     # define + start displayProcess
-    displayProcess = multiprocessing.Process(target=process_display, args=(pipe2,))
+    displayProcess = multiprocessing.Process(target=process_display, args=(pipe2,pipe4,))
     displayProcess.start()
 
     # define pipe between listenProcess and interuptThread
