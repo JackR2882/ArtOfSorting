@@ -18,9 +18,6 @@ class Display:
 
         # initalize window
         self.root = ctk.CTk()
-
-        self.frm = ctk.CTkFrame(self.root)
-        self.frm.grid()
         
         self.root.wm_attributes('-fullscreen', 'True')  # enable later -> will stretch window to fit fullscreen
                                                         # without header toolbar, irrespective of screen size
