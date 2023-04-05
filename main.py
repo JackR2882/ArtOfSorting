@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 5
+        self.currAlg = 0
 
         #audio-output object
         self.AUDIO = None
@@ -71,8 +71,10 @@ class Main:
 
             # loop around to start when necessary
             if self.currAlg >= len(self.priorityQueue):
-                #reset curr
+                #reset currAlg
                 self.currAlg = 0
+                # reinitialize strip in case of memory errors
+                generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
@@ -158,14 +160,12 @@ class Main:
     def interrupt(self, interrupt_val):
         name = interrupt_val[0] # interrupt val contains, both the name of interupt alg, and the volume it was spoken at
         vol = interrupt_val[1]
-
         # need to do something with volume (use it to change the size of the array)
 
         try:
             #queue the spoken algorithm next
             self.currAlg = self.priorityQueue.index(name)-1
-            #print(self.priorityQueue.index(name))
-            ret_str = name + " sort"    # wont work for cocktail shaker sort - will deal with later
+            ret_str = name + " sort"
             print("queuing: " + ret_str)
             self.DISPLAY.send(self.DISPLAY, nextAlg=ret_str)
 
