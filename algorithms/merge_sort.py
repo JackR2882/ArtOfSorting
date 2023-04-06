@@ -22,12 +22,12 @@ def sort(obj, audioObj):
     #   -> end = pointer for end of current slice of array
     def mergeSort(arr, start, end):
 
-        time.sleep(obj.recursionSD)
-
         # split array into two 
         mid = (int) (len(arr)/2)
         left = arr[:mid]
         right = arr[mid:]
+
+        time.sleep(obj.recursionSD + obj.compareSD)
 
         # more than two elements in array so need to recurse on each sub array
         if len(arr)>2:
@@ -45,18 +45,24 @@ def sort(obj, audioObj):
 
             # merge:
             for i in range(0,len(arr)):
+
+                sleep = obj.swapSD
+
                 if lcount >= mid:
                     arr[i] = r[rcount]            
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
                     rcount += 1
+                    sleep += obj.compareSD
                 elif rcount >= len(arr)-mid:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     lcount += 1
+                    sleep += obj.compareSD
                 elif l[lcount] < r[rcount]:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
                     lcount += 1
+                    sleep += obj.compareSD
                 else:
                     arr[i] = r[rcount]
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
@@ -65,6 +71,8 @@ def sort(obj, audioObj):
                 time.sleep(obj.compareSD + obj.swapSD)
                 audioObj.update(obj.stripState[start+i][0])
 
+                obj.update()
+                obj.update()
                 obj.update()
 
             # remove highlight after merge
