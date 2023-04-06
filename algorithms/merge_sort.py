@@ -48,28 +48,24 @@ def sort(obj, audioObj):
                 if lcount >= mid:
                     arr[i] = r[rcount]            
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
-                    obj.update()
                     rcount += 1
                 elif rcount >= len(arr)-mid:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
-                    obj.update()
                     lcount += 1
                 elif l[lcount] < r[rcount]:
                     arr[i] = l[lcount]
                     obj.stripState[start+i] = l[lcount] # also need to update LED strip
-                    obj.update()
                     lcount += 1
                 else:
                     arr[i] = r[rcount]
                     obj.stripState[start+i] = r[rcount] # also need to update LED strip
-                    obj.update()
                     rcount += 1
-                
+
+                time.sleep(obj.compareSD + obj.swapSD)
                 audioObj.update(obj.stripState[start+i][0])
 
-                
-                time.sleep(obj.compareSD + obj.swapSD)
+                obj.update()
 
             # remove highlight after merge
             obj.highlight(0,0,default_b)
