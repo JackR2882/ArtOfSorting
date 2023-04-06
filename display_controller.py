@@ -80,8 +80,7 @@ class Display:
         self.nextAlgLbl = ctk.CTkLabel(self.root, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 39))
         self.nextAlgLbl.place(relx=0.05, rely=0.93, anchor=tkinter.W)
 
-    #def buttonClick(self):
-    #        print("button clicked")
+
 
     def change(self, update):
         if update[0]:
