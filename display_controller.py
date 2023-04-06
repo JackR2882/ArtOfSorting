@@ -48,11 +48,40 @@ class Display:
         self.compareSlider = ctk.CTkSlider(self.root, from_=0, to=0.1, orientation='horizontal', variable=self.compareSD, width=385, number_of_steps=20)
         self.compareSlider.place(relx=0.01, rely=0.7, anchor=tkinter.W)
 
+        self.shuffleMode = 0
+
+        # method to handle button click event:
+        def buttonClick(arg):
+            self.shuffleMode = arg
+
+            # highlight corresponding button
+            if arg == 2:
+                self.randomShuffleButton.configure(fg_color="firebrick", hover_color="firebrick")
+                self.reverseShuffleButton.configure(fg_color="firebrick", hover_color="firebrick")
+                self.almostSortedButton.configure(fg_color="chartreuse4", hover_color="chartreuse4")
+            elif arg == 1:
+                self.randomShuffleButton.configure(fg_color="firebrick", hover_color="firebrick")
+                self.reverseShuffleButton.configure(fg_color="chartreuse4", hover_color="chartreuse4")
+                self.almostSortedButton.configure(fg_color="firebrick", hover_color="firebrick")
+            else:
+                self.randomShuffleButton.configure(fg_color="chartreuse4", hover_color="chartreuse4")
+                self.reverseShuffleButton.configure(fg_color="firebrick", hover_color="firebrick")
+                self.almostSortedButton.configure(fg_color="firebrick", hover_color="firebrick")
+
+        # initialize and display buttons for changing shuffle mode
+        self.randomShuffleButton = ctk.CTkButton(self.root, text="random shuffle", font=("Times", 25), width=80, command=lambda: buttonClick(0), fg_color="chartreuse4", hover_color="chartreuse4")
+        self.randomShuffleButton.place(relx=0.01, rely=0.8, anchor=tkinter.W)
+        self.reverseShuffleButton = ctk.CTkButton(self.root, text="reverse shuffle", font=("Times", 25), width=80, command=lambda: buttonClick(1), fg_color="firebrick", hover_color="firebrick")
+        self.reverseShuffleButton.place(relx=0.5, rely=0.8, anchor=tkinter.CENTER)
+        self.almostSortedButton = ctk.CTkButton(self.root, text="almost sorted", font=("Times", 25), width=80, command=lambda: buttonClick(2), fg_color="firebrick", hover_color="firebrick")
+        self.almostSortedButton.place(relx=0.99, rely=0.8, anchor=tkinter.E)
+
         self.nextAlg = "placeholder"
         self.nextAlgLbl = ctk.CTkLabel(self.root, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 39))
-        self.nextAlgLbl.place(relx=0.05, rely=0.9, anchor=tkinter.W)
+        self.nextAlgLbl.place(relx=0.05, rely=0.93, anchor=tkinter.W)
 
-
+    #def buttonClick(self):
+    #        print("button clicked")
 
     def change(self, update):
         if update[0]:
