@@ -28,8 +28,8 @@ class LED:
         self.recursionSD = 0.0
 
         #mode for how to shuffle
-        self.modes = ["random", "reversed", "almost-sorted"]
-        self.mode = 1
+        self.shuffleModes = ["random", "reversed", "almost-sorted"]
+        self.shuffleMode = 0
 
 
     #set pixel value by updating strip state
@@ -133,13 +133,13 @@ class LED:
 
     # randomly shuffles (shakes the array), or performs other suffles based on current mode
     def shake(self):
-        if self.modes[self.mode] == "random":
+        if self.shuffleModes[self.shuffleMode] == "random":
             # randomly shuffle arr
             random.shuffle(self.stripState)
-        elif self.modes[self.mode] == "reversed":
+        elif self.shuffleModes[self.shuffleMode] == "reversed":
             # reverse arr without sorting
             self.stripState.reverse()
-        elif self.modes[self.mode] == "almost-sorted":
+        elif self.shuffleModes[self.shuffleMode] == "almost-sorted":
             # select 20 elements at random from arr and move them to the start of the arr
             for i in range(0, 20):
                 item_i = random.randint(20, len(self.stripState)-1)
