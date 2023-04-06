@@ -22,7 +22,7 @@ from algorithms import shell_sort
 
 class Main:
     def __init__(self):
-        self.stripSize = 146
+        self.stripSize = 144
         self.defaultBrightness = 1
 
         #list to store all algorithms, will loop through this list to execute algorithms
@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 0
+        self.currAlg = 1
 
         #audio-output object
         self.AUDIO = None
@@ -78,7 +78,7 @@ class Main:
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
-            self.AUDIO.amplitude = 0.0
+            self.AUDIO.amplitude = 0.01
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
@@ -170,7 +170,7 @@ class Main:
             self.DISPLAY.send(self.DISPLAY, nextAlg=ret_str)
 
         except Exception as e:
-            print(e)
+            #print(e)
             # could be slow or fast mode
             if name == "fast":
                 print("entering fast mode!")
