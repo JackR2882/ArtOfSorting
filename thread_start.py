@@ -30,7 +30,7 @@ def process_display(sendPipe, recievePipe):
     def send():
         while True:
             time.sleep(1)
-            sendPipe.send((displayObj.swapSD, displayObj.compareSD))
+            sendPipe.send((displayObj.swapSD, displayObj.compareSD, displayObj.shuffleMode))
     
     t1 = threading.Thread(target=rcv)
     t1.start()
@@ -51,14 +51,15 @@ def thread_interupt(reciever):
     interupt = reciever.recv() # recieve from process_listen
     main.interrupt(interupt)
 
-# recieves updated slowdown values through pipe and updates LED obj with these values
+# recieves updated slowdown values, and shuffle mode through pipe and updates LED obj with these values
 # also runs main
 def thread_main(displayUpdateObj):
     def recv():
         while True:
-            updatedSD = displayUpdateObj.recieve(displayUpdateObj)
-            main.LED.swapSD = updatedSD[0]
-            main.LED.compareSD = updatedSD[1]
+            ret = displayUpdateObj.recieve(displayUpdateObj)
+            main.LED.swapSD = ret[0]
+            main.LED.compareSD = ret[1]
+            main.LED.shuffleMode = ret[2]
     
     t1 = threading.Thread(target = recv)
     t1.start()
