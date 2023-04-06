@@ -137,6 +137,7 @@ clear_strip.py
 algorithms/selection_sort_backup.py
 heap_sort_backup.py
 slowdowneval.py
+test/*
 
 #env variables
 .env
