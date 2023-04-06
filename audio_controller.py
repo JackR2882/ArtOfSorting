@@ -23,7 +23,7 @@ class AudioOut:
             self.start_idx += frames
 
         try:
-            with sd.OutputStream(device=1, channels=1, callback=callback):
+            with sd.OutputStream(device=2, channels=1, callback=callback):
                 print("running")
                 input()
         except Exception as e:
