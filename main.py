@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 1
+        self.currAlg = 5
 
         #audio-output object
         self.AUDIO = None
@@ -78,7 +78,7 @@ class Main:
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
-            self.AUDIO.amplitude = 0.01
+            self.AUDIO.amplitude = 0.03
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
@@ -111,7 +111,7 @@ class Main:
                 #execute quick sort
                 print("quick sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="counting sort")
-                quick_sort.sort(self.LED)
+                quick_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "counting":
                 #execute counting sort
                 print("counting sort")

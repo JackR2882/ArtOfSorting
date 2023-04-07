@@ -4,7 +4,7 @@
 import random
 import time
 
-def sort(obj):  
+def sort(obj, audioObj):  
 
     default_b = obj.stripState[0][1]
 
@@ -22,12 +22,15 @@ def sort(obj):
             pivot = start_index + random.randint(0, end_index - start_index)
             pivot_val = arr_in[pivot]
 
+            audioObj.update(pivot_val[0])
+
             l_part = start_index      # stores left partition
 
             # shift indexes into the right position:
             for i in range(start_index, end_index+1):
                 
                 if arr_in[i] < pivot_val:
+                    audioObj.update(arr_in[i][0])
                     time.sleep(obj.compareSD)
                     # insert into left partition
                     obj.swapPixel(i, l_part)
@@ -39,6 +42,7 @@ def sort(obj):
             # shift pivot into the correct position:
             pivot = arr_in.index(pivot_val) # find new location of pivot
             while arr_in[pivot] < arr_in[pivot-1] and pivot != start_index:
+                audioObj.update(arr_in[pivot-1][0])
                 time.sleep(obj.compareSD + obj.swapSD)
                 arr_in[pivot], arr_in[pivot-1] = arr_in[pivot-1], arr_in[pivot]
                 pivot -= 1
