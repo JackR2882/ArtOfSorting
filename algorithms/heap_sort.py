@@ -1,9 +1,8 @@
-# basic implmentation of heap sort
-
 # inspired by the following resources:
-# https://iq.opengenus.org/create-heap-from-array/
-# and:
-# https://www.geeksforgeeks.org/heap-sort/
+#  - https://iq.opengenus.org/create-heap-from-array/
+#  - https://www.geeksforgeeks.org/heap-sort/
+
+# basic implmentation of heap sort
 
 import math
 import time
@@ -32,12 +31,14 @@ def heapify(arr, n, obj, audioObj, default_b):
 		# swap left child and parent
 		arr[child_left], arr[parent] = arr[parent], arr[child_left]
 		arr = heapify(arr, child_left, obj, audioObj, default_b)
-		time.sleep(obj.compareSD+obj.swapSD+obj.recursionSD)
+		time.sleep(obj.swapSD+obj.recursionSD)
 	if (child_right < len(arr)) and (arr[child_right] < arr[parent]):
 	    # swap right child and parent
 		arr[child_right], arr[parent] = arr[parent], arr[child_right]
 		arr = heapify(arr, child_right, obj, audioObj, default_b)
-		time.sleep(obj.compareSD+obj.swapSD+obj.recursionSD)
+		time.sleep(obj.swapSD+obj.recursionSD)
+
+	time.sleep(obj.compareSD*3) # to make up for previous comparions
 
 	return(arr)
 
