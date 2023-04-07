@@ -1,5 +1,5 @@
 # basic implmentation of quick sort
-# randomized pivot
+# uses a randomized pivot
 
 import random
 import time
@@ -34,13 +34,16 @@ def sort(obj):
                     l_part += 1
                 
                 obj.update()
+                obj.update()
 
             # shift pivot into the correct position:
             pivot = arr_in.index(pivot_val) # find new location of pivot
             while arr_in[pivot] < arr_in[pivot-1] and pivot != start_index:
+                time.sleep(obj.compareSD + obj.swapSD)
                 arr_in[pivot], arr_in[pivot-1] = arr_in[pivot-1], arr_in[pivot]
                 pivot -= 1
                 
+                obj.update()
                 obj.update()
 
             # recurse:
