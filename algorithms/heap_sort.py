@@ -18,14 +18,6 @@ def heapify(arr, n, obj, audioObj, default_b):
 
 	obj.highlight(parent, parent+1, default_b)
 
-	# only highlight children if they exist
-	#if (child_right < len(arr)):
-	#	obj.highlight(parent, parent+1, default_b, stack=True, val=10)
-	#	audioObj.update(obj.stripState[child_right][0])
-	#elif (child_left < len(arr)):
-	#	obj.highlight(child_left, child_left+1, default_b, stack=True, val=10)
-	#	audioObj.update(obj.stripState[child_left][0])
-
 	# compare with children
 	if (child_left < len(arr)):
 		time.sleep(obj.swapSD)
@@ -45,8 +37,6 @@ def heapify(arr, n, obj, audioObj, default_b):
 			arr[child_right], arr[parent] = arr[parent], arr[child_right]
 			arr = heapify(arr, child_right, obj, audioObj, default_b)
 			time.sleep(obj.swapSD)
-
-	#time.sleep(obj.compareSD*3) # to make up for previous comparions
 
 	return(arr)
 
