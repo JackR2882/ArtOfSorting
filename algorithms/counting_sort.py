@@ -16,14 +16,14 @@ def sort(obj, audioObj):
     for i in range(1, len(arr)):
         if arr[max_i] < arr[i]:
             max_i = i
-        obj.highlight(i, i+1, default_b)
+        #obj.highlight(i, i+1, default_b)
         audioObj.update(arr[i][0])
         time.sleep(obj.compareSD)
-
+        
 
 
     # init empty arr
-    new_arr = [0]*(len(arr)-1)
+    new_arr = [0]*(len(arr))
 
 
 
@@ -48,6 +48,8 @@ def sort(obj, audioObj):
         obj.update()
         
         time.sleep(obj.swapSD) # technically updating array, so count as swap
+
+    raw_count = new_arr.copy()
 
 
 
@@ -86,19 +88,25 @@ def sort(obj, audioObj):
         audioObj.update(arr[i][0])
 
         index = new_arr[int(arr[i][0])]
-        prev_index = new_arr[int(arr[i][0])-1]
+        #prev_index = new_arr[int(arr[i][0])-1]
+        val = raw_count[int(arr[i][0])]
 
-        # need to account for repeated items:
-        if prev_index > index or prev_index == 0:
-            prev_index = -1
-        time.sleep(obj.compareSD)
+        raw_count[int(arr[i][0])] -= 1
 
-        for d in range(index, prev_index, -1):
-            obj.stripState[d] = arr[i]
-            obj.update()
-            obj.update()
-            obj.update()
-            time.sleep(obj.swapSD)
+        obj.stripState[index-val] = arr[i]
+
+
+
+        ## need to account for repeated items:
+        #if prev_index > index or prev_index == 0:
+        #    prev_index = -1
+        #time.sleep(obj.compareSD)
+
+        #for d in range(index, prev_index, -1):
+        #    obj.stripState[d] = arr[i]
+        obj.update()
+        obj.update()
+        obj.update()
 
 
 
