@@ -5,7 +5,9 @@
 
 import time
 
-def sort(obj):
+def sort(obj, audioObj):
+
+    default_b = obj.stripState[0][1]
 
     arr = obj.stripState
 
@@ -14,6 +16,8 @@ def sort(obj):
     for i in range(1, len(arr)):
         if arr[max_i] < arr[i]:
             max_i = i
+        obj.highlight(i, i+1, default_b)
+        audioObj.update(arr[i][0])
         time.sleep(obj.compareSD)
 
 
@@ -25,13 +29,15 @@ def sort(obj):
 
     # clear array, before frequency count is to be displayed
     obj.clear()
-    obj.stripState = [[0,224,0,0,0]]*146
+    obj.stripState = [[0,224,0,0,0]]*144
 
 
 
     # work out and display frequencies (count items)
     # raw count:
     for i in range(0, len(new_arr)):
+
+        audioObj.update(arr[i][0])
         new_arr[arr[i][0]] += 1 # update with raw count
         
         # display frequencies as the colour white on the led strip: -> frequency of pixel corresponds to the brightness of its pixel
@@ -49,6 +55,9 @@ def sort(obj):
     # cumulative-count:
     acc = 0
     for i in range(0, len(new_arr)):
+
+        audioObj.update(arr[i][0])
+
         acc += new_arr[i]
         new_arr[i] = acc
 
@@ -73,6 +82,9 @@ def sort(obj):
 
 
     for i in range(0, len(arr)):
+
+        audioObj.update(arr[i][0])
+
         index = new_arr[int(arr[i][0])]
         prev_index = new_arr[int(arr[i][0])-1]
 

@@ -36,7 +36,7 @@ class Main:
         #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 5
+        self.currAlg = 6
 
         #audio-output object
         self.AUDIO = None
@@ -117,7 +117,7 @@ class Main:
                 print("counting sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="counting sort", nextAlg="bucket sort")
                 generate_spectrum.initializeHalfSpectrum(self.LED,self.stripSize,self.defaultBrightness) # convert strip to random rg dist
-                counting_sort.sort(self.LED)
+                counting_sort.sort(self.LED, self.AUDIO)
                 generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness) # return strip to standard rgb dist
             elif self.priorityQueue[self.currAlg] == "bucket":
                 #execute bucket sort
