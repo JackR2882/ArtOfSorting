@@ -10,8 +10,8 @@ from algorithms import counting_sort_modified as counting_sort
 # then do the same for the 10th digit value, etc... all the way down to zero
 
 
-def sort(obj):
-    
+def sort(obj, audioObj):
+
     arr = obj.stripState
     obj.update()
 
@@ -26,5 +26,5 @@ def sort(obj):
     off = int(math.pow(10,size-1))
 
     while off >= 1:
-        counting_sort.sort(obj, off)
+        counting_sort.sort(obj, audioObj, off)
         off = off/10

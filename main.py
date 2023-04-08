@@ -35,7 +35,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 7
+        self.currAlg = 6
 
         #audio-output object
         self.AUDIO = None
@@ -127,12 +127,12 @@ class Main:
                 #execute radix sort
                 print("radix sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="radix sort", nextAlg="cocktail shaker sort")
-                radix_sort.sort(self.LED)
+                radix_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "cocktail shaker":
                 #execute cocktail shaker sort
                 print("cocktail shaker sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="cocktail shaker sort", nextAlg="tim sort")
-                cocktail_sort.sort(self.LED, audioObj)
+                cocktail_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "tim":
                 # execute tim sort
                 print("tim sort")
@@ -147,7 +147,7 @@ class Main:
                 # execute shell sort
                 print("shell sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="shell sort", nextAlg="bubble sort")
-                shell_sort.sort(self.LED, audioObj)
+                shell_sort.sort(self.LED, self.AUDIO)
 
             #algorithm done so clear strip
             self.LED.clear()
