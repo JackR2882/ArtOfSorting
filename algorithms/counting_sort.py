@@ -1,31 +1,24 @@
-# broken - can find a way to fix / git revert / just get rid of it, 
-#        - fixed an issue with raw count though, so may be worth trying to preserve that
+# inspired by the following resource:
+#  - https://www.javatpoint.com/counting-sort
 
-# the following resource was used in the writing of this function: https://www.javatpoint.com/counting-sort
-
+# basic implementation of insertion sort:
 
 import time
 
 def sort(obj):
 
-
-
     arr = obj.stripState
-
-
 
     # find max item in array:
     max_i = 0
     for i in range(1, len(arr)):
-        time.sleep(obj.compareSD)
         if arr[max_i] < arr[i]:
             max_i = i
         time.sleep(obj.compareSD)
 
 
 
-    # init arr of length max + 1
-    #new_arr = [0]*(int(arr[max_i][0])+1)
+    # init empty arr
     new_arr = [0]*(len(arr)-1)
 
 
@@ -45,10 +38,10 @@ def sort(obj):
         ratio = (new_arr[arr[i][0]]) / 30
         obj.stripState[arr[i][0]] = [i,int(255 - (12*ratio)),int(255*ratio),int(255*ratio),int(255*ratio)]
         obj.update()
+        obj.update()
+        obj.update()
         
         time.sleep(obj.swapSD) # technically updating array, so count as swap
-
-    print(new_arr)
 
 
 
@@ -65,6 +58,8 @@ def sort(obj):
             obj.stripState[i] = [i,int(255 - (12*ratio)),int(255*ratio),int(255*ratio),int(255*ratio)]
         except:
             obj.stripState[i] = [i,0,255,255,255]
+        obj.update()
+        obj.update()
         obj.update()
 
         time.sleep(obj.swapSD) # technically updating array, so count as swap
@@ -84,10 +79,14 @@ def sort(obj):
         # need to account for repeated items:
         if prev_index > index or prev_index == 0:
             prev_index = -1
+        time.sleep(obj.compareSD)
 
         for d in range(index, prev_index, -1):
             obj.stripState[d] = arr[i]
             obj.update()
+            obj.update()
+            obj.update()
+            time.sleep(obj.swapSD)
 
 
 
