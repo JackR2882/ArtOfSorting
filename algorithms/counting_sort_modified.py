@@ -44,6 +44,7 @@ def sort(obj, audioObj, off):
     raw_count = new_arr.copy()
 
 
+
     # work out and display cumulative frequencies
     # cumulative-count:
     acc = 0
@@ -79,7 +80,6 @@ def sort(obj, audioObj, off):
         audioObj.update(arr[i][0])
 
         index = new_arr[int(math.floor(arr[i][0]/off))]
-        #prev_index = new_arr[int(math.floor(arr[i][0])/off)-1]
         val = raw_count[int(math.floor(arr[i][0])/off)]
 
         raw_count[int(math.floor(arr[i][0])/off)] -= 1
