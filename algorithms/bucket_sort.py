@@ -3,7 +3,7 @@
 import math
 import time
 
-def sort(obj):
+def sort(obj, audioObj):
 
     #compareSD = obj.compareSD
 
@@ -28,6 +28,8 @@ def sort(obj):
     bucket_1, bucket_2, bucket_3, bucket_4, bucket_5 = [], [], [], [], []
 
     for i in range(0, len(arr)):
+
+        audioObj.update(arr[i][0])
 
         if arr[i][0] < bucket_range*1:
             # insert into bucket_1
@@ -68,12 +70,18 @@ def sort(obj):
         arr_unsorted = buckets[i]
 
         sorted = i*bucket_range+1
+        
+        # sort bucket with insertion sort
         for x in range(i*bucket_range, i*bucket_range+len(arr_unsorted)-1):
+
+            audioObj.update(obj.stripState[x][0])
         
             for n in reversed(range(i*bucket_range,sorted)):
                 
                 obj.stripState[n+1][1] += 10
                 obj.stripState[n][1] += 10
+
+                audioObj.update(obj.stripState[n][0])
 
                 if not obj.compareAndSwapPixel(n+1, n):
                     obj.stripState[n+1][1] -= 10

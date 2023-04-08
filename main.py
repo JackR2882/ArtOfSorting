@@ -33,10 +33,9 @@ class Main:
 
         #get LED object from controller
         self.LED = LED_controller.LED(self.stripSize)
-        #self.LED = None
 
         #counter for current algorithm being executed
-        self.currAlg = 6
+        self.currAlg = 7
 
         #audio-output object
         self.AUDIO = None
@@ -123,7 +122,7 @@ class Main:
                 #execute bucket sort
                 print("bucket sort")
                 displayUpdateObj.send(displayUpdateObj, currAlg="bucket sort", nextAlg="radix sort")
-                bucket_sort.sort(self.LED)
+                bucket_sort.sort(self.LED, self.AUDIO)
             elif self.priorityQueue[self.currAlg] == "radix":
                 #execute radix sort
                 print("radix sort")
