@@ -1,5 +1,3 @@
-#  https://www.cs.usfca.edu/~galles/visualization/BucketSort.html <- should it be looking more like this?
-
 # basic implementation of bucket sort
 
 import math
@@ -7,7 +5,7 @@ import time
 
 def sort(obj):
 
-    compareSD = obj.compareSD
+    #compareSD = obj.compareSD
 
     default_b = obj.stripState[0][1]
 
@@ -31,8 +29,6 @@ def sort(obj):
 
     for i in range(0, len(arr)):
 
-        time.sleep(compareSD)
-
         if arr[i][0] < bucket_range*1:
             # insert into bucket_1
             bucket_1.append(arr[i])
@@ -53,9 +49,13 @@ def sort(obj):
             # insert into bucket 2
             bucket_5.append(arr[i])
             bucket_5[-1][1] += 10
+        
+        time.sleep(obj.compareSD + obj.swapSD) # appending so modifying arr
 
         obj.stripState[0:i+1], obj.stripState[i:]= bucket_1 + bucket_2 + bucket_3 + bucket_4 + bucket_5, arr[i:]
-
+        
+        obj.update()
+        obj.update()
         obj.update()
 
         buckets = [bucket_1, bucket_2, bucket_3, bucket_4, bucket_5]
@@ -69,7 +69,7 @@ def sort(obj):
 
         sorted = i*bucket_range+1
         for x in range(i*bucket_range, i*bucket_range+len(arr_unsorted)-1):
-        #audioBuff.append(obj.stripState[i][0])
+        
             for n in reversed(range(i*bucket_range,sorted)):
                 
                 obj.stripState[n+1][1] += 10
@@ -81,7 +81,9 @@ def sort(obj):
                     break
 
                 obj.update()
-                
+                obj.update()
+                obj.update()
+
                 obj.stripState[n+1][1] -= 10
                 obj.stripState[n][1] -= 10
                 
@@ -89,8 +91,9 @@ def sort(obj):
             # revert to default brightness:
             for n in range(0, (i)*bucket_range):
                 obj.stripState[n][1] = default_b
+            obj.update()
             obj.update() 
-                #obj.update()
+            obj.update()
             sorted += 1
 
     # remove any highlighting
