@@ -29,7 +29,7 @@ def merge(obj, audioObj, start_l, end_l, start_r, end_r):
     offset = start_l
 
     l_arr = obj.stripState[start_l:end_l+1]
-    r_arr = obj.stripState[start_r:end_r]
+    r_arr = obj.stripState[start_r:end_r+1]
     
     while(len(l_arr) and len(r_arr)) > 0:
 
@@ -115,6 +115,8 @@ def sort(obj, audioObj):
     left_sorted = 0
     right_sorted = 0
 
+    length = len(obj.stripState)
+
     while left_sorted < run_count:
         # if left_sorted and right_sorted are the same size (left_sorted == (right_sorted-left_sorted)):
         #      merge left and right sorted partitions
@@ -126,7 +128,8 @@ def sort(obj, audioObj):
             inc = min(i+2, run_count)
             
             obj.highlight((i)*run_size, (inc*run_size)-1, default_b)
-            merge(obj, audioObj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), ((inc*run_size))-1)
+            
+            merge(obj, audioObj, ((i)*run_size), ((i+1)*run_size)-1, ((i+1)*run_size), min((inc*run_size)-1, length))
             
             i = inc
 
@@ -136,7 +139,7 @@ def sort(obj, audioObj):
                 right_sorted = i
         else:
             obj.highlight(0, (right_sorted*run_size)-1, default_b)
-            merge(obj, audioObj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(right_sorted))-1)
+            merge(obj, audioObj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), min((run_size*right_sorted)-1, length))
             left_sorted = right_sorted
 
     obj.highlight(0,0, default_b)
