@@ -1,47 +1,39 @@
-import time
-
 #basic implmentation of binary sort:
+
 #essentially the same as insertion sort, however a binary search is used to find the correct index for insertion
+
+import time
 
 def binary_search(val, obj, audioObj, start_i, end_i, default_b):
 
-    compareSD = obj.compareSD
+    audioObj.update(val[0])
 
     # highlight current section of arr
     # can switch between stacking and non-stacking brightness change by enabling / unenabling the flag
     obj.highlight(start_i, end_i, default_b, stack=True)
-    
-    #for i in range(0, 10):
-    #    obj.update()
+    obj.update()
+    obj.update()
 
     arr = obj.stripState
 
     i = start_i + int((end_i-start_i)/2)
-    #print("start: " + str(start_i) + ", end: " + str(end_i) + ", i: " + str(i) + ", val: " + str(val) + ", into: " + str(arr[start_i:end_i])) 
 
     if (end_i == start_i) or (i == start_i):
-    #if obj.evaluate(end_i, start_i)[1] or obj.evaluate(i, start_i)[1]:
-        time.sleep(compareSD)
+        time.sleep(obj.compareSD)
         if arr[i] < val:
-        #if obj.evaluate(arr[i], val)[0]:
-            time.sleep(compareSD)
+            time.sleep(obj.compareSD)
             i += 1
         if end_i > start_i and arr[end_i] < val:
-        #if obj.evaluate(end_i, start_i)[2] and obj.evaluate(arr[end_i], val)[0]:
-            time.sleep(compareSD)
+            time.sleep(obj.compareSD)
             i += 1
     elif val > arr[i]:
-    #elif obj.evaluate(val, arr[i])[2]:
-        audioObj.update(val[0])
+        time.sleep(obj.compareSD)
         audioObj.update(arr[i][0])
-        time.sleep(compareSD)
         # recurse to right of val
         i = binary_search(val, obj, audioObj, i+1, end_i, default_b)
     elif val < arr[i]:
-    #elif obj.evaluate(val, arr[i])[0]:
-        audioObj.update(val[0])
+        time.sleep(obj.compareSD)
         audioObj.update(arr[i][0])
-        time.sleep(compareSD)
         # recurse to left of val
         i = binary_search(val, obj, audioObj, start_i, i-1, default_b)
 
@@ -75,12 +67,5 @@ def sort(obj, audioObj):
 
         obj.stripState[index:(sorted+1)] = [val] + obj.stripState[index:sorted]
         obj.update()
-
-        # possible way of inserting -> keeps execution time in line with other algorithms but doesn't look the best
-        #prev = obj.stripState[index]
-        #obj.stripState[index] = val
-        #for n in range(index+1, sorted+1):
-        #    obj.stripState[n], prev = prev, obj.stripState[n]
-        #    obj.update()
 
         sorted += 1
