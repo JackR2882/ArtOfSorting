@@ -4,7 +4,7 @@
 import random
 import time
 
-def sort(obj, audioObj):  
+def sort(obj, audioObj, rand=True):  
 
     default_b = obj.stripState[0][1]
 
@@ -19,7 +19,12 @@ def sort(obj, audioObj):
 
         if len(arr_in) > 1:
 
-            pivot = start_index + random.randint(0, end_index - start_index)
+            # choose between randomised or regular quicksort
+            if rand:
+                pivot = start_index + random.randint(0, end_index - start_index)
+            else:
+                pivot = start_index
+
             pivot_val = arr_in[pivot]
 
             audioObj.update(pivot_val[0])

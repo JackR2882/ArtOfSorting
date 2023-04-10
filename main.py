@@ -35,7 +35,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 12
+        self.currAlg = 5
 
         #audio-output object
         self.AUDIO = None
@@ -110,8 +110,16 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "quick":
                 #execute quick sort
                 print("quick sort")
-                displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="counting sort")
-                quick_sort.sort(self.LED, self.AUDIO)
+                displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="randomised sort")
+                quick_sort.sort(self.LED, self.AUDIO, rand=False)
+                
+                self.LED.shake()
+
+                #execute randomised quicksort
+                print("randomised quick sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="randomised quick sort", nextAlg="counting sort")
+                quick_sort.sort(self.LED, self.AUDIO, rand=True)
+
             elif self.priorityQueue[self.currAlg] == "counting":
                 #execute counting sort
                 print("counting sort")
