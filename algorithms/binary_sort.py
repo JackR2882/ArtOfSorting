@@ -16,8 +16,10 @@ def binary_search(val, obj, audioObj, start_i, end_i, default_b):
 
     arr = obj.stripState
 
+    # get mid index from between start_i and end_i
     i = start_i + int((end_i-start_i)/2)
 
+    # if search area is too small
     if (end_i == start_i) or (i == start_i):
         time.sleep(obj.compareSD)
         if arr[i] < val:
@@ -26,11 +28,13 @@ def binary_search(val, obj, audioObj, start_i, end_i, default_b):
         if end_i > start_i and arr[end_i] < val:
             time.sleep(obj.compareSD)
             i += 1
+    # greater than, so recurse to right
     elif val > arr[i]:
         time.sleep(obj.compareSD)
         audioObj.update(arr[i][0])
         # recurse to right of val
         i = binary_search(val, obj, audioObj, i+1, end_i, default_b)
+    # less than, so recurse to left
     elif val < arr[i]:
         time.sleep(obj.compareSD)
         audioObj.update(arr[i][0])
@@ -59,12 +63,12 @@ def sort(obj, audioObj):
         obj.update()
 
         index = binary_search(val, obj, audioObj, 0, sorted, default_b) # perform binary search to find where to insert item
-        #sorted_arr = insert(sorted_arr, index, val) # insert item into sorted arr at given index (need to shift anything to the right of including the index, right by one)
 
         obj.highlight(0,0,default_b)
 
         time.sleep(swapSD*(sorted-index))
 
+        # insert at index (need to shift rest of arr)
         obj.stripState[index:(sorted+1)] = [val] + obj.stripState[index:sorted]
         obj.update()
 
