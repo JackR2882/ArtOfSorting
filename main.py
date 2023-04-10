@@ -110,7 +110,7 @@ class Main:
             elif self.priorityQueue[self.currAlg] == "quick":
                 #execute quick sort
                 print("quick sort")
-                displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="randomised sort")
+                displayUpdateObj.send(displayUpdateObj, currAlg="quick sort", nextAlg="randomised quick sort")
                 quick_sort.sort(self.LED, self.AUDIO, rand=False)
                 
                 self.LED.shake()
