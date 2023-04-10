@@ -44,17 +44,17 @@ def sort(obj, audioObj):
             bucket_3.append(arr[i])
             bucket_3[-1][1] += 10
         elif arr[i][0] < bucket_range*4:
-            # insert into bucket 2
+            # insert into bucket 4
             bucket_4.append(arr[i])
             bucket_4[-1][1] += 2
         else:
-            # insert into bucket 2
+            # insert into bucket 5
             bucket_5.append(arr[i])
             bucket_5[-1][1] += 10
         
         time.sleep(obj.compareSD + obj.swapSD) # appending so modifying arr
 
-        obj.stripState[0:i+1], obj.stripState[i:]= bucket_1 + bucket_2 + bucket_3 + bucket_4 + bucket_5, arr[i:]
+        obj.stripState[0:i], obj.stripState[i+1:]= bucket_1 + bucket_2 + bucket_3 + bucket_4 + bucket_5, arr[i+1:]
         
         obj.update()
         obj.update()
@@ -62,17 +62,24 @@ def sort(obj, audioObj):
 
         buckets = [bucket_1, bucket_2, bucket_3, bucket_4, bucket_5]
 
-
+    #print(obj.stripState[143][0])
+    #print(obj.stripState[142][0])
 
     # now just need to sort buckets - can just do any basic sort e.g. insertion sort
     for i in range(0, num_buckets):
 
         arr_unsorted = buckets[i]
 
-        sorted = i*bucket_range+1
+        sorted = i*bucket_range
         
         # sort bucket with insertion sort
-        for x in range(i*bucket_range, i*bucket_range+len(arr_unsorted)-1):
+
+        #print("sorting in range: " + str(i*bucket_range) + ":" + str(i*bucket_range+len(arr_unsorted)))
+        #print("sorted: " + str(sorted))
+        #print("i*bucket_range: " + str(i*bucket_range))
+        #and 
+
+        for x in range(i*bucket_range, i*bucket_range+len(arr_unsorted)):
 
             audioObj.update(obj.stripState[x][0])
         
@@ -99,8 +106,6 @@ def sort(obj, audioObj):
             # revert to default brightness:
             for n in range(0, (i)*bucket_range):
                 obj.stripState[n][1] = default_b
-            obj.update()
-            obj.update() 
             obj.update()
             sorted += 1
 
