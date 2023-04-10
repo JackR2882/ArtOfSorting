@@ -14,8 +14,7 @@ def sort(obj, audioObj, start, end):
         for n in reversed(range(start,sorted)):
 
             audioObj.update(obj.stripState[n][0])
-
-            #obj.highlight(n, n+2, default_b)
+            #obj.highlight(n, n+2, default_b, stack=True, val=5)
             
             if not obj.compareAndSwapPixel(n+1, n):
                 break
