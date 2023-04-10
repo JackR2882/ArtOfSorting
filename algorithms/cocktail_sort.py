@@ -23,7 +23,7 @@ def sort(obj, audioObj):
                 prevVal = obj.stripState[i-1].copy()
                 obj.highlight(i-1,i+1,default_b)
 
-                obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
+                #audioObj.update(obj.stripState[i-1][0])
 
                 if obj.compareAndSwapPixel(i,i-1):
                     unsorted = True
@@ -40,7 +40,7 @@ def sort(obj, audioObj):
                 prevVal = obj.stripState[i+1].copy()
                 obj.highlight(i,i+2,default_b)
 
-                obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
+                #audioObj.update(obj.stripState[i+1][0])
 
                 if obj.compareAndSwapPixel(i+1, i):
                     unsorted = True
