@@ -18,25 +18,35 @@ def heapify(arr, n, obj, audioObj, default_b):
 
 	obj.highlight(parent, parent+1, default_b)
 
+	swap = 0
+
 	# compare with children
 	if (child_left < len(arr)):
-		time.sleep(obj.swapSD)
-		obj.highlight(child_left, child_left+1, default_b, stack=True, val=10) 
+		obj.stripState[child_left][1] += 10
+		#obj.highlight(child_left, child_left+1, default_b, stack=True, val=10) 
 		audioObj.update(obj.stripState[child_left][0])
 		if (arr[child_left] < arr[parent]):
 			# swap left child and parent
 			arr[child_left], arr[parent] = arr[parent], arr[child_left]
 			arr = heapify(arr, child_left, obj, audioObj, default_b)
-		time.sleep(obj.swapSD)
+			#time.sleep(obj.swapSD)
+			swap += 1
+		obj.stripState[child_left][1] = default_b
 	if (child_right < len(arr)):
-		time.sleep(obj.swapSD)
-		obj.highlight(child_right, child_right+1, default_b, stack=True, val=10)
+		obj.stripState[child_left][1] += 10
+		obj.stripState[child_right][1] += 10
+		#obj.highlight(child_right, child_right+1, default_b, stack=True, val=10)
 		audioObj.update(obj.stripState[child_right][0])
 		if (arr[child_right] < arr[parent]):
 	    	# swap right child and parent
 			arr[child_right], arr[parent] = arr[parent], arr[child_right]
 			arr = heapify(arr, child_right, obj, audioObj, default_b)
-			time.sleep(obj.swapSD)
+			#time.sleep(obj.swapSD)
+			swap += 1
+		obj.stripState[child_left][1] = default_b
+		obj.stripState[child_right][1] = default_b
+
+	time.sleep((2+swap)*obj.compareSD + swap*obj.swapSD)
 
 	return(arr)
 
