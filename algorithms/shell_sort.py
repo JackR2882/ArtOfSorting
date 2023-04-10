@@ -20,7 +20,10 @@
 # prevents items from having to be inserted to distant position
 
 
-# inspired by the following implemntation: https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
+
+# inspired by the following resource:
+#  - https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
+
 
 
 def sort(obj, audioObj):
@@ -38,15 +41,13 @@ def sort(obj, audioObj):
             obj.highlight(i, i+1, default_b) # highlight current item
             audioObj.update(arr[i][0])
 
-            temp = arr[i] # store current item
-
             n = i # value to look back by
 
             # insertion sort backwards from current item in steps of size = interval
             while n >= interval and obj.compareAndSwapPixel(n, n-interval):
                 obj.highlight(n, n+1, default_b)
                 obj.highlight(n-interval, n-interval+1, default_b, stack=True, val=5)
-
+                
                 audioObj.update(arr[n-interval][0])
 
                 n = n - interval
