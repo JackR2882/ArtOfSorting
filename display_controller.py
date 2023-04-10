@@ -43,9 +43,9 @@ class Display:
         self.cExplainLbl.place(relx=0.5, rely=0.6, anchor=tkinter.W)
 
         # initialize and display sliders for swap and comparison slowdowns
-        self.swapSlider = ctk.CTkSlider(self.root, from_=0, to=0.1, orientation='horizontal', variable=self.swapSD, width=385, number_of_steps=20)
+        self.swapSlider = ctk.CTkSlider(self.root, from_=0.001, to=0.1, orientation='horizontal', variable=self.swapSD, width=385, number_of_steps=20)
         self.swapSlider.place(relx=0.01, rely=0.5, anchor=tkinter.W)
-        self.compareSlider = ctk.CTkSlider(self.root, from_=0, to=0.1, orientation='horizontal', variable=self.compareSD, width=385, number_of_steps=20)
+        self.compareSlider = ctk.CTkSlider(self.root, from_=0.001, to=0.1, orientation='horizontal', variable=self.compareSD, width=385, number_of_steps=20)
         self.compareSlider.place(relx=0.01, rely=0.7, anchor=tkinter.W)
 
         self.shuffleMode = 0
