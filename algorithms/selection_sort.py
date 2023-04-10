@@ -16,12 +16,14 @@ def sort(obj, audioObj):
             audioObj.update(obj.stripState[n][0])
             
             obj.stripState[n][1] += 10
+
             obj.update()
 
-            min_index, _ = obj.comparePixel(min_index, n)
-            
-            obj.highlight(min_index, min_index+1, default_b)
+            min_index, old_min = obj.comparePixel(min_index, n)
 
+            obj.stripState[old_min][1] = default_b
+
+        obj.stripState[min_index][1] = default_b
         obj.swapPixel(i, min_index)
 
         obj.update()
