@@ -139,4 +139,6 @@ def sort(obj, audioObj):
             merge(obj, audioObj, 0, (run_size*left_sorted)-1, (run_size*left_sorted), (run_size*(right_sorted))-1)
             left_sorted = right_sorted
 
+        time.sleep(1)
+
     obj.highlight(0,0, default_b)
