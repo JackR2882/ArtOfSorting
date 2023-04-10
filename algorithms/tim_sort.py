@@ -46,6 +46,8 @@ def merge(obj, audioObj, start_l, end_l, start_r, end_r):
 
         offset += 1
         obj.update()
+        obj.update()
+        obj.update()
 
     while len(r_arr) > 0:
 
@@ -58,6 +60,8 @@ def merge(obj, audioObj, start_l, end_l, start_r, end_r):
 
         offset += 1
         obj.update()
+        obj.update()
+        obj.update()
 
     while len(l_arr) > 0:
 
@@ -69,6 +73,8 @@ def merge(obj, audioObj, start_l, end_l, start_r, end_r):
         time.sleep(obj.swapSD)
         
         offset += 1
+        obj.update()
+        obj.update()
         obj.update()
 
 
