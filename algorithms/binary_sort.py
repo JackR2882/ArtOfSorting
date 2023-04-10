@@ -6,11 +6,13 @@ import time
 
 def binary_search(val, obj, audioObj, start_i, end_i, default_b):
 
+    time.sleep(obj.compareSD)
+
     audioObj.update(val[0])
 
     # highlight current section of arr
     # can switch between stacking and non-stacking brightness change by enabling / unenabling the flag
-    obj.highlight(start_i, end_i, default_b, stack=True)
+    obj.highlight(start_i, end_i, default_b)
     obj.update()
     obj.update()
 
