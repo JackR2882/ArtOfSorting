@@ -55,7 +55,7 @@ def sort(obj, audioObj):
 
     default_b = obj.stripState[0][1]
 
-    for i in range(1, len(obj.stripState)-1):
+    for i in range(1, len(obj.stripState)):
 
         val = obj.stripState[i].copy()
         audioObj.update(val[0])
