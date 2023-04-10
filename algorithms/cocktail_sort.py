@@ -21,21 +21,12 @@ def sort(obj, audioObj):
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i-1].copy()
-                obj.stripState[i][1] += 10
-                obj.stripState[i-1][1] += 10
-                obj.update()
+                obj.highlight(i-1,i+1,default_b)
 
                 obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
 
                 if obj.compareAndSwapPixel(i,i-1):
                     unsorted = True
-
-                #if currVal < prevVal:
-                    #swap values
-                #    obj.stripState[i], obj.stripState[i-1] = prevVal, currVal
-                #    unsorted = True
-                #else:
-                #    obj.stripState[i], obj.stripState[i-1] = currVal, prevVal
             
             sorted_r += 1
             forward = not forward
@@ -47,21 +38,12 @@ def sort(obj, audioObj):
 
                 currVal = obj.stripState[i].copy()
                 prevVal = obj.stripState[i+1].copy()
-                obj.stripState[i][1] += 10
-                obj.stripState[i+1][1] += 10
-                obj.update()
+                obj.highlight(i,i+2,default_b)
 
                 obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
 
                 if obj.compareAndSwapPixel(i+1, i):
                     unsorted = True
-
-                #if currVal > prevVal:
-                    #swap values
-                #    obj.stripState[i], obj.stripState[i+1] = prevVal, currVal
-                #    unsorted = True
-                #else:
-                #    obj.stripState[i], obj.stripState[i+1] = currVal, prevVal
             
             sorted_l += 1
             forward = not forward
