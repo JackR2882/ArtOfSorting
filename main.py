@@ -35,7 +35,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 6
+        self.currAlg = 12
 
         #audio-output object
         self.AUDIO = None
@@ -74,10 +74,11 @@ class Main:
                 self.currAlg = 0
                 # reinitialize strip in case of memory errors
                 generate_spectrum.initialize(self.LED,self.stripSize,self.defaultBrightness)
+                self.LED.shake()
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
-            self.AUDIO.amplitude = 0.03
+            self.AUDIO.amplitude = 0.01
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
