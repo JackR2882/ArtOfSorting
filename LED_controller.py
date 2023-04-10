@@ -46,11 +46,12 @@ class LED:
     # compares and swaps pixels at locations ID_1 and ID_2
     # returns true if swap occured, and false if no swap
     def compareAndSwapPixel(self,ID_1,ID_2):
-        time.sleep(self.compareSD + self.swapSD)
         if self.stripState[ID_1] < self.stripState[ID_2]:
+            time.sleep(self.compareSD + self.swapSD)
             self.stripState[ID_1], self.stripState[ID_2] = self.stripState[ID_2], self.stripState[ID_1]
             return(True) # flag to signify that swap occured
         else:
+            time.sleep(self.compareSD)
             return(False) # flag to signify that no swap occured
 
     # compares pixels at locations ID_1 and ID_2
