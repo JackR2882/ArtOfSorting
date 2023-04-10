@@ -27,8 +27,8 @@ class Display:
 
         # initalize relevant variables + outputs
         self.currAlg = "placeholder"
-        self.currAlgLbl = ctk.CTkLabel(self.root, text="Current algorithm: " + self.currAlg, font=("Times", 60), wraplength=790)
-        self.currAlgLbl.place(relx=0.01, rely=0.1, anchor=tkinter.W)
+        self.currAlgLbl = ctk.CTkLabel(self.root, text="Current algorithm: " + self.currAlg, font=("Times", 60), wraplength=790, justify="left")
+        self.currAlgLbl.place(relx=0.01, rely=0.05, anchor=tkinter.NW)
 
         self.swapSD = tkinter.DoubleVar(0.0)
         self.compareSD = tkinter.DoubleVar(0.0)
@@ -77,8 +77,8 @@ class Display:
         self.almostSortedButton.place(relx=0.99, rely=0.8, anchor=tkinter.E)
 
         self.nextAlg = "placeholder"
-        self.nextAlgLbl = ctk.CTkLabel(self.root, text="Next algorithm: " + str(self.nextAlg), justify='left', font=("Times", 39))
-        self.nextAlgLbl.place(relx=0.05, rely=0.93, anchor=tkinter.W)
+        self.nextAlgLbl = ctk.CTkLabel(self.root, text="Next algorithm: " + str(self.nextAlg), font=("Times", 39))
+        self.nextAlgLbl.place(relx=0.01, rely=0.93, anchor=tkinter.W)
 
 
 
