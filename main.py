@@ -2,7 +2,7 @@
 #interrupt() -> moves the pointer for the next algorithm in priorityQueue, allowing user to select next algorithm to run
 
 import time
-from init import generate_spectrum
+import generate_spectrum
 import LED_controller
 
 # import algorithms:
@@ -35,7 +35,7 @@ class Main:
         self.LED = LED_controller.LED(self.stripSize)
 
         #counter for current algorithm being executed
-        self.currAlg = 5
+        self.currAlg = 0
 
         #audio-output object
         self.AUDIO = None
@@ -162,6 +162,12 @@ class Main:
             self.LED.clear()
 
             self.currAlg += 1
+
+            # FOR TESTING PURPOSES ONLY:
+            for x in range(1, len(self.LED.stripState)):
+                if self.LED.stripState[x] < self.LED.stripState[x-1]:
+                    print("error with: " + self.priorityQueue[self.currAlg-1] + ", at index: " + str(x))
+                    print(self.LED.stripState)
 
         self.LED.clear()
 
