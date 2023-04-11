@@ -29,6 +29,7 @@ porcupine = pvporcupine.create(access_key = access_key, keyword_paths=["/home/pi
                                                                        "/home/pi/ArtOfSorting/hotword_detection/cocktail_sort/cocktail-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/tim_sort/tim-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/binary_sort/binary-sort_en_raspberry-pi_v2_1_0.ppn",
+                                                                       "/home/pi/ArtOfSorting/hotword_detection/shell_sort/shell-sort_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/slow_mode/slow-mode_en_raspberry-pi_v2_1_0.ppn",
                                                                        "/home/pi/ArtOfSorting/hotword_detection/fast_mode/fast-mode_en_raspberry-pi_v2_1_0.ppn"
                                                                        ])
@@ -80,7 +81,7 @@ def listen():
             # if hotword detected, then which hotword is detected?
             hotwords = ["bubble", "insertion", "merge", "selection",
                         "heap", "quick", "counting", "bucket", "radix",
-                        "cocktail shaker", "tim", "binary", "slow", "fast"]
+                        "cocktail shaker", "tim", "binary", "shell", "slow", "fast"]
             
             output = [hotwords[hotword], vol]
             
