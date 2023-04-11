@@ -37,8 +37,6 @@ porcupine = pvporcupine.create(access_key = access_key, keyword_paths=["/home/pi
 
 def listen():
 
-    print("LISTENING "*3)
-
     # open audio stream
     stream = listener.open(
         rate=porcupine.sample_rate,
@@ -48,15 +46,14 @@ def listen():
         frames_per_buffer=porcupine.frame_length)
 
     while True:
+
         wave = stream.read(porcupine.frame_length, exception_on_overflow=False)
-        #wave = stream.read(2048)
 
         # convert to more managable form (byte to decimal)
         wave = struct.unpack_from("h" * porcupine.frame_length, wave)
 
         # generate value corresponding to what noise is detected (hotword or not, and if hotword then which hotword)
         hotword = porcupine.process(wave)
-
 
         # if hotword is detected
         if hotword != -1:
@@ -68,10 +65,34 @@ def listen():
                         "fast"]
             
             output = hotwords[hotword]
-            
             stream.close()
             return(output)
 
+    
+        
+def clear(): # clears stream to prevent end of previous hotword from being detected
+
+    # open audio stream
+    stream = listener.open(
+        rate=porcupine.sample_rate,
+        channels=1,
+        format=pyaudio.paInt16,
+        input=True,
+        frames_per_buffer=porcupine.frame_length)
+    
+    for _ in range(0, 10):
+
+        wave = stream.read(porcupine.frame_length, exception_on_overflow=False)
+        #wave = stream.read(2048)
+
+        # convert to more managable form (byte to decimal)
+        wave = struct.unpack_from("h" * porcupine.frame_length, wave)
+
+        # generate value corresponding to what noise is detected (hotword or not, and if hotword then which hotword)
+        hotword = porcupine.process(wave)
+
+    
+    stream.close()
 
 
 
