@@ -171,10 +171,7 @@ class Main:
 
         self.LED.clear()
 
-    def interrupt(self, interrupt_val):
-        name = interrupt_val[0] # interrupt val contains, both the name of interupt alg, and the volume it was spoken at
-        vol = interrupt_val[1]
-        # need to do something with volume (use it to change the size of the array)
+    def interrupt(self, name):
 
         try:
             #queue the spoken algorithm next
@@ -182,9 +179,7 @@ class Main:
             ret_str = name + " sort"
             print("queuing: " + ret_str)
             self.DISPLAY.send(self.DISPLAY, nextAlg=ret_str)
-
-        except Exception as e:
-            #print(e)
+        except:
             # could be slow or fast mode
             if name == "fast":
                 print("entering fast mode!")
