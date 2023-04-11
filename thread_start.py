@@ -48,8 +48,9 @@ def process_listen(sender):
 
 # recives hotword message from pipe and interrupts main with that message
 def thread_interupt(reciever):
-    interupt = reciever.recv() # recieve from process_listen
-    main.interrupt(interupt)
+    while True:
+        interupt = reciever.recv() # recieve from process_listen
+        main.interrupt(interupt)
 
 # recieves updated slowdown values, and shuffle mode through pipe and updates LED obj with these values
 # also runs main
