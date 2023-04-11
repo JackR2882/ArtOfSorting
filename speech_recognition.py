@@ -64,7 +64,8 @@ def listen():
             # if hotword detected, then which hotword is detected?
             hotwords = ["bubble", "insertion", "merge", "selection",
                         "heap", "quick", "counting", "bucket", "radix",
-                        "cocktail shaker", "tim", "binary", "shell", "slow", "fast"]
+                        "cocktail shaker", "tim", "binary", "shell", "slow",
+                        "fast"]
             
             output = hotwords[hotword]
             
