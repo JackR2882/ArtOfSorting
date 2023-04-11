@@ -45,6 +45,7 @@ def process_listen(sender):
     while True: # need to listen in a loop
         interupt = speech_recognition.listen()
         sender.send(interupt) # send through pipe to thread interupt
+        speech_recognition.clear() # to prevent trailing end of word being detected
 
 # recives hotword message from pipe and interrupts main with that message
 def thread_interupt(reciever):
