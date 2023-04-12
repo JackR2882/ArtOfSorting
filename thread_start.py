@@ -56,14 +56,14 @@ def thread_interupt(reciever):
 # recieves updated slowdown values, and shuffle mode through pipe and updates LED obj with these values
 # also runs main
 def thread_main(displayUpdateObj):
-    def recv():
+    def rcv():
         while True:
             ret = displayUpdateObj.recieve(displayUpdateObj)
             main.LED.swapSD = ret[0]
             main.LED.compareSD = ret[1]
             main.LED.shuffleMode = ret[2]
     
-    t1 = threading.Thread(target = recv)
+    t1 = threading.Thread(target = rcv)
     t1.start()
 
     main.run(audioObj, displayUpdateObj)
