@@ -8,7 +8,7 @@ class AudioOut:
         self.duration = 0.0005 # 0.001
         self.sineFreq = 500 # controls pitch
         self.amplitude = 0 # acts as vol
-        self.start_idx = 0
+        self.startI = 0
 
     def update(self, val):
         self.sineFreq = 500 + (2000*(val/144))
@@ -16,11 +16,10 @@ class AudioOut:
     def audio_out(self):
 
         def callback(outdata, frames, time, status):
-            #global start_idx
-            t = (self.start_idx + np.arange(frames)) / self.sampleRate
+            t = (self.startI + np.arange(frames)) / self.sampleRate
             t = t.reshape(-1, 1)
             outdata[:] = self.amplitude * np.sin(2 * np.pi * self.sineFreq * t)
-            self.start_idx += frames
+            self.startI += frames
 
         try:
             with sd.OutputStream(device=2, channels=1, callback=callback):
