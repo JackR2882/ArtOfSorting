@@ -78,7 +78,7 @@ class Main:
 
             # set volume of audio out
             #self.AUDIO.amplitude = 0.5
-            self.AUDIO.amplitude = 0.01
+            self.AUDIO.amplitude = 0.1
 
             # execute relevant algorithm:
             if self.priorityQueue[self.currAlg] == "bubble":
