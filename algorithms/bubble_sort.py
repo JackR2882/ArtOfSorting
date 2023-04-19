@@ -13,12 +13,7 @@ def sort(obj, audioObj):
         for i in range(1, (len(obj.stripState)-sorted)):
 
             audioObj.update(obj.stripState[i][0])
-
-            currVal = obj.stripState[i].copy()
-            prevVal = obj.stripState[i-1].copy()
             obj.highlight(i-1,i+1, default_b)
- 
-            obj.stripState[i], obj.stripState[i-1] = currVal, prevVal # reset brightness
 
             if obj.compareAndSwapPixel(i,i-1):
                 unsorted = True
