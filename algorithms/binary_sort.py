@@ -69,9 +69,9 @@ def sort(obj, audioObj):
         obj.highlight(0,0,default_b)
 
         time.sleep(swapSD*(sorted-index))
-
-        # insert at index (need to shift rest of arr)
-        obj.stripState[index:(sorted+1)] = [val] + obj.stripState[index:sorted]
-        obj.update()
+        
+        for x in range(i,index,-1):
+            obj.swapPixel(x,x-1)
+            obj.update()
 
         sorted += 1
