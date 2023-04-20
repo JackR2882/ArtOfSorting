@@ -37,7 +37,7 @@ def process_display(sendPipe, recievePipe):
     t2 = threading.Thread(target=send)
     t2.start()
 
-    # start display refreshing loop
+    # start display refresh loop
     displayObj.refresh()
 
 # process to listen to audio from microphone and send message through pipe to thread_interrupt when hotword detected
