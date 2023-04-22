@@ -87,37 +87,5 @@ def clear(): # clears stream to prevent end of previous hotword from being detec
 
         # convert to more managable form (byte to decimal)
         wave = struct.unpack_from("h" * porcupine.frame_length, wave)
-
-        # generate value corresponding to what noise is detected (hotword or not, and if hotword then which hotword)
-        hotword = porcupine.process(wave)
-
     
     stream.close()
-
-
-
-
-# FIXED BY CHANGING FILE: nano ~/.asoundrc
-# using this guide: https://matthewdaws.github.io/blog/2019-12-07-pi-audio.html
-
-#  GNU nano 5.4                                                           /home/pi/.asoundrc                                                                    
-#pcm.!default {
-#type asym
-#playback.pcm {
-#    type plug
-#    slave.pcm "hw:0,0"
-#}
-#capture.pcm {
-#    type plug
-#    slave.pcm "hw:1,0"
-#}
-#}
-
-
-#make unmutable:
-#https://www.tecmint.com/make-file-directory-undeletable-immutable-in-linux/#:~:text=To%20make%20a%20file%20mutable,the%20above%20attribute%2C%20as%20follows.&text=You%20will%20find%20these%20related,Enabling%20sudo%20Access%20on%20Users
-#sudo chattr +i ~/.asoundrc
-
-
-#make mutable:
-#sudo chattr -i ~/.asoundrc
