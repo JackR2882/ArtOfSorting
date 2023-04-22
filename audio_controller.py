@@ -1,5 +1,12 @@
+# Class to manage audio output:
+# has a 'setter' method (update(val)) to update the frequency value based on an input
+# and a playback loop (audio_out())
+
+
+
 import numpy as np
 import sounddevice as sd
+
 
 
 class AudioOut:
