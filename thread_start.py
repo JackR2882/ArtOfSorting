@@ -1,6 +1,14 @@
 #thread_listen() -> listens for commands from user
 #thread_main() -> runs the main thread (responsible for queueing and running sorting algorithms)
- 
+
+# wait for new usb connection before continuing, prevents seg fault if speaker is connected after boot
+import pyudev # sourced from: https://pyudev.readthedocs.io/en/v0.14/api/monitor.html
+context = pyudev.Context()
+monitor = pyudev.Monitor.from_netlink(context)
+monitor.filter_by(subsystem='input')
+for _, _ in monitor:
+    break
+
 import main
 import threading
 import multiprocessing
@@ -9,6 +17,7 @@ import audio_controller
 import display_controller
 import display_updater
 import time
+
 
 #setup main object, runs the sorting algorithms
 main = main.Main()
