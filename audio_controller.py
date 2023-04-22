@@ -2,12 +2,11 @@
 # has a 'setter' method (update(val)) to update the frequency value based on an input
 # and a playback loop (audio_out())
 
-
+# inspired by the following resource:
+#  - https://python-sounddevice.readthedocs.io/en/0.4.6/examples.html#play-a-sine-signal
 
 import numpy as np
 import sounddevice as sd
-
-
 
 class AudioOut:
     def __init__(self):
