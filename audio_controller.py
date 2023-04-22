@@ -21,8 +21,17 @@ class AudioOut:
             outdata[:] = self.amplitude * np.sin(2 * np.pi * self.sineFreq * t)
             self.startI += frames
 
+        # try with device 2 (speaker connected during boot)
         try:
             with sd.OutputStream(device=2, channels=1, callback=callback):
+                print("running")
+                input()
+        except Exception as e:
+            print(e)
+
+        # otherwise try with device 3 (speaker disconected during boot)
+        try:
+            with sd.OutputStream(device=3, channels=1, callback=callback):
                 print("running")
                 input()
         except Exception as e:
