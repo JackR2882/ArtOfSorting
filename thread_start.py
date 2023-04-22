@@ -1,5 +1,4 @@
-#thread_listen() -> listens for commands from user
-#thread_main() -> runs the main thread (responsible for queueing and running sorting algorithms)
+# entry point for system, spawns all threads / processes used by system
 
 # wait for new usb connection before continuing, prevents seg fault if speaker is connected after boot
 import pyudev # sourced from: https://pyudev.readthedocs.io/en/v0.14/api/monitor.html

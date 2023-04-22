@@ -1,3 +1,5 @@
+# Main class manages algorithm queue and interfaces with other components of the system
+
 #run() -> loops through all algorithms in priorityQueue, and repeats this until interrupted
 #interrupt() -> moves the pointer for the next algorithm in priorityQueue, allowing user to select next algorithm to run
 
