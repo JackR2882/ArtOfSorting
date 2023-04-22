@@ -82,6 +82,7 @@ class Display:
 
 
 
+    # update labels for current and next algorithms
     def change(self, update):
         if update[0]:
             self.currAlg = update[0]
@@ -90,6 +91,7 @@ class Display:
 
 
 
+    # refresh loop to update display and slider values
     def refresh(self):
         while True:
             # update label text values
