@@ -28,6 +28,6 @@ def initializeHalfSpectrum(obj,stripSize,defaultBrightness):
     while i < stripSize:
         rand = random.random()
 
-        # could round rand first to get a slightly more uniform dist? -> maybe 2d.p (gives higher chance of repeats)
+        # could round rand first? -> maybe 2d.p (gives higher chance of repeats)
         obj.setPixel(i,int(rand*100),defaultBrightness,255,255*rand,0)
         i+=1

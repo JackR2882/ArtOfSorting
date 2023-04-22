@@ -1,4 +1,10 @@
+# LED class manages strip state any output to the strip
+
 #setPixel() -> sets a specific pixel value on the strip
+#swapPixel() -> swap two pixel values
+#compareAndSwapPixel() -> orders two pixels into ascending order
+#comparePixel() -> returns pixel addresses in ascending order
+#highlight() -> highlights a section of the strip (between two input values)
 #update() -> updates entire strip with new values
 #clear() -> flushes the strip with empty pixel values
 #shake() -> shuffles array randomly
