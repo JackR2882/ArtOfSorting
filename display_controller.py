@@ -1,4 +1,4 @@
-# controller to handle viusal output to display
+# Class to maanage viusal output on display
 # SCREEN DIMENSIONS: 800x480
 
 import tkinter
