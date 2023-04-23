@@ -3,7 +3,7 @@
 
 
 
-class Display_Updater():
+class DisplayUpdater():
 
     def __init__(self):
         self.recievePipe = None

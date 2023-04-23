@@ -88,7 +88,7 @@ if __name__ == "__main__":
     pipe3, pipe4 = multiprocessing.Pipe()
 
     # define display update object
-    displayUpdateObj = display_updater.Display_Updater
+    displayUpdateObj = display_updater.DisplayUpdater
     displayUpdateObj.recievePipe = pipe1
     displayUpdateObj.sendPipe = pipe3
 
