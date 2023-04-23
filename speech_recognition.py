@@ -87,5 +87,7 @@ def clear(): # clears stream to prevent end of previous hotword from being detec
 
         # convert to more managable form (byte to decimal)
         wave = struct.unpack_from("h" * porcupine.frame_length, wave)
+
+        porcupine.process(wave)
     
     stream.close()
