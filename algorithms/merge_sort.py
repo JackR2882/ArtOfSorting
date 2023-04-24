@@ -27,7 +27,7 @@ def sort(obj, audioObj):
         left = arr[:mid]
         right = arr[mid:]
 
-        time.sleep(obj.recursionSD + obj.compareSD)
+        time.sleep(obj.compareSD)
 
         # more than two elements in array so need to recurse on each sub array
         if len(arr)>2:
