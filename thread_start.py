@@ -28,22 +28,22 @@ def process_display(sendPipe, recievePipe):
     displayObj = display_controller.Display()
 
     # recieve updated labels from display updater
-    def rcvThread():
+    def thread_rcv():
         while True:
             update = recievePipe.recv()
             #print("receiving: " + update[0] + " & " + update[1])
             displayObj.change(update)
 
     # send updated slowdowns to display updater - doesn't need to be that responsive so can do once every second
-    def sendThread():
+    def thread_send():
         while True:
             time.sleep(1)
             sendPipe.send((displayObj.swapSD, displayObj.compareSD, displayObj.shuffleMode))
     
-    t1 = threading.Thread(target=rcvThread)
-    t1.start()
-    t2 = threading.Thread(target=sendThread)
-    t2.start()
+    rcvThread = threading.Thread(target=thread_rcv)
+    rcvThread.start()
+    sendThread = threading.Thread(target=thread_send)
+    sendThread.start()
 
     # start display refresh loop
     displayObj.refresh()
@@ -64,15 +64,15 @@ def thread_interupt(reciever):
 # recieves updated slowdown values, and shuffle mode through pipe and updates LED obj with these values
 # also runs main
 def thread_main(displayUpdateObj):
-    def rcv():
+    def thread_rcv():
         while True:
             ret = displayUpdateObj.recieve(displayUpdateObj)
             main.LED.swapSD = ret[0]
             main.LED.compareSD = ret[1]
             main.LED.shuffleMode = ret[2]
     
-    recieveThread = threading.Thread(target = rcv)
-    recieveThread.start()
+    rcvThread = threading.Thread(target = thread_rcv)
+    rcvThread.start()
 
     main.run(audioObj, displayUpdateObj)
 
