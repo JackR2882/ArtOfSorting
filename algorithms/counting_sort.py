@@ -18,7 +18,7 @@ def sort(obj, audioObj):
             obj.highlight(i, i+1, default_b)
             max_i = i
         audioObj.update(arr[i][0])
-        time.sleep(obj.compareSD)
+        time.sleep(obj.compareSD+obj.swapSD)
         
 
 
@@ -49,8 +49,6 @@ def sort(obj, audioObj):
         
         time.sleep(obj.swapSD) # technically updating array, so count as swap
 
-    raw_count = new_arr.copy()
-
 
 
     # work out and display cumulative frequencies
@@ -69,6 +67,7 @@ def sort(obj, audioObj):
             obj.stripState[i] = [i,int(255 - (12*ratio)),int(255*ratio),int(255*ratio),int(255*ratio)]
         except:
             obj.stripState[i] = [i,0,255,255,255]
+
         obj.update()
         obj.update()
         obj.update()
@@ -96,6 +95,8 @@ def sort(obj, audioObj):
         obj.update()
         obj.update()
         obj.update()
+
+        time.sleep(obj.swapSD)
 
 
 
