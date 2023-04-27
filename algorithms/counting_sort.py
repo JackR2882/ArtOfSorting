@@ -18,7 +18,7 @@ def sort(obj, audioObj):
             obj.highlight(i, i+1, default_b)
             max_i = i
         audioObj.update(arr[i][0])
-        time.sleep(obj.compareSD+obj.swapSD)
+        time.sleep(obj.compareSD)
         
 
 
