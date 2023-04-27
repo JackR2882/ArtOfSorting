@@ -1,7 +1,7 @@
 # inspired by the following resource:
 #  - https://www.javatpoint.com/counting-sort
 
-# basic implementation of insertion sort:
+# basic implementation of counting sort:
 
 import time
 
