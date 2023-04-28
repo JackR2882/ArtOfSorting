@@ -32,9 +32,9 @@ def sort(obj, audioObj, rand=True):
             # shift indexes into the right position:
             for i in range(start_index, end_index+1):
                 
+                time.sleep(obj.compareSD)
                 if arr_in[i] < pivot_val:
                     audioObj.update(arr_in[i][0])
-                    time.sleep(obj.compareSD)
                     # insert into left partition
                     obj.swapPixel(i, l_part)
                     l_part += 1
