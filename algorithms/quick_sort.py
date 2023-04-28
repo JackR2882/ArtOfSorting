@@ -13,8 +13,6 @@ def sort(obj, audioObj, rand=True):
 
     def quicksort(arr_in, start_index, end_index):
 
-        time.sleep(obj.recursionSD)
-
         obj.stripState = obj.highlight(start_index, end_index, default_b)
 
         if len(arr_in) > 1:
