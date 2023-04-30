@@ -21,7 +21,7 @@ def sort(obj, audioObj, off):
 
     # clear array, before frequency count is to be displayed
     obj.clear()
-    obj.stripState = [[0,224,0,0,0]]*144
+    obj.stripState = [[0,224,0,0,0]]*len(arr)
     
     
 
@@ -89,6 +89,8 @@ def sort(obj, audioObj, off):
         obj.update()
         obj.update()
         obj.update()
+
+        time.sleep(obj.swapSD)
 
 
 

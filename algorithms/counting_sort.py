@@ -12,13 +12,13 @@ def sort(obj, audioObj):
     arr = obj.stripState
 
     # find max item in array:
-    max_i = 0
-    for i in range(1, len(arr)):
-        if arr[max_i] < arr[i]:
-            obj.highlight(i, i+1, default_b)
-            max_i = i
-        audioObj.update(arr[i][0])
-        time.sleep(obj.compareSD)
+    #max_i = 0
+    #for i in range(1, len(arr)):
+    #    if arr[max_i] < arr[i]:
+    #        obj.highlight(i, i+1, default_b)
+    #        max_i = i
+    #    audioObj.update(arr[i][0])
+    #    time.sleep(obj.compareSD)
         
 
 
