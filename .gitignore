@@ -130,14 +130,8 @@ dmypy.json
 
 
 #misc files
-test1.py
-development/
-notes.txt
-clear_strip.py
-algorithms/selection_sort_backup.py
-heap_sort_backup.py
-slowdowneval.py
 test/*
+unused/*
 
 #env variables
 .env
