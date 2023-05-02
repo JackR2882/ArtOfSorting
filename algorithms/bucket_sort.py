@@ -1,5 +1,8 @@
 # basic implementation of bucket sort
 
+# inspired by the following resource:
+#   - https://www.simplilearn.com/tutorials/data-structure-tutorial/bucket-sort-algorithm
+
 import math
 import time
 

@@ -1,4 +1,4 @@
-# basic implementation of insertion sort:
+# basic implementation of selection sort:
 
 def sort(obj, audioObj):
 

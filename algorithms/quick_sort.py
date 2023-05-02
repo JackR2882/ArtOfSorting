@@ -1,5 +1,5 @@
 # basic implmentation of quick sort
-# uses a randomized pivot
+# uses a randomized pivot, or the leftmost item as a pivot
 
 import random
 import time

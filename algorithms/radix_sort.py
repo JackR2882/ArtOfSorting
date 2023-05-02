@@ -1,5 +1,8 @@
 # basic implmentation of radix sort:
 
+# inspired by the following resource:
+#   - https://www.programiz.com/dsa/radix-sort
+
 import math
 from algorithms import counting_sort_modified as counting_sort
 

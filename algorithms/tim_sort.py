@@ -4,6 +4,9 @@
 # then use insertion sort on those runs
 # then merge runs using the merge from merge sort
 
+# inspired by the following resource:
+#   - https://www.geeksforgeeks.org/timsort/
+
 from algorithms import insertion_sort_modified as insertion_sort
 import math
 import time

@@ -1,7 +1,5 @@
 # basic implementation of shell sort:
 
-
-
 # variation on insertion sort / bubble sort
 # define i as interval pair off with distance as interval, e.g...
 
@@ -20,10 +18,8 @@
 # prevents items from having to be inserted to distant position
 
 
-
 # inspired by the following resource:
 #  - https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
-
 
 
 def sort(obj, audioObj):

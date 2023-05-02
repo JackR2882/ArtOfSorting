@@ -1,5 +1,4 @@
 # basic implementation of cocktail shaker sort:
-# probably cleaner ways to do this, but can fix later
 
 def sort(obj, audioObj):
 
