@@ -49,8 +49,6 @@ def binary_search(val, obj, audioObj, start_i, end_i, default_b):
 
 def sort(obj, audioObj):
 
-    swapSD = obj.swapSD
-
     sorted = 1
 
     default_b = obj.stripState[0][1]
@@ -67,8 +65,6 @@ def sort(obj, audioObj):
         index = binary_search(val, obj, audioObj, 0, sorted, default_b) # perform binary search to find where to insert item
 
         obj.highlight(0,0,default_b)
-
-        time.sleep(swapSD*(sorted-index))
         
         for x in range(i,index,-1):
             obj.swapPixel(x,x-1)

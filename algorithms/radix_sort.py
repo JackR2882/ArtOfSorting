@@ -5,6 +5,7 @@
 
 import math
 from algorithms import counting_sort_modified as counting_sort
+import time
 
 # use counting sort to sort array based on current digit
 
@@ -20,6 +21,9 @@ def sort(obj, audioObj):
 
     max_i = 0
     for i in range(0, len(arr)):
+
+        time.sleep(obj.comparisonSD)
+
         if arr[max_i] < arr[i]:
             max_i = i
     

@@ -102,6 +102,8 @@ def sort(obj, audioObj):
         insertion_sort.sort(obj, audioObj, (i*run_size), ((i+1)*run_size)-1)
         i += 1
 
+
+    # last sort, may be shorter than the rest
     obj.highlight((i*run_size), ((i+1)*run_size)-1, default_b)
     insertion_sort.sort(obj, audioObj, (i*run_size), len(arr)-1)
 

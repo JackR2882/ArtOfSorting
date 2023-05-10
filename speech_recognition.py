@@ -52,7 +52,7 @@ def listen():
         # convert to more managable form (byte to decimal)
         wave = struct.unpack_from("h" * porcupine.frame_length, wave)
 
-        # generate value corresponding to what noise is detected (hotword or not, and if hotword then which hotword)
+        # generate value corresponding to what signal is detected (hotword or not, and if hotword then which hotword)
         hotword = porcupine.process(wave)
 
         # if hotword is detected

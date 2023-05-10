@@ -34,28 +34,35 @@ def sort(obj, audioObj):
 
         audioObj.update(arr[i][0])
 
+        comparisons = 0
+
         if arr[i][0] < bucket_range*1:
             # insert into bucket_1
             bucket_1.append(arr[i])
             bucket_1[-1][1] += 10
+            comparisons += 1
         elif arr[i][0] < bucket_range*2:
             # insert into bucket 2
             bucket_2.append(arr[i])
             bucket_2[-1][1] += 2
+            comparisons += 1
         elif arr[i][0] < bucket_range*3:
             # insert into bucket 3
             bucket_3.append(arr[i])
             bucket_3[-1][1] += 10
+            comparisons += 1
         elif arr[i][0] < bucket_range*4:
             # insert into bucket 4
             bucket_4.append(arr[i])
             bucket_4[-1][1] += 2
+            comparisons += 1
         else:
             # insert into bucket 5
             bucket_5.append(arr[i])
             bucket_5[-1][1] += 10
+            comparisons += 1
         
-        time.sleep(obj.compareSD + obj.swapSD) # appending so modifying arr
+        time.sleep(obj.compareSD*comparisons + obj.swapSD) # appending so modifying arr
 
         obj.stripState[0:i], obj.stripState[i+1:]= bucket_1 + bucket_2 + bucket_3 + bucket_4 + bucket_5, arr[i+1:]
         
