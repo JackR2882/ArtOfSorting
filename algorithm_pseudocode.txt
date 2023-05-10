@@ -1,0 +1,672 @@
+Pseudocode for each of the algorithms included with the system have been provided:
+
+Note that in these examples, calls to LED class methods such as swapPixel(), comparePixel(), compareAndSwapPixel() and highlight() have been reduced to their basic functionality for ease of understanding.
+
+For example highlight() would be represented by two lines:
+	
+-	highlight pixels on LED strip between x and y
+-	update LED strip
+
+Rather than a single line:
+
+-	highlight(x,y)
+
+Since more than one process happens in a call to highlight.
+
+Additionally, some processes have been simplified somewhat with pseudocode. 
+
+
+
+# quick sort
+
+procedure sort(ledObj, audioObj, rand):
+	
+	procedure quicksort(startIndex, endIndex)
+
+		highlight pixels on the LED strip between (including) startIndex and endIndex
+
+		update LED strip
+`
+		if difference between startIndex and endIndex > 1 then
+
+			if rand then
+				pivot <- random integer between startIndex and endIndex
+			else
+				pivot <- endIndex
+
+		
+			lPart <- startIndex
+
+			for index in range startIndex to endIndex do
+
+				send value of pixel at current index to speaker	
+
+				sleep comparison slowdown		
+
+				if value of pixel at current index < value of pixel at pivot then
+					swap pixels at current index and pivot
+					sleep swap slowdown
+					increment lPart
+
+				update LED strip
+		
+			do while value at pivot index < value at pivot-1 index and pivot does not = startIndex
+
+				send value at pivot-1 index to speaker
+				swap pixels at pivot index and pivot-1 index
+				decrement pivot
+
+				update LED strip
+
+			if pivot does not = startIndex then
+				strip state <- quicksort(startIndex, pivot-1)
+			if pivot does not = endIndex then
+				strip state <- quicksort(pivot+1, endIndex)
+
+
+			return strip state
+
+		else
+			
+			return strip state
+
+
+	quicksort(0, length of strip)
+
+		
+
+
+# selection sort
+
+procedure sort(ledObj, audioObj):
+
+	for i in range 0 to length of strip do
+	
+		send value at index i to speaker
+
+		minIndex <- 0
+
+		for n in range i+1 to length of strip do
+		
+			send value at index n to speaker
+
+			higlight pixel at index n
+
+			update LED strip 
+
+			minIndex <- minimum of values at minIndex and n indexes
+			oldMin <- maximum of values at minIndex and n indexes
+
+			clear highlighing from oldMin pixel
+
+		clear highlighing from minIndex pixel
+
+		swap pixels at index i and minIndex
+
+		update LED strip
+
+
+
+# counting sort
+
+procedure sort(ledObj, audioObj, offset=1):
+
+	arr <- current strip state
+
+	initialize newArr as empty array
+
+	clear LED strip
+
+	replace strip state with empty values
+
+	for index in range 0 to length of LED strip do
+
+		send arr value at index to speaker
+
+		i <- arr value at index
+
+		increment newArr at index i		
+
+		update strip state at index i with pixel intensity based on incremented value of newArr
+
+		update LED strip
+
+		sleep swap slowdown
+
+	accumulator <- 0
+
+	for index in range 0 to length of LED strip do
+		
+		send arr value at current index to speaker
+
+		accumulator <- acumulator + value of newArr at current index	
+
+		update strip state at current index with pixel intensity based on current value of accumulator
+
+		update LED strip
+
+		sleep swap slowdown
+
+	replace strip state with copy of arr
+
+	for index in range 0 to length of LED strip do
+		
+		send arr value at current index to speaker
+
+		value <- arr value at current index
+
+		decrement newArr at value index
+
+		update strip state at index equal to value from previous step with value from arr at current index
+
+		update LED strip
+
+		sleep swap slowdown
+
+
+
+# radix sort
+
+procecure sort(ledObj, audioObj):
+
+	arr <- current strip state
+
+	max_i <- 0
+
+	for i in range to o length of LED strip do
+	
+		sleep comparison slowdown
+
+		if pixel at max_i < pixel at i then
+
+			max_i = i	
+
+		max_val <- pixel at max_i
+
+		size = log10(max_val)+1
+		offset = 10^(size-1)
+
+		while offset >= 1
+
+			call counting_sort(ledObj, audioObj, offset)
+
+			offset = offset/10
+
+
+
+# bubble sort
+
+procedure sort(ledObj, audioObj):
+
+	unsorted <- True
+	sorted <- 0
+
+	while unsorted do:
+
+		unsorted <- False
+
+		for index in range 1 to (length of LED strip - sorted) do
+		
+			send strip value at current index to speaker
+
+			highlight pixels on the led strip at index and index-1
+
+			update LED strip
+
+			sleep comparison slowdown
+
+			if pixel at index < pixel at index - 1 then
+			
+				sleep swap slowdown
+
+				swap pixels at index and index - 1
+		
+				unsorted <- True
+			 
+		increment sorted
+
+
+
+# insertion sort
+
+procedure sort(ledObj, audioObj):
+
+	sorted <- 1
+
+	for i in range 0 to length of LED strip do
+		
+		send strip value at i to speaker
+
+			for n in range sorted to 0 do
+
+				send strip value at n to speaker
+
+				highlight pixels on led strip at n and n+1
+
+				update LED strip
+
+				sleep comparison slowdown
+
+				if pixel at n+1 < pixel at n then
+
+					sleep swap slowdown
+
+					swap pixels at n and n + 1
+
+				else
+				
+					break
+
+				update LED strip
+
+
+
+# cocktail shaker sort
+
+procedure sort(ledObj, audioObj):
+
+	unsorted <- True
+		
+	forward <- True
+
+	left_sorted <- 0
+	right_sorted <- 0
+
+	while unsorted do:
+		
+		unsorted <- False
+
+		if forward then
+			
+			for i in range (left_sorted + 1) to (length of LED strip - right_sorted) do
+				
+				send strip value at i to speaker
+
+				highlight pixels on led strip at i-1 and i
+		
+				update led strip
+
+				sleep comparison slowdown
+
+				if pixel at i < pixel at i-1 then
+		
+					sleep swap slowdown
+
+					swap pixels at i and i-1
+				
+					unsorted <- True
+
+			increment right_sorted
+
+			forward <- not forward
+
+		else
+
+			for i in range (length of LED strip - right_sorted) to  left_sorted do
+			
+				send strip value at i to speaker
+
+				highlight pixels at i and i+1
+
+				update led strip
+
+				sleep comparison slowdown
+
+				if pixel at i > pixel at i+1 then
+
+					sleep swap slowdown
+
+					swap pixels at i and i+1
+
+			increment left_sorted
+
+			forward <- not forward
+
+
+
+# merge sort
+
+procedure sort(ledObj, audioObj)
+
+
+	procedure mergeSort(arr, start, end)
+
+		mid <- length of arr / 2
+
+		left <- partition containing everying left of mid in array
+
+		right <- partition containing everyting right of mid in array
+
+		sleep comparison slowdown
+
+		if length of arr > 2 then
+
+			l = mergeSort(left, start, start+mid-1)
+
+			r = mergesort(right, start+mid, end)
+
+			highight pixels between start and end
+
+			update led strip
+
+			l_count <- 0
+
+			r_count <- 0
+
+			i <- 0
+
+			while left and right are not empty do:
+			
+				sleep comparison slowdown
+
+				if element of left at l_count < element of right at r_count then				# this is necessary to overwrite strip state, need to keep array for merge at next level, as well as update strip state
+		
+					update strip at start+l_count+r_count with value of element of left at l_count
+					update arr at i with value of element of left at l_count
+
+					increment l_count
+
+				else
+					update strip at start+l_count+r_count with value of element of right at r_count
+					update arr at i with value of element of right at r_count
+
+					increment r_count
+
+				send strip value at start + i to speaker
+				
+				sleep swap slowdown
+
+
+				update led strip				
+
+				incrment i
+
+			return arr
+
+
+		else
+
+			return ordering of left and right
+	
+
+	arr <- current strip state
+
+	start <- 0
+
+	end <- 0
+
+	mergeSort(arr, start, end)
+
+
+
+# bucket sort
+
+procedure sort(ledObj, audioObj)
+
+	procedure sort(ledObj, audioObj)
+
+	num_buckets <- 5
+
+	arr <- current strip state
+
+	bucket_range = max/num_buckets
+
+	for i in range 0 to length of LED strip do
+
+		send arr value at i to speaker
+
+		insert arr value at i into corresponding bucket
+
+		sleep comparison slowdown + swap slowdown
+
+		replace strip state with buckets in order
+
+		update led strip
+
+	for i in range 0 to num_buckets do
+
+		# perform insertion sort on bucket (SEE INSERTION SORT PSEUDOCODE) 
+
+
+
+# heap sort
+
+procedure heapify(arr, n, ledObj, audioObj)
+
+	parent <- n
+
+	send strip value at n to speaker
+
+	highlight pixel at n
+
+	update led strip
+
+	child_left = 2*parent + 1
+
+	child_right = 2*parent + 1
+
+	x <- 0
+
+	if child_left does not exceed leghth of arr then
+
+		send strip value at child_left to speaker
+
+		highlight pixel at child_left
+
+		if arr value at child_left < arr value at parent then
+
+			arr <- heapify(arr, child_left, ledObj, audioObj)
+
+			increment x
+
+	if child_right does not exceed length of arr then
+
+		send strip value at child_right to speaker
+
+		highlight pixel at child_right
+
+		if arr value at child_right < arr value at parent then
+			
+			swap arr values at child_right and parent
+
+			arr <- heapify(arr, child_right, ledObj, audioObj)
+
+			incement x
+
+	clear all highlighting
+
+	sleep (2+x)*comparison slowdown + x *swap slowdown	
+
+	return arr	
+	
+procedure heap(arr, ledObj, audioObj)
+	
+	for i in range (lengh of arr / 2) to 0 do
+
+		arr = heapify(arr, n-1, ledObj, audioObj)
+
+	return arr
+	
+def sort(ledObj, audioObj)
+
+	current strip state <- heap(current strip state, ledObj, auddioObj)
+
+	heaped_arr <- current strip state
+
+	sorted_arr <- empty array
+
+	i <- 0
+
+	while i <= length of led strip do
+	
+		append first item of heaped_array to sorted_arr
+
+		send this item to the speaker
+
+		remove this item from heaped array
+
+		heaped_arr = heap(heaped_arr, ledObj, audioObj)	
+
+		current strip state = heaped_arr + sorted_arr
+
+		update led strip
+
+		increment i
+	 
+
+
+# shell sort
+
+procedure sort(ledObj, audioObj)
+
+	arr <- current strip state
+
+	interval = length of arr / 2
+
+	while interval greater than 0 do
+
+		for i in range interval to length of arr do
+
+			highlight pixel at i
+
+			send value of pixel at i to speaker
+
+			n <- i
+
+			while n >= interval and (pixel value at n < pixel value at n-interval):
+		
+				sleep comparison slowdown
+						
+				highlight pixels at n and n-interval
+
+				update led strip
+
+				swap pixels at n and n-interval
+
+				sleep swap slowdown
+
+				send value at pixel n-interval to speaker
+
+				n <- n - interval
+
+				update led strip
+				
+
+
+# binary sort
+
+procedure binary_search(val, ledObj, audioObj, start_i, end_i)
+	
+	send val to speaker
+
+	highlight pixels between start_i and end_i
+
+	update led strip
+
+	i <- middle value between start_i and end_i
+
+
+	if end_i = start_i or i = start_i then
+
+		sleep comparison slowdown	
+
+		increment i
+
+	
+	else if val > value of arr at index i then
+	
+		sleep comparison slowdown
+
+		send value of arr at index i to speaker
+
+		i = binary_search (val, ledObj, audioObj, i+1, end_i)
+
+	else if val < value of arr at index i then
+
+		sleep comparison slowdown
+
+		send value of arr at index i to speaker
+
+		i = binary_search(val, ledObj, audioObj, start_i, i-1)
+
+	return(i)
+
+procedure sort()
+
+	sorted <- 1
+
+	for i in range 1 to length of led strip do
+
+		val <- pixel at index i
+
+		send val to speaker
+
+		highlight pixel at index i
+
+		update led strip
+
+		index <- binary_search(val, ledObj, audioObj, 0, sorted)
+
+		for x in range i to index do
+
+			swap pixels at positions x and x-1
+
+			sleep swap slowdown			
+
+			update led strip
+
+		increment sorted
+			
+
+
+# tim sort
+
+procedure merge(ledObj, audioObj start_l, end_l, start_r, end_r)
+
+	offset <- start_l
+
+	l_arr <- slice of strip state array between start_l and end_l
+
+	r_arr <- slize of strip state array between start_r and end_r
+
+
+	while l_arr and r_arr are not empty do
+
+		if 1st element of l_arr < 1st element of r_arr then
+
+			set strip state array at offset equal to 1st element of l_arr
+
+			remove 1st element from l_arr
+
+		else
+
+			set strip state array at offset equal to 1st element of r_arr
+
+			remove 1st element from r_arr
+
+		sleep comparison slowdown + swap slowdown
+
+		update led strip
+
+		increment offset
+
+procedure sort(ledObj, audioObj)
+
+	arr = current strip state
+
+	run_size <- 32
+
+	run_count = length of array / run_size
+
+	i <- 0
+
+	while i less than run_count:
+
+		highlight pixels between i*run_size and (i*run_size)-1
+
+		# perform insertion sort on slice between i*run_size and (i*run_size)-1 (SEE INSERTION SORT PSEUDOCODE)
+
+
+	i <- 0
+
+	# recursively highlight and merge runs using merge procedure defined above
